@@ -140,9 +140,9 @@ Der Projektstart ist am Montag den 22. September 2016. \\
 Die Projektdauer beträgt 14 Wochen, und das Projektende ist am Freitag den 23. Dezember 2016. \\
 
 
-\noindent Während diesen 14 Wochen sind 240 Arbeitsstuden pro Projektmitglied eingeplant. Das entspricht pro Mitglied eine Arbeitszeit von 16 Stunden pro Woche. Dies ergibt einen totalen Aufwand von 480 Stunden.\\
+\noindent Während diesen 14 Wochen sind 240 Arbeitsstuden pro Projektmitglied eingeplant. Das entspricht pro Mitglied eine Arbeitszeit von 18 Stunden pro Woche. Dies ergibt einen totalen Aufwand von 480 Stunden.\\
 
-\noindent Die wöchentliche Arbeitszeit von 16 Stunden kann bei Verzug oder bei unerwarteten Problemen auf maximal 24 Stunden erhöht werden. \\
+\noindent Die wöchentliche Arbeitszeit von 18 Stunden kann bei Verzug oder bei unerwarteten Problemen auf maximal 24 Stunden erhöht werden. \\
 
 \noindent Es sind gegenwärtig keine Absenzen während dieser Zeit geplant. 
 \subsection{Zeitliche Planung}
@@ -150,8 +150,10 @@ Die Zeitplanung und die Verwaltung der Arbeitspakete erfolgt in Redmine. Diese w
 Die Projektmitglieder tragen jeweils die investierte Zeit am Abend, in das zugewiesene Ticket ein. 
 
 \subsubsection{Phasen}
-Das Projekt wird in fünf Phasen unterteilt: Initialisierung, Analyse, Design, Construction und Abschluss. 
-\includegraphics[width=0.50\textwidth]{phasen.png}
+Das Projekt wird in fünf Phasen unterteilt: Initialisierung, Analyse, Design, Construction und Abschluss.
+\newline
+\newline
+\includegraphics[width=1\textwidth]{figures/phasen.png}
 \newpage
 
 \subsubsection{Meilensteine}
@@ -159,11 +161,11 @@ Das Projekt beinhaltet insgesamt fünf Meilensteine. \\
 \begin{table}[H]
     \begin{tabular}{@{} l l l r@{}}\toprule    
     {Meilenstein} & {Beschreibung} & {Datum}\\ \midrule
-    MS1 & Review Anforderungen und Analyse  & 13.10.16\\ \addlinespace
-    MS2 & Review Architektur und Design & 27.10.16\\ \addlinespace
-    MS3 & Präsentation Beta Version  & 17.11.16\\ \addlinespace
-    MS4 & Software Version 1.0  & 08.12.16\\ \addlinespace
-    MS5 & Präsentation und Abgabe & 23.12.16\\ 
+    MS1 & Anforderungen und Scope definiert  & 13.10.16\\ \addlinespace
+    MS2 & Architektur und Design beschrieben & 27.10.16\\ \addlinespace
+    MS3 & Betaversion fertiggestellt  & 17.11.16\\ \addlinespace
+    MS4 & Software und Dokumentationen fertiggestellt  & 08.12.16\\ \addlinespace
+    MS5 & Arbeitsabgabe & 23.12.16\\ 
     \bottomrule
     \end{tabular}
 \caption{\textbf{Projekt Meilensteine}}
@@ -176,11 +178,20 @@ Die Dauer eines Iterationszyklus beträgt jeweils eine Wochen.
 \centering
     \begin{tabular}{@{} p{3cm} l l l@{}}\toprule    
     {Iteration} & {Inhalt} & {Start} & {Ende}\\ \midrule
-    Initialisierung & Projektstart und Themenbesprechnung & 15.09.2016  & 22.09.2016\\ \addlinespace
-    Analyse & Projektplan, Use Cases, Diagramme erstellen  & 23.09.2016 & 13.10.2016\\ \addlinespace
-    Design & Architektur und Design & 14.10.2016 & 27.10.2016\\ \addlinespace
-    Construktion & Produkt programmieren & 28.10.2016  & 08.12.2016\\ \addlinespace
-    Abschluss & Präsentation, Projektabschluss &  09.12.2016 & 23.12.2016\\ \addlinespace
+    Initialisierung & Projektstart und Kickoff-Meeting & 15.09.2016  & 22.09.2016\\ \addlinespace
+    Analyse 1 & Projektplanung  & 23.09.2016 & 30.09.2016\\ \addlinespace
+    Analyse 2 & -  & 01.10.2016 & 06.10.2016\\ \addlinespace
+    Analyse 3 & -  & 07.10.2016 & 13.10.2016\\ \addlinespace
+    Design 1 & - & 14.10.2016 & 20.10.2016\\ \addlinespace
+    Design 2 & - & 21.10.2016 & 27.10.2016\\ \addlinespace
+    Realisierung 1 & - & 28.10.2016  & 03.11.2016\\ \addlinespace
+    Realisierung 2 & - & 04.11.2016  & 10.11.2016\\ \addlinespace
+    Realisierung 3 & - & 11.11.2016  & 17.11.2016\\ \addlinespace
+    Realisierung 4 & - & 18.11.2016  & 24.11.2016\\ \addlinespace
+    Realisierung 5 & - & 25.11.2016  & 01.12.2016\\ \addlinespace
+    Realisierung 6 & - & 02.12.2016  & 08.12.2016\\ \addlinespace
+    Abschluss 1 & - &  09.12.2016 & 15.12.2016\\ \addlinespace
+    Abschluss 2 & - &  16.12.2016 & 23.12.2016\\ \addlinespace
     \bottomrule
     \end{tabular}
 \caption{\textbf{Projekt Iterationen}}
@@ -202,7 +213,7 @@ Die Dauer eines Iterationszyklus beträgt jeweils eine Wochen.
 
 
 \textbf{Projektstart}&&&&\\ \addlinespace
-Themenwahl & Thema wählen und mit Betreuer besprechen & Inception & Alle & 4 & 6.5\\ \addlinespace
+Kickoff-Meeting & Allgemeine Besprechungen zum Projektstart & Initialisierung & Alle & 1 & 0.75 \\ \addlinespace
 \hline\caption{\textbf{Arbeitspakete}}
 \end{longtable}
 \end{landscape}
@@ -210,37 +221,19 @@ Themenwahl & Thema wählen und mit Betreuer besprechen & Inception & Alle & 4 & 
 
 
 
-\subsection{Besprechungen}
-Besprechungen finden wöchentlich jeweils am Montag statt. 
-Eine Besprechung dauert in der Regel 30min und findet in der HSR (meistens Gebäude 1) statt. Bei einer Besprechung wird das weitere Vorgehen, sowie durchgeführte Arbeiten, fällige Arbeiten und auftretende Probleme besprochen. Weiter werden Arbeitspakete verteilt, damit alle Projektmitglieder wissen was zu tun ist. 
-Als Kommunikationsmittel wird eine Whatsapp Gruppe verwendet. 
+\subsection{Teammeeting}
+Besprechungen finden wöchentlich jeweils am Dienstag statt. 
+Eine Besprechung dauert in der Regel 30min und findet in der HSR statt. Bei einer Besprechung wird das weitere Vorgehen, sowie durchgeführte Arbeiten, fällige Arbeiten und auftretende Probleme besprochen. Weiter werden Arbeitspakete verteilt, damit beide Projektmitglieder wissen was zu tun ist. 
 
-\subsubsection{Reviews}
-Die Reviews zur Arbeit mit dem Betreuer finden Montags ab 15:00 Uhr statt. 
-Die Reviews werden mit dem Betreuer Andreas Steffen in seinem Büro durchgeführt. Die Dauer eines Reviews ist unterschiedlich und kann start variieren. 
+\subsubsection{Meeting mit Betreuern}
+Die Meetings mit den Betreuern finden jeden Donnerstag um 13:30 Uhr statt. 
+Die Meetings werden mit den Betreuern Beat Stettler und Urs Baumann in ihrem Büro durchgeführt. Die Dauer eines Meetings ist unterschiedlich und kann stark variieren. 
 
 \section{Risikomanagement}
 \subsection{Risiken}
 Technische Risiken in der Entwicklung sind im Dokument TechnischeRisiken.xlsx aufgeführt.
 \subsection{Umgang mit Risiken}
 Die im Dokument TechnischeRisiken.xlsx aufgeführten Risiken sind in der Zeitplanung nicht speziell vorgesehen. Falls beim Eintreten eines geplanten Risikos ein erhöhter Zeitbedarf entsteht, so muss dies mit hoher Wahrscheinlichkeit mit Mehrarbeit der Teammitglieder kompensiert werden. Falls die nötige Mehrarbeit ausserhalb der Möglichkeiten liegt, so muss in Absprache aller Teammitglieder mit dem Betreuer nach einer anderer Lösung (z.B. Einschränkung von Programmfeatures, etc.) gesucht werden.
-
-\section{Infrastruktur}
-\begin{table}[H]
-\centering
-% TODO: Aktuelle Versionen hinschreiben und neue Software hinzufügen
-    \begin{tabular}{@{} l l p{9cm} @{}}\toprule    
-    {Software} & {Version} & {Beschreibung}\\ \midrule
-    Redmine & 3.2.0 & Projektmanagementtool\\ \addlinespace
-    Git & 2.7.2 & Verteiltes Versionsverwaltungsystem \\ \addlinespace
-    \LaTeX & 2 & Textsatzsystem \\ \addlinespace
-    WhatsApp & 2.12.14 & Teamkommunikation \\ \addlinespace
-    OneNote & 2016 & Notizen im Team \\ \addlinespace
-    Dropbox & 3.14.7 & Teilen von Dokumenten ausserhalb von Git \\ \addlinespace
-    \bottomrule
-    \end{tabular}
-\caption{\textbf{Infrastruktur}}
-\end{table}
 
 
 \section{Qualitätsmassnahmen}
@@ -301,9 +294,6 @@ Wenn alles in Ordnung ist, wird das Ticket auf Erledigt gesetzt.
 Falls ein Fehler gefunden wurde, wird ein Kommentar hinzugefügt und das Ticket bekommt den Status In Bearbeitung.
 
 
-\subsubsection{Code Style Guidelines}
-
-\subsection{Testen}
 
 \end{document}
 
