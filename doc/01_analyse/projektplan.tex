@@ -16,7 +16,7 @@
 %Titel Seite
 \usepackage{titling} %Wird benötigt damit \maketitle die Variabeln title, author und date nicht überschreibt
 \title{Projektplan}
-\subtitle{Projekt: sniffdatel}
+\subtitle{Projekt: network unit testing environment}
 \author{David Meister \and Andreas Stalder}		
  %mit /and können Personen hinzugefügt werden
 \date{\today}
@@ -25,9 +25,9 @@
 %Kopf, Fusszeile
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\lhead{SA Network Unit Testing}
+\lhead{}
 \chead{}
-\rhead{netunit}
+\rhead{network unit testing environment}
 \lfoot{\thetitle \: v1.0 }
 \cfoot{\today }
 \rfoot{Seite \thepage}
@@ -71,10 +71,10 @@
 	\begin{center}
 %	\includegraphics[width=0.50\textwidth]{}
 	\end{center}
-	{\huge\bfseries netunit\par}
+	{\huge\bfseries network unit testing environment\par}
 	\vspace{8cm}
 	\raggedright
-	{\bfseries SA Network Unit Testing\par}
+	{\bfseries HSR Studienarbeit Network Unit Testing\par}
 	{\huge\bfseries Projektplan\par}
 	\vspace{1cm}
 	{\theauthor \par}
@@ -112,14 +112,20 @@ Noch keine.
 %  \url{http://jnetpcap.com/}
 \end{description}
 
-\section{Projekt Übersicht}
+\section{Projektübersicht}
+Nach durchgeführten Changes im Netzwerkbereich wird die gewünschte Funktionalität meist von Hand getestet. In den meisten Fällen geschieht dies durch einfache Tools wie ping oder traceroute. Es wird vom durchführenden Netzwerk Engineer erwartet, dass er selbständig weiss, welche Funktionalität er nach durchgeführten Changes testen muss. Je nach Komplexität der Infrastruktur ist der Scope kaum in den Griff zu kriegen. \\
 
+\noindent In der Software Entwicklung nutzt man schon lange Unit Tests. Optimalerweise werden für Softwareklassen zuerst Unit Tests geschrieben und anschliessend wird der Code implementiert. Somit existiert für jede Klasse und deren Methoden eine Testsammlung, welche bei späteren Changes immer ausgeführt werden kann. \\
+
+\noindent Mit dieser Arbeit wird die Möglichkeit der Nutzung für Netzwerk Unit Tests angestrebt.
 \subsection{Zweck und Ziel}
+Die Studienarbeit soll den Nachweis der Problemlösungsfähigkeit unter Anwendung ingenieurmässiger Methoden nachweisen. Entsprechend verfügt die Arbeit über einen konzeptionellen, theoretischen und einen praktischen Anteil.\\
 
+\noindent Mit Unit Tests für Netzwerkinfrastrukturen möchte man ein technisches Hilfsmittel für die Qualitätssicherung in der IT bereitstellen. Ähnlich wie in der Software Entwicklung soll eine Systematik entwickelt werden, um Komponenten im Netzwerk auf ihre Konfiguration und Funktionalität zu testen. 
 \subsection{Lieferumfang}
-
+noch nicht definiert
 \subsection{Annahmen und Einschränkungen}
-
+bisher noch keine Annahmen und Einschränkungen
 \subsection{Organisationsstruktur}
 \begin{table}[H]
 \centering
@@ -135,22 +141,21 @@ Noch keine.
 Das Projekt wird von Beat Stettler und Urs Baumann betreut und benotet.
 
 \section{Management Abläufe}
-\subsection{Kostenvoranschlag}
-Der Projektstart ist am Montag den 22. September 2016. \\
-Die Projektdauer beträgt 14 Wochen, und das Projektende ist am Freitag den 23. Dezember 2016. \\
+\subsection{Zeitbudget}
+Der Projektstart ist am Montag, dem 22. September 2016. \\
+Die Projektdauer beträgt 14 Wochen, und das Projektende ist am Freitag, dem 23. Dezember 2016. \\
 
-
-\noindent Während diesen 14 Wochen sind 240 Arbeitsstuden pro Projektmitglied eingeplant. Das entspricht pro Mitglied eine Arbeitszeit von 18 Stunden pro Woche. Dies ergibt einen totalen Aufwand von 480 Stunden.\\
+\noindent Während diesen 14 Wochen sind 240 Arbeitsstuden pro Projektmitglied eingeplant. Das entspricht pro Mitglied eine Arbeitszeit von ca. 18 Stunden pro Woche. Dies ergibt einen totalen Aufwand von ca. 480 Stunden.\\
 
 \noindent Die wöchentliche Arbeitszeit von 18 Stunden kann bei Verzug oder bei unerwarteten Problemen auf maximal 24 Stunden erhöht werden. \\
 
 \noindent Es sind gegenwärtig keine Absenzen während dieser Zeit geplant. 
 \subsection{Zeitliche Planung}
-Die Zeitplanung und die Verwaltung der Arbeitspakete erfolgt in Redmine. Diese wird während dem Projekt laufend aktualisiert. Die im Redmine erzeugten Tickets dienen als Arbeitspakete. Diese werden einer, ebenfalls im Redmine hinterlegten, Iteration zugewiesen. Anhand von diesen Daten ist ein übersichtlicher Zeitplan ersichtlich. Um einen Überblick über den aktuellen Zeitplan zu erhalten, erfolgt der Zugriff auf das Gantt-Diagram via URL:
-Die Projektmitglieder tragen jeweils die investierte Zeit am Abend, in das zugewiesene Ticket ein. 
+Die Zeitplanung und die Verwaltung der Arbeitspakete erfolgt in Redmine. Diese wird während dem Projekt laufend aktualisiert. Die in Redmine erzeugten Tickets dienen sogleich als Arbeitspakete. Diese werden einer, ebenfalls im Redmine hinterlegten Iteration zugewiesen. Anhand von diesen Daten ist ein übersichtlicher Zeitplan ersichtlich. Um einen Überblick über den aktuellen Zeitplan zu erhalten, erfolgt der Zugriff auf das Gantt-Diagram via URL:
+Die Projektmitglieder tragen jeweils die investierte Zeit am Abend in das zugewiesene Ticket ein. 
 
 \subsubsection{Phasen}
-Das Projekt wird in fünf Phasen unterteilt: Initialisierung, Analyse, Design, Construction und Abschluss.
+Das Projekt wird in fünf Phasen unterteilt: Initialisierung, Analyse, Design, Realisierung und Abschluss.
 \newline
 \newline
 \includegraphics[width=1\textwidth]{figures/phasen.png}
@@ -173,7 +178,7 @@ Das Projekt beinhaltet insgesamt fünf Meilensteine. \\
 
 
 \subsubsection{Iterationen}
-Die Dauer eines Iterationszyklus beträgt jeweils eine Wochen. 
+Die Dauer eines Iterationszyklus beträgt jeweils eine Woche. 
 \begin{table}[htb]
 \centering
     \begin{tabular}{@{} p{3cm} l l l@{}}\toprule    
@@ -242,19 +247,22 @@ Die im Dokument TechnischeRisiken.xlsx aufgeführten Risiken sind in der Zeitpla
 \centering
     \begin{tabular}{@{} p{3cm} p{4cm} p{6cm} @{}}\toprule    
     {Massnamen} & {Zeitraum} & {Ziel der Massnahme}\\ \midrule
-    Git verwenden & immer & Versionierung und Verhinderung von Datenchaos\\ \addlinespace
+    git verwenden & immer & Versionierung und Verhinderung von Datenchaos\\ \addlinespace
     Redmine verwenden & immer & Einhaltung von Vorgehen und Zeitplan\\ \addlinespace
-    Teamsitzung & 1h pro Woche & Sicherstellung der erfolgreichen Kommunikation.\\ \addlinespace
+    Teamsitzung & wöchentlich & Sicherstellung der erfolgreichen Kommunikation.\\ \addlinespace
     Codereviews & nach Abschluss von Ticket & Garantierung guter Codequalität  \\ \addlinespace
-    Styleguide für Code & immer & Code lesbarkeit und Wartungsfreundlichkeit\\ \addlinespace
+    Styleguide für Code & immer & Code lesbarkeit und Wartungsfreundlichkeit\\
+\addlinespace
     Tests & in und nach der Programmierphase & Sicherstellung der Funktionalität \\
+\addlinespace
+    Continuous Integration & immer & Steigerung der Softwarequalität\\    
     \bottomrule
     \end{tabular}
 \caption{\textbf{Qualitätsmassnahmen}}
 \end{table}
 
 \subsection{Dokumentation}
-Alle Datein, welche Teil der Dokumentation sind, werden mit Git versioniert. Das Git Repository befindet sich auf GitHub.
+Alle Datein, welche Teil der Dokumentation sind, werden mit git versioniert. Das git Repository befindet sich auf GitHub.
 \subsection{Projektmanagement}
 Als Projektmanagementsoftware wird Redmine eingesetzt. 
 Es wird nach jeder Arbeitssession oder beim Wechsel einer Arbeit der Aufwand auf das entsprechende Ticket verbucht.
@@ -276,15 +284,16 @@ Logindaten Redmine Gastbenutzer:
 
 
 \subsection{Entwicklung}
-Wie die Dokumentation wird auch der Code mit Git versioniert und auf GitHub abgelegt.
 
-\subsubsection{Vorgehen}
-Als Erstes erfolgt die Einarbeitung in das entsprechende Thema.
-Nach Erstellung eines Konzeptes werden die Features separiert entwickelt.
-Wurden Reviews und Tests erfolgreich durchgeführt, kann die Zusammenführung erfolgen.
-
+\subsubsection{Versionierung}
+Wie die Dokumentation wird auch der Sourcecode mit git versioniert und auf GitHub abgelegt. Es wird darauf geachtet, möglichst häufig auf den Stamm zu commiten.
+\subsubsection{Test Driven Development}
+Es hat sich herausgestellt, dass die Software Qualität mit Test Driven Development (TDD) am besten ist. Beim TDD wird vor der Implementation der dazugehörige Unit Test entwickelt. Wo überall möglich, wird mittels TDD entwickelt.
+\subsubsection{Code Metriken}
 
 \subsubsection{Code Reviews}
+
+
 Damit wir eine Kontrolle über den Code haben, wird jedes Feature von mindestens einer anderen Person betrachtet.
 Dazu wird wie folgt vorgegangen: \\
 Die zuständige Person entwickelt das vorgesehene Feature und schreibt Tests dazu.
@@ -293,6 +302,7 @@ All diese Feedback-Tickets werden einmal pro Woche von mindestens einem anderen 
 Wenn alles in Ordnung ist, wird das Ticket auf Erledigt gesetzt.
 Falls ein Fehler gefunden wurde, wird ein Kommentar hinzugefügt und das Ticket bekommt den Status In Bearbeitung.
 
+\subsubsection{Continuous Integration}
 
 
 \end{document}
