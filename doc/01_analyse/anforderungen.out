@@ -1,0 +1,39 @@
+\BOOKMARK [1][-]{section.1}{\304nderungsgeschichte}{}% 1
+\BOOKMARK [1][-]{section.2}{Einf\374hrung}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Zweck}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{G\374ltigkeitsbereich}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Referenzen}{section.2}% 5
+\BOOKMARK [1][-]{section.3}{Allgemeine Beschreibung}{}% 6
+\BOOKMARK [2][-]{subsection.3.1}{Produkt Perspektive}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.2}{Produkt Funktion}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.3}{Benutzer Charakteristik}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.4}{Einschr\344nkungen}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{Use Cases}{}% 11
+\BOOKMARK [2][-]{subsection.4.1}{Use Case Diagramm}{section.4}% 12
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Bemerkung}{subsection.4.1}% 13
+\BOOKMARK [2][-]{subsection.4.2}{Aktoren}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.3}{Beschreibungen \(Brief\)}{section.4}% 15
+\BOOKMARK [3][-]{subsubsection.4.3.1}{UC1: select interfaces}{subsection.4.3}% 16
+\BOOKMARK [3][-]{subsubsection.4.3.2}{UC2: collecting sessions}{subsection.4.3}% 17
+\BOOKMARK [3][-]{subsubsection.4.3.3}{UC3: listening conversations}{subsection.4.3}% 18
+\BOOKMARK [3][-]{subsubsection.4.3.4}{UC4: save file}{subsection.4.3}% 19
+\BOOKMARK [2][-]{subsection.4.4}{Beschreibungen \(Fully Dressed\)}{section.4}% 20
+\BOOKMARK [3][-]{subsubsection.4.4.1}{UC1: select interfaces}{subsection.4.4}% 21
+\BOOKMARK [3][-]{subsubsection.4.4.2}{UC2: collecting sessions}{subsection.4.4}% 22
+\BOOKMARK [3][-]{subsubsection.4.4.3}{UC3: listening conversations}{subsection.4.4}% 23
+\BOOKMARK [3][-]{subsubsection.4.4.4}{UC4: save file}{subsection.4.4}% 24
+\BOOKMARK [1][-]{section.5}{Nichtfunktionale Anforderungen}{}% 25
+\BOOKMARK [2][-]{subsection.5.1}{Performance}{section.5}% 26
+\BOOKMARK [3][-]{subsubsection.5.1.1}{Ladezeiten}{subsection.5.1}% 27
+\BOOKMARK [3][-]{subsubsection.5.1.2}{Daten\374bertragungsraten}{subsection.5.1}% 28
+\BOOKMARK [2][-]{subsection.5.2}{Qualit\344t}{section.5}% 29
+\BOOKMARK [3][-]{subsubsection.5.2.1}{Funktionalit\344t}{subsection.5.2}% 30
+\BOOKMARK [3][-]{subsubsection.5.2.2}{Zuverl\344ssigkeit}{subsection.5.2}% 31
+\BOOKMARK [3][-]{subsubsection.5.2.3}{Benutzbarkeit}{subsection.5.2}% 32
+\BOOKMARK [3][-]{subsubsection.5.2.4}{Effizienz}{subsection.5.2}% 33
+\BOOKMARK [3][-]{subsubsection.5.2.5}{Wartbarkeit}{subsection.5.2}% 34
+\BOOKMARK [3][-]{subsubsection.5.2.6}{\334bertragbarkeit}{subsection.5.2}% 35
+\BOOKMARK [2][-]{subsection.5.3}{Datenschutz}{section.5}% 36
+\BOOKMARK [2][-]{subsection.5.4}{Schnittstellen}{section.5}% 37
+\BOOKMARK [3][-]{subsubsection.5.4.1}{Benutzerschnittstellen}{subsection.5.4}% 38
+\BOOKMARK [3][-]{subsubsection.5.4.2}{Netzwerkschnittstellen}{subsection.5.4}% 39

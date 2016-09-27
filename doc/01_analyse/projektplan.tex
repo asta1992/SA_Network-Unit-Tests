@@ -1,0 +1,466 @@
+\documentclass[a4,12pt]{scrartcl}
+
+%Basic 
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+%Schrift 
+%\usepackage{fontspec} 
+%\setmainfont{Arial} 
+%Zeilenabstand
+\usepackage{setspace}
+\setstretch {1.3}
+\usepackage{float}
+\usepackage[bottom = 3.50cm]{geometry}
+
+%Titel Seite
+\usepackage{titling} %Wird benötigt damit \maketitle die Variabeln title, author und date nicht überschreibt
+\title{Projektplan}
+\subtitle{Projekt: sniffdatel}
+\author{David Meister \and Giorgio Vincenti \and Samuel Krieg \and Andreas Stalder}		
+ %mit /and können Personen hinzugefügt werden
+\date{\today}
+
+
+%Kopf, Fusszeile
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{SW Engineering Projekt FS 2016}
+\chead{}
+\rhead{sniffdatel}
+\lfoot{\thetitle \: v1.2 }
+\cfoot{\today }
+\rfoot{Seite \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+%Bilder
+\usepackage{graphicx}
+
+%Zeichnen
+\usepackage{tikz}
+
+%Tabellen
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%Codesnippets
+\usepackage{listings}
+\lstset{language=java,basicstyle=\footnotesize,frame=single} %backgroundcolor=\color{lightgray}
+
+%Querformat für eine Seite
+\usepackage{lscape}
+\usepackage{rotating}
+\usepackage{pdflscape}
+
+%URL 
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref}
+\urlstyle{same} 
+
+
+%Loremimpsum
+\usepackage{lipsum}
+
+
+
+\begin{document}
+
+%\clearpage\maketitle
+\begin{titlepage}
+	\centering
+	\vspace{5cm}
+	\begin{center}
+	\includegraphics[width=0.50\textwidth]{logo.png}
+	\end{center}
+	{\huge\bfseries sniffdatel\par}
+	\vspace{8cm}
+	\raggedright
+	{\bfseries SW Engineering Projekt FS 2016\par}
+	{\huge\bfseries Projektplan\par}
+	\vspace{1cm}
+	{\theauthor \par}
+	{\today\par}
+
+\end{titlepage}
+
+\section{Änderungsgeschichte}
+
+\begin{table}[htb]
+\centering
+    \begin{tabular}{@{} l l l l@{}}\toprule    
+    {Datum} & {Version} & {Änderung} & {Autor}\\ \midrule
+    04.03.16 & 1.0 & Erstellung erster Version & Alle\\ \addlinespace
+    07.03.16 & 1.1 & Korrektur nach erstem Review & sk/dm \\ \addlinespace
+    10.03.16 & 1.1 & Arbeitspakete und Projektorganisation & gv\\ \addlinespace
+    15.04.16 & 1.2 & Aktualisierung Mgmt Abläufe & gv
+    %01.03.16 & 1.0 & Vorlage erstellt & Samuel Krieg\\ \addlinespace
+    \bottomrule
+    \end{tabular}
+\caption{\textbf{Änderungsgeschichte}}
+\end{table}
+\newpage
+%\thispagestyle{empty}
+\tableofcontents
+\newpage
+
+
+\section{Einführung}
+\subsection{Zweck}
+Dieses Dokument stellt den Projektplan für unser Engineering-Projekt dar, es dient zur Planung, Steuerung und Kontrolle.
+\subsection{Gültigkeitsbereich}
+Dieses Dokument ist über die gesamte Projektdauer gültig. Es wird in späteren Iterationen angepasst. Somit ist jeweils die neuste Version des Dokuments gültig und alte Versionen sind obsolet.
+\subsection{Referenzen}
+\begin{description}
+  \item[jNetPcap] \hfill \\
+  \url{http://jnetpcap.com/}
+  \item[Java Media Framework 2.0] \hfill \\
+  \url{http://download.oracle.com/otndocs/jcp/7273-jmf-2.0-fr-spec-oth-JSpec/}
+  \item[RTP] A Transport Protocol for Real-Time Applications (RFC) \hfill \\
+  \url{https://tools.ietf.org/html/rfc1889}
+  \item[SIP] Session Initiation Protocol (RFC) \hfill \\
+  \url{https://tools.ietf.org/html/rfc3261}
+  \item[SDP] Session Description Protocol (RFC) \hfill \\
+  \url{https://tools.ietf.org/html/rfc4566}
+\end{description}
+
+\section{Projekt Übersicht}
+sniffdatel ermöglicht das Aufzeichnen und Abspielen von Voice over IP Paketen in Echtzeit. Wireshark bietet seit langem die Möglichkeit, den Netzwerkverkehr auf der Karte aufzuzeichnen, RTP Streams zu filtern und diese abzuspielen. Wireshark ist jedoch nicht in der Lage, RTP Datenpakete in Echtzeit wiederzugeben. sniffdatel filtert RTP Streams aus dem mitgeschnittenen Netzwerkverkehr, stellt die Streams auf einem GUI dar und spielt sie nach Wunsch ab. 
+\subsection{Zweck und Ziel}
+Im Engineering-Projekt sollen die Teammitglieder das im Software-Engineering 1 Modul erworbene Wissen praktisch anwenden. Es soll ein vollständiges Softwareprodukt von der Anforderungsspezifikation bis zum getesteten Code entwickelt und dokumentiert werden. Mittels unterstützenden Werkzeugen wie z.B. Redmine und git soll das Teamverhalten erlernt und gefördert werden. 
+
+Wir Teammitglieder bekunden grosses Interesse in den Informatikbereichen Computernetze und Informationssicherheit, deshalb war für uns klar, ein Softwareprodukt in diesem Bereich zu entwickeln. 
+
+Wir konnten uns an Übungslektionen erinnern, in denen wir RTP Datenpakete mit Wireshark aufgezeichnet und abgespielt haben. Dies war einerseits faszinierend, andererseits mühsam und wenig intuitiv. Uns ist die Idee gekommen, ein Netzwerksniffer nur für den Zweck, VoIP Pakete aufzuzeichnen und abzuspielen, zu entwickeln.    
+\subsection{Lieferumfang}
+Dieses Projekt umfasst die fertige Software, allfällige Handbücher, Prototypen und Präsentationen.
+\subsection{Annahmen und Einschränkungen}
+Es wird von einem Umfang von geschätzten 120 Stunden pro Teammitglied ausgegangen. Erweist sich die geplante Zeit als zu knapp, oder ein Feature als nicht realisierbar, so wird dies in Absprache mit dem Betreuer gegebenenfalls weggelassen.
+\section{Projektorganisation}
+Das Projektteam besteht aus vier gleichgestellten Mitgliedern, es wird bewusst auf einen Projektleiter verzichtet. Sämtliche Entscheidungen werden als Team gefällt. Das Projektteam wird von Andreas Steffen betreut.
+
+\subsection{Organisationsstruktur}
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{} l l l l@{}}    
+    {Vorname} & {Name} & {E-Mail} & Veratwortlich für\\ \midrule
+    Andreas & Stalder & astalder@hsr.ch & Usability- und Abnahmetest Verantwortlicher\\ \addlinespace
+    David & Meister & dmeister@hsr.ch & Systemtest Verantwortlicher\\ \addlinespace
+    Giorgio & Vincenti & gvincent@hsr.ch & Redmine Verantwortlicher\\ \addlinespace
+    Samuel & Krieg & skrieg@hsr.ch & Git und Dokumentvorlagen Verantwortlicher\\
+    \bottomrule
+    \end{tabular}
+\caption{\textbf{Teammitglieder}}
+\end{table} 
+
+Primäre Ansprechsperson für organisatorische Belange ist David Meister.
+\subsection{Externe Schnittstellen}
+Das Projekt wird von Andreas Steffen betreut und benotet. Für Usability Tests werden weitere externe Personen involviert.
+
+\section{Management Abläufe}
+\subsection{Kostenvoranschlag}
+Der Projektstart ist am Montag den 22. Februar 2016. \\
+Die Projektdauer beträgt 15 Wochen, und das Projektende ist am Freitag den 3. Juni 2016. \\
+
+
+\noindent Während diesen 15 Wochen sind 120 Arbeitsstuden pro Projektmitglied eingeplant. Das entspricht pro Mitglied eine Arbeitszeit von acht Stunden pro Woche. Dies ergibt einen totalen Aufwand von 480 Stunden.\\
+
+\noindent Die wöchentliche Arbeitszeit von acht Stunden kann bei Verzug oder bei unerwarteten Problemen auf maximal 12 Stunden erhöht werden. \\
+
+\noindent Es sind gegenwärtig keine Absenzen während dieser Zeit geplant. 
+\subsection{Zeitliche Planung}
+Die Zeitplanung und die Verwaltung der Arbeitspakete erfolgt in Redmine. Diese wird während dem Projekt laufend aktualisiert. Die im Redmine erzeugten Tickets dienen als Arbeitspakete. Diese werden einer, ebenfalls im Redmine hinterlegten, Iteration zugewiesen. Anhand von diesen Daten ist ein übersichtlicher Zeitplan ersichtlich. Um einen Überblick über den aktuellen Zeitplan zu erhalten, erfolgt der Zugriff auf das Gantt-Diagram via URL:
+\url{http://152.96.56.43/redmine/projects/ep2016_realtimeplayer/issues/gantt}
+Die Projektmitglieder tragen jeweils die investierte Zeit am Abend, in das zugewiesene Ticket ein. 
+
+\subsubsection{Phasen}
+Das Projekt wird in vier Phasen unterteilt: Inception, Elaboration, Construction und Transition. 
+
+\begin{center}
+\begin{figure}[H]
+\begin{tikzpicture}
+\draw [line width=2pt] (0,0) rectangle (12 ,1.5);
+\draw [line width=2pt] (1.5,0) -- (1.5, 1.5);
+\draw [dashed] (3,0) -- (3.0, 1.5);
+\draw [dashed] (4.5,0) -- (4.5, 1.5);
+\draw [line width=2pt] (6,0) -- (6, 1.5);
+\draw [dashed] (7.5,0) -- (7.5, 1.5);
+\draw [dashed] (9,0) -- (9, 1.5);
+\draw [line width=2pt] (10.5,0) -- (10.5, 1.5);
+\filldraw 
+(2.25,0.75) node[align=center] {1} (3.75,0.75) node[align=center] {2} (5.25,0.75) node[align=center] {3} (6.75,0.75) node[align=center] {1} (8.25,0.75) node[align=center] {2} (9.75,0.75) node[align=center] {3};  
+\filldraw 
+(0,-0.5) node[align=left,   below] {Inception} (3.75,-0.5) node[align=center, below] {Elaboration} (8.25,-0.5) node[align=center, below] {Construction} (12,-0.5) node[align=right,  below] {Transition};
+\end{tikzpicture}
+\caption{\textbf{Phasenplan}}
+\end{figure}
+\end{center}
+\newpage
+
+\subsubsection{Meilensteine}
+Das Projekt beinhaltet insgesamt acht Meilensteine. \\
+\textit{*Update: MS3 kann zeitlich nicht eingehalten werden, und wurde nach Absprache mit dem Betreuer auf den 18.4.16 verschoben.}
+\begin{table}[H]
+    \begin{tabular}{@{} l l l r@{}}\toprule    
+    {Meilenstein} & {Beschreibung} & {Datum}\\ \midrule
+    MS1 & Review Projektplan & 07.03.16\\ \addlinespace
+    MS2 & Review Anforderungen und Analyse  & 22.03.16\\ \addlinespace
+    MS3* & Zwischenpräsentation mit Demo eines Architekturprotypen  & 11.04.16\\ \addlinespace
+    MS4 & Review Architektur und Design & 18.04.16\\ \addlinespace
+    MS5 & Präsentation Alpha Version   & 09.05.16\\ \addlinespace
+    MS6 & Präsentation Beta Version  & 16.05.16\\ \addlinespace
+    MS7 & Software Version 1.0  & 23.05.16\\ \addlinespace
+    MS8 & Präsentation und Abgabe & 03.06.16\\ 
+    \bottomrule
+    \end{tabular}
+\caption{\textbf{Projekt Meilensteine}}
+\end{table}
+
+\subsubsection{Iterationen}
+Die Dauer eines Iterationszyklus beträgt jeweils zwei Wochen. 
+\begin{table}[htb]
+\centering
+    \begin{tabular}{@{} p{3cm} l l r@{}}\toprule    
+    {Iteration} & {Inhalt} & {Start} & {Ende}\\ \midrule
+    Inception& SW1: Themenwahl, Projektantrag & 22.02.2016  & 29.02.2016\\ \addlinespace
+    Elaboration1&SW2/3: Projektplan, Diagramme erstellen  & 01.03.2016 & 13.03.2016\\ \addlinespace
+    Elaboration2 &SW4/5: Entwurf GUI, Architektur und Design & 14.03.2016 & 27.03.2016\\ \addlinespace
+    Elaboration3 &SW6/7:  GUI Abschluss, Prototyp & 28.03.2016  & 11.04.2016\\ \addlinespace
+    Construction1 &SW8/9: Prototypen programmieren & 12.04.2016  & 24.04.2016\\ \addlinespace
+    Construction2 &SW10/11: Prototypen programmieren & 25.04.2016  & 09.05.2016\\ \addlinespace
+    Construction3 &SW12/13  Ausbau Prototypen, Release & 10.05.2016  & 23.05.2016\\ \addlinespace
+    Transition &SW14/15:  Präsentation, Projektabschluss &  24.05.2016 & 03.06.2016\\ \addlinespace
+    \bottomrule
+    \end{tabular}
+\caption{\textbf{Projekt Iterationen}}
+\end{table}
+
+
+\begin{landscape}
+\subsubsection{Arbeitspakete (Tickets)}
+\begin{longtable}{ p{5.5cm} p{8cm} l l p{1cm} p{1cm} }
+
+\hline 
+\multicolumn{1}{p{5.5cm}}{\textbf{Name}} & \multicolumn{1}{p{8cm}}{\textbf{Inhalt}} & \multicolumn{1}{l}{\textbf{Iteration}} & \multicolumn{1}{l}{\textbf{Wer}} & \multicolumn{1}{p{1cm}}{\textbf{Soll}} & \multicolumn{1}{p{1cm}}{\textbf{Ist}} \\ \hline 
+\endfirsthead
+
+
+\hline 
+\multicolumn{1}{p{5.5cm}}{\textbf{Name}} & \multicolumn{1}{p{8cm}}{\textbf{Inhalt}} & \multicolumn{1}{l}{\textbf{Iteration}} & \multicolumn{1}{l}{\textbf{Wer}} & \multicolumn{1}{p{1cm}}{\textbf{Soll}} & \multicolumn{1}{p{1cm}}{\textbf{Ist}} \\ \hline 
+\endhead
+
+
+\textbf{Projektstart}&&&&\\ \addlinespace
+Themenwahl & Thema wählen und mit Betreuer besprechen & Inception & Alle & 4 & 6.5\\ \addlinespace
+Projektantrag & Projektantrag erstellen & Inception & Alle & 2 & 2.5\\ \addlinespace
+\textbf{Projektplan} &  &  &  &  & \\ \addlinespace
+Einführung & Einführungs- und Übersichtkapitel in Projektplan erstellen  & Elaboration1  & dm  & 2 &2 \\ \addlinespace
+Organistation & Organisationskapitel in Projektplan erstellen   & Elaboration1  & dm  & 1  &2 \\ \addlinespace
+Management Abläufe & Phasen, Iterationen, Meilensteine und Arbeitspakete definieren und in Redmine eintragen  & Elaboration1  & gv  & 16  & 26 \\ \addlinespace
+Risikomanagement & Risikomanagement Kapitel erstellen und vorhandene Risiken abschätzen  & Elaboration1  & dm/as  & 2 & 6 \\ \addlinespace
+Infrastruktur & Infrastruktur Kapitel erstellen & Elaboration1  & as  & 2  &1.5 \\ \addlinespace
+Qualitätsmanagement & Qualitätsmanagement Kapitel erstellen & Elaboration1 & sk/as   & 5 &12 \\ \addlinespace
+Review Projektplan & Projektplan gemäss Review anpassen & Elaboration1 & alle & 6 & 6 \\ \addlinespace
+&  &  &  &  & \\ \addlinespace
+&  &  &  &  & \\ \addlinespace
+\textbf{Anforderungen + Analyse} &  &  &  &  & \\ \addlinespace
+Use Case Diagramm + fully dressed & Use Case Diagramm erstellen & Elaboration1  & sk/gv  & 5  &19.5 \\ \addlinespace
+Supplementary Spec. & Nicht-funktionale Anforderungen definieren & Elaboration1  &  dm & 3 &4.5 \\ \addlinespace
+Domain Modell& Domain Modell für Software erstellen  & Elaboration1  & dm/as  & 5 &15.7  \\ 
+SDD& System Sequenz Diagramm für Projekt erstellen & Elaboration1  & as  & 4  & 3.5 \\ \addlinespace
+Operation Contracts& Verfassen der Contracts  & Elaboration1  & gv & 2  & 8.75\\ \addlinespace
+Activity Diagramm & Darstellen der Abläufe  & Elaboration1  & as & 4  & 2.5 \\ \addlinespace
+Zustandsdiagramm & Darstellen der möglichen Zustände & Elaboration1  & sk  & 4  & 9.5 \\ \addlinespace
+Entwurf GUI & GUI Entwurf ausarbeiten & Elaboration2  & alle  & 8 &2 \\ \addlinespace
+Review + Korrektur Anforderungen+Analyse & Ausarbeiten und Verbesserungen gemäss Review Feedback & Elaboration2  & alle  & 8 & \\ \addlinespace
+Architektur & Definieren der Software-Architektur & Elaboration2  & dm/gv & 10  & \\ \addlinespace
+\textbf{Design} &  &  &  &  & \\ \addlinespace
+Design Model & Klassendiagramme erstellen & Elaboration2  & as/sk  &6  & \\ \addlinespace
+Logische Architektur& Definieren der Architektur im Detail  & Elaboration2  & as/sk  & 15  & \\ \addlinespace
+GUI Design fertigstellen & GUI Entwurf ausarbeiten und fertigstellen  & Elaboration3 & alle &16  &0 \\ \addlinespace
+\textbf{Implementation} &  &  &  &  & \\ \addlinespace
+Prototyp GUI& Erster Prototyp für GUI programmieren & Elaboration3  & sk  &26  & \\ \addlinespace 
+Prototyp Session finder & Erster Prototyp für Session Zuordnung programmieren  & Construction1  & as/sk & 18  & 17.5\\ \addlinespace   
+Prototyp Packet aufzeichnung & Erster Prototyp für Paket aufzeichnung mittels pcab library & Construction1  & as/sk  & 18  & 29\\ \addlinespace
+Prototyp Audio wiedergabe & Erster Prototp für Audio Verarbeitung und Abspielung programmieren & Construction2  & gv/dm  & 24  & 63.5\\ \addlinespace
+Prototypen zusammenführen & Alle erstellten Prototypen zusammenführen & Construction2  & as/dm  & 10  & 6\\ \addlinespace
+Ausbau GUI & Prototypen GUI ausbauen & Construction3  & xx  & 24  & \\ \addlinespace
+Ausbau Session finder & Prototypen Session finder ausbauen & Construction3  & xx  &16  & \\ \addlinespace
+Ausbau Packet aufzeichnen & Prototypen Aufzeichnung der Pakete ausbauen  & Construction3  & xx  & 16  & \\ \addlinespace
+Ausbau Audio wiedergabe & Prototypen Audio Wiedergabe ausbauen  & Construction3  & xx & 16 & \\ \addlinespace
+\textbf{Test + Bugfixing}&  &  &  &  & \\ \addlinespace
+Usability Tests & Usability Tests erstellen und dokumentieren & Construction3 & xx  & 12  & \\ \addlinespace
+Systemtest mit Telefon & Software Tests mit kompletter Infrastruktur (Softphones, Netzwerk..)  & Construction3 &alle  & 12  & \\ \addlinespace
+Abnahmetest & Software Abnahmetest-Dokument & Construction 3 & xx & 12 & \\ \addllinespace
+\textbf{Dokumentation}&  &  &  &  & \\ \addlinespace
+Benutzeranleitung & Benutzeranleitung für Software erstellen  & Transition  & xx  & 8  & \\ \addlinespace
+Übersicht Q-Massnahmen & Übersicht Dokument für Q-Massnahmen erstellen  & Transition  & xx  & 16  & \\ \addlinespace
+Schlusspräsentation & Schlusspräsentation erstellen + vorbereiten  & Transition  & alle & 40  & \\ \addlinespace
+Abgabe vorbereiten& Dokumente und Software soweit fertig für Abgabe vorbereiten & Transition  & alle  & 16  & \\ \addlinespace
+\textbf{Sitzungen+Dokumente}&  &  &  &  & \\ \addlinespace
+Meeting& Wöchentliche Team Meetings  & laufend & alle  & 60 & \\ \addlinespace
+Meeting mit Betreuer + Reviews & Team Meetings mit Betreuer, Reviews inklusive  & laufend  &alle  & 20  & \\ \addlinespace
+Dokumentvorlagen & Dokumentvorlagen erstellen auf Git & laufend & alle & 8 & \\ \addlinespace
+&  &  &  &  & \\
+
+\hline\caption{\textbf{Arbeitspakete}}
+\end{longtable}
+\end{landscape}
+
+
+
+
+
+
+\subsection{Besprechungen}
+Besprechungen finden wöchentlich jeweils am Montag statt. 
+Eine Besprechung dauert in der Regel 30min und findet in der HSR (meistens Gebäude 1) statt. Bei einer Besprechung wird das weitere Vorgehen, sowie durchgeführte Arbeiten, fällige Arbeiten und auftretende Probleme besprochen. Weiter werden Arbeitspakete verteilt, damit alle Projektmitglieder wissen was zu tun ist. 
+
+Als Kommunikationsmittel wird eine Whatsapp Gruppe verwendet. 
+
+\subsubsection{Reviews}
+Die Reviews zur Arbeit mit dem Betreuer finden Montags ab 15:00 Uhr statt. 
+Die Reviews werden mit dem Betreuer Andreas Steffen in seinem Büro durchgeführt. Die Dauer eines Reviews ist unterschiedlich und kann start variieren. 
+
+\section{Risikomanagement}
+\subsection{Risiken}
+Technische Risiken in der Entwicklung sind im Dokument TechnischeRisiken.xlsx aufgeführt.
+\subsection{Umgang mit Risiken}
+Die im Dokument TechnischeRisiken.xlsx aufgeführten Risiken sind in der Zeitplanung nicht speziell vorgesehen. Falls beim Eintreten eines geplanten Risikos ein erhöhter Zeitbedarf entsteht, so muss dies mit hoher Wahrscheinlichkeit mit Mehrarbeit der Teammitglieder kompensiert werden. Falls die nötige Mehrarbeit ausserhalb der Möglichkeiten liegt, so muss in Absprache aller Teammitglieder mit dem Betreuer nach einer anderer Lösung (z.B. Einschränkung von Programmfeatures, etc.) gesucht werden.
+
+\section{Infrastruktur}
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{} l l p{9cm} @{}}\toprule    
+    {Software} & {Version} & {Beschreibung}\\ \midrule
+    Eclipse IDE & Mars.2 (4.5.2) & IDE zur Entwicklung von Software. Wird für alle Entwicklungsaufgaben verwendet\\ \addlinespace
+    JUnit & 4.12 & Testframework für das Testen von Java-Programmen \\ \addlinespace
+    EclEmma & 2.3.3 & Werkzeug, welches die Testabdeckung in Java-Programmen misst \\ \addlinespace
+    Redmine & 3.2.0 & Projektmanagementtool\\ \addlinespace
+    Git & 2.7.2 & Verteiltes Versionsverwaltungsystem \\ \addlinespace
+    jitsi & 2.8 & VoIP Softphone \\ \addlinespace
+    \LaTeX & 2 & Textsatzsystem \\ \addlinespace
+    WhatsApp & 2.12.14 & Teamkommunikation \\ \addlinespace
+    OneNote & 2016 & Notizen im Team \\ \addlinespace
+    Dropbox & 3.14.7 & Teilen von Dokumenten ausserhalb von Git \\ \addlinespace
+    \bottomrule
+    \end{tabular}
+\caption{\textbf{Infrastruktur}}
+\end{table}
+
+
+\section{Qualitätsmassnahmen}
+
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{} p{3cm} p{4cm} p{6cm} @{}}\toprule    
+    {Massnamen} & {Zeitraum} & {Ziel der Massnahme}\\ \midrule
+    Git verwenden & immer & Versionierung und Verhinderung von Datenchaos\\ \addlinespace
+    Redmine verwenden & immer & Einhaltung von Vorgehen und Zeitplan\\ \addlinespace
+    Teamsitzung & 1h pro Woche & Sicherstellung der erfolgreichen Kommunikation.\\ \addlinespace
+    Codereviews & nach Abschluss von Ticket & Garantierung guter Codequalität  \\ \addlinespace
+    Styleguide für Code & immer & Code lesbarkeit und Wartungsfreundlichkeit\\ \addlinespace
+    Tests & in und nach der Programmierphase & Sicherstellung der Funktionalität \\
+    \bottomrule
+    \end{tabular}
+\caption{\textbf{Qualitätsmassnahmen}}
+\end{table}
+
+\subsection{Dokumentation}
+Alle Datein, welche Teil der Dokumentation sind, werden mit Git versioniert. Das Git Repository befindet sich auf GitHub.
+\subsection{Projektmanagement}
+Als Projektmanagementsoftware wird Redmine eingesetzt. 
+Es wird nach jeder Arbeitssession oder beim Wechsel einer Arbeit der Aufwand auf das entsprechende Ticket verbucht.
+Zugriff auf Redmine erfolg über die Url: \url{http://152.96.56.43/redmine/}
+Um den Zugriff für Betreuungspersonen zu ermöglichen wurde ein Gastbenutzer eingerichtet.
+\newline
+\newline
+Logindaten Redmine Gastbenutzer:
+\begin{description}
+\begin{description}
+\item [Login:]
+guest
+\item [Password:]
+guest2016
+\end{description}
+\end{description}
+
+
+\subsection{Entwicklung}
+Wie die Dokumentation wird auch der Code mit Git versioniert und auf GitHub abgelegt.
+
+\subsubsection{Vorgehen}
+Als Erstes erfolgt die Einarbeitung in das entsprechende Thema.
+Nach Erstellung eines Konzeptes werden die Features separiert entwickelt.
+Wurden Reviews und Tests erfolgreich durchgeführt, kann die Zusammenführung erfolgen.
+
+
+\subsubsection{Code Reviews}
+Damit wir eine Kontrolle über den Code haben, wird jedes Feature von mindestens einer anderen Person betrachtet.
+Dazu wird wie folgt vorgegangen: \\
+Die zuständige Person entwickelt das vorgesehene Feature und schreibt Tests dazu.
+Wenn man mit seiner Arbeit zufrieden ist, bekommt das Feature den Status Feedback.
+All diese Feedback-Tickets werden einmal pro Woche von mindestens einem anderen Teammitglied überprüft.
+Wenn alles in Ordnung ist, wird das Ticket auf Erledigt gesetzt.
+Falls ein Fehler gefunden wurde, wird ein Kommentar hinzugefügt und das Ticket bekommt den Status In Bearbeitung.
+
+
+\subsubsection{Code Style Guidelines}
+In Anlehnung an die Java Code Conventions wurde eine Code Style Guideline definiert, und in der Datei CodeStyleProfile.xml beschrieben. Es ist möglich dieses Definition ins Eclipse einzubinden. Nachfolgend die Quelltextformatierung welche für das Projekt verwendet wird. 
+\begin{lstlisting}
+package mypackage;
+
+import java.util.LinkedList;
+
+public class MyIntStack {
+
+  private final LinkedList fStack;
+
+  public MyIntStack() {
+    fStack = new LinkedList();
+  }
+
+  public int pop() {
+    return ((Integer) fStack.removeFirst()).intValue();
+  }
+
+  public void push(int elem) {
+    fStack.addFirst(new Integer(elem));
+  }
+
+  public boolean isEmpty() {
+    return fStack.isEmpty();
+  }
+}
+\end{lstlisting}
+
+\subsection{Testen}
+\subsubsection{Unit Tests}
+Um eine hohe Qualität für das gesamte Projekt zu erhalten, werden für alle wichtigen Komponenten/Klassen Unit Tests geschrieben.
+Dazu verwenden wir JUnit4.
+So können wir nach jedem Entwicklungsschritt überprüfen, ob die Tests noch funktionieren.
+Die Tests zu den Klassen werden zum Teil vor dem Programmieren und zum Teil nach dem Programmieren der Klasse gemacht.
+Damit die Komponente abgenommen wird, muss jeder Test erfolgreich durchlaufen.
+
+\subsubsection{Systemtest}
+Nachdem das Programm die Alpha- und Betaphase erreicht hat, wird jeweils ein Systemtest gemacht.
+Dafür wird vorher eine Testspezifikation geschrieben.
+Die Ergebnisse werden in einem Testprotokoll erfasst und durch dieses Protokoll werden Bugreports zu den Tickets hinzugefügt.
+
+\subsubsection{Abnahmetest}
+Sobald das Produkt fertig entwickelt wurde, wird ein Abnahmetest durchgeführt.
+Dafür wird vorgängig eine Testspezifikation geschrieben.
+Die Testspezifikation beinhaltet die am Anfang besprochenen Anforderungen, sowie auch anderen relevanten Tests.
+
+\subsubsection{Usability Test}
+Nachdem das User Interface funktioniert, werden erste Usability Tests durchgeführt.
+Es werden mehrere externe Personen einbezogen, welche das Programm auf Usability testen und bewerten.
+Dazu wird vorgängig ein Testspezifikation mit verschiedenen Bewertungspunkten erstellt.
+Nachdem der Test abgeschlossen ist, besprechen wir die verschiedenen Punkte im Team und planen, was verändert wird.
+Die besprochenen Punkte werden danach in das Projekt eingepflegt.
+
+\subsubsection{Testabdeckung}
+Für die Testabdeckung werden wir EclEmma einsetzen.
+Durch die Tests wollen wir eine möglichst hohe Abdeckung(90\%) des nicht trivialen Codes.
+
+
+\end{document}
+

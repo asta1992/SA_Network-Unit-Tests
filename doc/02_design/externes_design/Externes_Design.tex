@@ -1,0 +1,268 @@
+\documentclass[a4,12pt]{scrartcl}
+
+%Basic 
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+%Schrift 
+%\usepackage{fontspec} 
+%\setmainfont{Arial} 
+%Zeilenabstand
+\usepackage{setspace}
+\setstretch {1.3}
+\usepackage{float}
+\usepackage[bottom = 3.50cm]{geometry}
+
+%Titel Seite
+\usepackage{titling} %Wird benötigt damit \maketitle die Variabeln title, author und date nicht überschreibt
+\title{Externes Design}
+\subtitle{Projekt: sniffdatel}
+\author{David Meister \and Giorgio Vincenti \and Samuel Krieg \and Andreas Stalder}		
+ %mit /and können Personen hinzugefügt werden
+\date{\today}
+
+
+%Kopf, Fusszeile
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{SW Engineering Projekt FS 2016}
+\chead{}
+\rhead{sniffdatel}
+\lfoot{\thetitle \: v1.0 }
+\cfoot{\today }
+\rfoot{Seite \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+%Bilder
+\usepackage{graphicx}
+
+%Zeichnen
+\usepackage{tikz}
+
+%Tabellen
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%Codesnippets
+\usepackage{listings}
+\lstset{language=java,basicstyle=\footnotesize,frame=single} %backgroundcolor=\color{lightgray}
+
+%Querformat für eine Seite
+\usepackage{lscape}
+\usepackage{rotating}
+\usepackage{pdflscape}
+
+%URL 
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref}
+\urlstyle{same} 
+
+
+%Loremimpsum
+\usepackage{lipsum}
+
+
+
+\begin{document}
+
+%\clearpage\maketitle
+\begin{titlepage}
+	\centering
+	\vspace{5cm}
+	\begin{center}
+	\includegraphics[width=0.50\textwidth]{logo.png}
+	\end{center}
+	{\huge\bfseries sniffdatel\par}
+	\vspace{8cm}
+	\raggedright
+	{\bfseries SW Engineering Projekt FS 2016\par}
+	{\huge\bfseries Externes Design\par}
+	\vspace{1cm}
+	{\theauthor \par}
+	{\today\par}
+
+\end{titlepage}
+
+\section{Änderungsgeschichte}
+
+\begin{table}[htb]
+\centering
+    \begin{tabular}{@{} l l l l@{}}\toprule    
+    {Datum} & {Version} & {Änderung} & {Autor}\\ \midrule
+    04.03.16 & 1.0 & Erstellung erster Version & Alle\\ \addlinespace
+    %01.03.16 & 1.0 & Vorlage erstellt & Samuel Krieg\\ \addlinespace
+    \bottomrule
+    \end{tabular}
+\caption{\textbf{Änderungsgeschichte}}
+\end{table}
+	\newpage
+%\thispagestyle{empty}
+\tableofcontents
+\newpage
+
+
+\section{Einführung}
+\subsection{Zweck}
+Dieses Dokument beschreibt das Externe Design des Porjekts \textbf{sniffdatel}. Es befasst sich mit der Benutzeroberfläche und der Interaktion des Benutzers mit dieser. 
+\subsection{Gültigkeitsbereich}
+Dieses Dokument ist über die gesamte Projektdauer gültig. Es wird in späteren Iterationen angepasst. Somit ist jeweils die neuste Version des Dokuments gültig und alte Versionen sind obsolet.
+\subsection{Referenzen}
+\begin{description}
+  \item[moqups] \hfill \\
+  \url{https://moqups.com/}
+  \item[JavaFX 8] \hfill \\
+  \url{http://docs.oracle.com/javase/8/javase-clienttechnologies.htm}
+\end{description}
+
+\section{Design}
+\textbf{Sniffdatel} erhält ein möglichst einfach gehaltene Benutzeroberfläche. Das aussehen orientiert sich so weit als möglich an Wireshark. Ziel ist, dass der Benutzer einen möglist einfachen und schnellen Einstieg in die Benutzung von \textbf{sniffdatel} hat. Die Benutzeroberflächenelemente sollen soweit als möglich selbst erklärend und und logisch in ihrer Funktion für den Benutzer sein.
+
+
+Es wurden Mock-ups anhand von eifachen Handskizzen erstellt um das aussehen und die Funktionen der Benutzeroberfläche zu planen.
+\section{Ansichten}
+Das Benutzerinterface besitzt zwei Seiten. Zum einen eine Hauptansicht welche beim Start geladen wird, und eine Ansicht für die Auswahl des aktiven Interfaces zur Aufzeichnung.
+\begin{figure} [H]
+	\begin{center}
+\begin{minipage}[hbt]{7cm}
+	\centering
+	\includegraphics[width=\textwidth]{./pictures/main.PNG}
+	\caption{Hauptansicht}
+	\label{Hauptansicht}
+\end{minipage}
+\hfill
+\begin{minipage}[hbt]{7cm}
+	\centering
+	\includegraphics[width=\textwidth]{./pictures/captureInterface.PNG}
+	\caption{Interface Auswahl}
+	\label{Interface Auswahl}
+\end{minipage}
+	\end{center}
+\end{figure}
+
+\subsection{Hauptansicht}
+Die Hauptansicht ist aufgeteilt in mehrere Teile mit verschiedene Funktionen. Die einteilung soll bewusst an Wireshark erinnern. Klare grenzen zwischen den einzelnen Komponenten sollen leicht ausgemacht werden können.  
+\begin{figure} [H]
+	\begin{center}
+	\includegraphics[width=0.80\textwidth]{./pictures/main_parts.PNG}
+	\caption{\textbf{Hauptansicht Unterteilung}}
+	\label{Bild Referenz}
+	\end{center}
+\end{figure}
+\subsubsection{Menu}
+\begin{figure} [H]
+	\begin{center}
+	\includegraphics[width=0.80\textwidth]{./pictures/main_menu.png}
+	\caption{\textbf{Hauptansicht Menu}}
+	\label{Hauptansicht Menu}
+	\end{center}
+\end{figure}
+Das Menu wird unterteil in drei Teile. Unter \textbf{File} kann der Benutzer die Aufzeichnung speichern sofern der Use Case integriert wird, sowie das Programm beenden. Unter \textbf{Help} soll die Dokumentation von \textbf{sniffdatel} zufinden sein. Bei \textbf{About} stehen Iinfos wie Versionsnummer, Authoren und sonstige Programmdetails.
+
+\subsubsection{Sessionfinder}
+\begin{figure} [H]
+	\begin{center}
+	\includegraphics[width=0.80\textwidth]{./pictures/main_sessionfinder.png}
+	\caption{\textbf{Hauptansicht Sessionfinder}}
+	\label{Hauptansicht Sessionfinder}
+	\end{center}
+\end{figure}
+
+Dieser Bereich ist für das finden der VoIP-Sessions zuständig.
+\begin{description}
+\item [Interface Selection:]
+Verlinkt auf die \grqq{}Interface Selection\grqq{} Ansicht in welcher das aktive Interface zum Sniffen ausgewählt werden muss.
+\item [Record:]
+Startet den Sessionfinder welche die aktiven Sessions in der Sessionliste auflistet.
+\item [Reset:]
+Löscht die Liste der Sessions und startet die Aufzeichnung der Sessions neu.
+\item [Stop:]
+Stopt den Sessionfinder und friert somit den Stand der Sessionliste ein.
+\end{description}
+
+\subsubsection{Audio Player}
+\begin{figure} [H]
+	\begin{center}
+	\includegraphics[width=0.80\textwidth]{./pictures/main_audioplayer.png}
+	\caption{\textbf{Hauptansicht Audio Player}}
+	\label{Hauptansicht Audio Player}
+	\end{center}
+\end{figure}
+Dieser Bereich ist für die Audiowiedergabe der VoIP-Sessions zuständig.
+\begin{description}
+\item [Start:]
+Startet die Wiedergabe der aktuell ausgwählten Session.
+\item [Stop:]
+Stop die aktuell laufende Wiedergabe.
+\item [Direction:]
+Hier wird ausgwählt welche Richtung man hören will. \grqq{}Left -> Right\grqq{}, \grqq{}Right-> Left\grqq{}, oder \grqq{}Both\grqq{}.
+
+\end{description}
+
+\subsubsection{Sessionlist}
+\begin{figure} [H]
+	\begin{center}
+	\includegraphics[width=0.80\textwidth]{./pictures/main_sessionlist.png}
+	\caption{\textbf{Hauptansicht Sessionlist}}
+	\label{Hauptansicht Sessionlist}
+	\end{center}
+\end{figure}
+In der Sessionlist werden alle erkannten VoIP-Sessions aufgelistet mit Details wie Sessionname, Caller(Left/Right), Aktuellem Sessionstand, usw. Ist die Audiowiedergabe aktiv, wird kenntlich gemacht welche Session wiedergegen wird.
+
+\subsubsection{Callers}
+\begin{figure} [H]
+	\begin{center}
+	\includegraphics[width=0.80\textwidth]{./pictures/main_caller.png}
+	\caption{\textbf{Hauptansicht Callers}}
+	\label{Hauptansicht Callers}
+	\end{center}
+\end{figure}
+Dieser Bereich führt Details der Anrufer zur in der Sessionlist ausgewählten Session.
+
+\subsubsection{Sessiondetails}
+\begin{figure} [H]
+	\begin{center}
+	\includegraphics[width=0.80\textwidth]{./pictures/main_sessiondetail.png}
+	\caption{\textbf{Hauptansicht Sessiondetails}}
+	\label{Hauptansicht Sessiondetails}
+	\end{center}
+\end{figure}
+Dieser Bereich führt Details Sessionlist ausgewählten Session.
+
+\subsection{Interfaceauswahlansicht}
+Die \grqq{}Interface Selection\grqq{} Ansicht ist zuständig zum das Interface auswählen mit dem gesnifft werden soll. Es beinhaltet eine List mit den  Netzwerkinterfaces.
+
+	\begin{center}
+	\includegraphics[width=0.80\textwidth]{./pictures/captureInterface_parts.PNG}
+	\caption{\textbf{Interfaceauswahlansicht Unterteilung}}
+	\label{Interfaceauswahlansicht}
+	\end{center}
+\end{figure}
+
+\subsubsection{Interface list}
+\begin{figure} [H]
+	\begin{center}
+	\includegraphics[width=0.80\textwidth]{./pictures/captureInterface_list.PNG}
+	\caption{\textbf{Interfaceauswahlansicht Interface list}}
+	\label{Interfaceauswahlansicht Interface list}
+	\end{center}
+\end{figure}
+Dieser Bereich listet alle Netzwerkinterfaces mit Details des jeweiligen Gerätes auf. Es kann durch anklicken eines ausgewählt. Das \grqq{}aktive\grqq{} wird durch durch einen Punkt oder Farbe als ausgewählt markiert. 
+
+\subsubsection{Buttons}
+\begin{figure} [H]
+	\begin{center}
+	\includegraphics[width=0.80\textwidth]{./pictures/captureInterface_button.png}
+	\caption{\textbf{Interfaceauswahlansicht Interface list}}
+	\label{Interfaceauswahlansicht Buttons}
+	\end{center}
+\end{figure}
+Ein gewöhnlicher Buttonbereich mit OK und Cancel.
+\begin{description}
+\item [OK:]
+Speichert die Interfaceauswahl und geht zur Hauptansicht zurück.
+\item [Cancel:]
+Geht ohne speichern der Interfaceauswahl zur Hauptansicht zurück.
+\end{description}
+
+
+\end{document}
+
