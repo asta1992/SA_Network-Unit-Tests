@@ -226,7 +226,7 @@ Kickoff-Meeting & Allgemeine Besprechungen zum Projektstart & Initialisierung & 
 
 
 
-\subsection{Teammeeting}
+\subsection{Teammeetings}
 Besprechungen finden wöchentlich jeweils am Dienstag statt. 
 Eine Besprechung dauert in der Regel 30min und findet in der HSR statt. Bei einer Besprechung wird das weitere Vorgehen, sowie durchgeführte Arbeiten, fällige Arbeiten und auftretende Probleme besprochen. Weiter werden Arbeitspakete verteilt, damit beide Projektmitglieder wissen was zu tun ist. 
 
@@ -242,24 +242,6 @@ Die im Dokument TechnischeRisiken.xlsx aufgeführten Risiken sind in der Zeitpla
 
 
 \section{Qualitätsmassnahmen}
-
-\begin{table}[H]
-\centering
-    \begin{tabular}{@{} p{3cm} p{4cm} p{6cm} @{}}\toprule    
-    {Massnamen} & {Zeitraum} & {Ziel der Massnahme}\\ \midrule
-    git verwenden & immer & Versionierung und Verhinderung von Datenchaos\\ \addlinespace
-    Redmine verwenden & immer & Einhaltung von Vorgehen und Zeitplan\\ \addlinespace
-    Teamsitzung & wöchentlich & Sicherstellung der erfolgreichen Kommunikation.\\ \addlinespace
-    Codereviews & nach Abschluss von Ticket & Garantierung guter Codequalität  \\ \addlinespace
-    Styleguide für Code & immer & Code lesbarkeit und Wartungsfreundlichkeit\\
-\addlinespace
-    Tests & in und nach der Programmierphase & Sicherstellung der Funktionalität \\
-\addlinespace
-    Continuous Integration & immer & Steigerung der Softwarequalität\\    
-    \bottomrule
-    \end{tabular}
-\caption{\textbf{Qualitätsmassnahmen}}
-\end{table}
 
 \subsection{Dokumentation}
 Alle Datein, welche Teil der Dokumentation sind, werden mit git versioniert. Das git Repository befindet sich auf GitHub.
@@ -289,21 +271,24 @@ Logindaten Redmine Gastbenutzer:
 Wie die Dokumentation wird auch der Sourcecode mit git versioniert und auf GitHub abgelegt. Es wird darauf geachtet, möglichst häufig auf den Stamm zu commiten.
 \subsubsection{Test Driven Development}
 Es hat sich herausgestellt, dass die Software Qualität mit Test Driven Development (TDD) am besten ist. Beim TDD wird vor der Implementation der dazugehörige Unit Test entwickelt. Wo überall möglich, wird mittels TDD entwickelt.
+\subsubsection{Reviews}
+Regelmässige Reviews sind in einem iterativen Vorgehen unerlässlich. Die getätigte Arbeit muss ständig abgeglichen und in Frage gestellt werden. Aus Kosten-Nutzen Sicht sind Reviews das effektivste Mittel um die geforderte Qualität zu erreichen.\\ 
+
+\noindent In diesem Projekt werden drei verschiedene Arten von Reviews durchgeführt. Zum einen sind dies regelmässige Code Reviews, zum anderen sind dies Requirement- und Architekturreviews.\\
+
+\noindent Bei den regelmässigen Code Reviews wird besonders auf die gewählten Namen (Packages, Klassen, Methoden, Variablen), die Verständlichkeit vom Code und Code Smells geachtet.\\
+
+\noindent Bei den Requirement Reviews wird sichergestellt, dass man den Wünschen des Auftraggebers entsprechend entwickelt. Die Frage nach dem "Was" wird erneut gestellt und somit sichergestellt, dass man beim Projektende nicht ein qualitativ hochwertiges Produkt entwickelt hat, welches aber nicht die Wünsche des Auftraggebers abdeckt.\\ 
+
+\noindent Beim Architektur Review wird besonders auf die nicht-funktionalen Anforderungen (NFA) geachtet. Diese wirken sich in den meisten Fällen auf die gewählte Architektur aus. Die gewählte Architektur muss mit den NFA's verträglich sein. Wenn zu spät im Projekt bemerkt wird, dass die Architektur geändert werden muss, kann dies sehr aufwändig sein.
 \subsubsection{Code Metriken}
+Code Metriken zeigen mögliche Fehler oder Schwachstellen im entwickelten Code auf. Es wird grundsätzlich zwischen statischen- und dynamischen Metrik Tools unterschieden. Bei den dynamischen Metrik Tools wird der Code ausgeführt. Beispiele wären Unit Tests und die dazugehörige Coverage. Bei den statischen Analysetools wird der Code nicht ausgeführt. Ein Beispiel wäre Checkstyle. Dieses Tool überprüft vor allem die Einhaltung von Style Richtlinien.\\
 
-\subsubsection{Code Reviews}
-
-
-Damit wir eine Kontrolle über den Code haben, wird jedes Feature von mindestens einer anderen Person betrachtet.
-Dazu wird wie folgt vorgegangen: \\
-Die zuständige Person entwickelt das vorgesehene Feature und schreibt Tests dazu.
-Wenn man mit seiner Arbeit zufrieden ist, bekommt das Feature den Status Feedback.
-All diese Feedback-Tickets werden einmal pro Woche von mindestens einem anderen Teammitglied überprüft.
-Wenn alles in Ordnung ist, wird das Ticket auf Erledigt gesetzt.
-Falls ein Fehler gefunden wurde, wird ein Kommentar hinzugefügt und das Ticket bekommt den Status In Bearbeitung.
-
+\noindent Um diese mächtigen Tools effektiv nutzen zu können, müssen sie in den Build Prozess mit eingebunden werden. SonarQube stellt ein Modul für Build-Management-Tools bereit, sodass statische Code Analysen automatisch beim Build ausgeführt werden.
 \subsubsection{Continuous Integration}
+Mittels Continuous Integration (CI) wird das Risiko von schleichenden Softwarebugs minimiert. Jeder commit in den Stamm triggert einen kompletten Build der Software auf dem CI-Server. Somit wird immer ersichtlich, falls Fehler im Build auftauchen oder Unit Tests fehlschlagen.\\
 
+\noindent Als CI-Server wird Jenkins verwendet. Jenkins ist frei verfügbar und bietet nebst guter cross-platform Unterstützung mächtige Tools zur automatischen Überprüfung mittels statischen Code Analyse Tools.
 
 \end{document}
 
