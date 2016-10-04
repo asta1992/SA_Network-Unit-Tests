@@ -120,10 +120,30 @@ Noch keine.
 \subsection{Scope}
 \subsection{Nutzen}
 \subsection{Beispiele von Test Cases}
+\newpage
 \section{Circuit Tests}
 \subsection{Scope}
+Mit Circuit Tests möchte man die Verbindungen der Devices testen. Mögliche LAN Devices sind unter anderem Access-, Distribution-, und Core Switches, aber auch Router oder Firewalls. Denkbar sind auch Verbindungen im WAN Bereich, ob Ethernet, ATM oder MPLS. Diese Devices haben jeweils unterschiedliche Verbindungen zueinander. Circuit Tests überprüfen Anhand verschiedener Bewertungskriterien die Qualität und Charakteristika dieser Verbindungen.\\
+
+\includegraphics[width=1\textwidth]{figures/Netzwerk_logisch.png}\\
+
+\noindent Wenn von Verbindungsqualität gesprochen wird, möchte man vor allem bestimmte Verbindungsspezifische Parameter wie Round Trip Times, Jitter, Throughput Packet Loss testen. Je nach Verbindung, welche es zu testen gilt, kann man sinnvolle Grenzwerte festlegen. So können gewisse Throughput Werte auf der WAN Verbindung einer Firewall akzeptabel sein, während derselbe Wert auf der LAN Verbindung zu niedrig wäre.\\
+
+\noindent Typischerweise bewegt man sich bei Circuit Tests auf den OSI-Layern 1-3. Es muss jeweils überlegt werden, welche Tests sinnvoll sind, um die komplette Funktionalität der Verbindung auf unterschiedlichen Test Cases abzubilden.   
 \subsection{Nutzen}
+Durch systematisches Testen der Verbindungen gewinnen wir Vertrauen in die Funktionalität der Verbindungen. Changes im Netzwerk, seien es einfache Konfigurationsänderungen, oder Austausch eines oder mehrerer Devices, können bei auftretenden Fehlern schwerwiegende Folgen mit sich bringen.\\
+
+\noindent Als Verantwortlicher Netzwerk Engineer trägt man eine grosse Verantwortung. Beim unsystematischen ad-hoc Testing werden leider oft essenzielle Funktionen und Parameter nicht getestet. Es wird sich ganz auf das Know-How und die Erfahrung des Verantwortlichen Engineers gestützt. Unter Zeitdruck werden oft nur sehr wenige Tests durchgeführt, bis das Netzwerk wieder für den produktiven Betrieb freigegeben wird. Mit systematischen Circuit Tests werden beispielsweise fehlende Links und Verbindungsfehler auf allen Devices schnell erkannt. 
 \subsection{Beispiele von Test Cases}
+\subsubsection{Round Trip Time}
+Bei der Round Trip Time (RTT) möchte man herausfinden, wieviel Zeit für die Übertragung und Verarbeitung eines Datenpakets über die Verbindung benötigt wird. Da bei den Circuit Tests keine high-level Services getestet werden, sollen Datenpakete gesendet werden, für welche die Gegenstation extrem wenig Zeit benötigt, um diese zu Verarbeiten. Das Interesse besteht also hauptsächlich in der benötigten Zeit für den Übertragungsweg.\\
+
+\noindent Der bekannteste Weg, um die RTT zu ermitteln, ist der ping-Befehl, welcher einen ICMP Request auslöst. Mit Ping kann man die RTT innerhalb der Broadcast Domain, aber auch über dessen Grenzen hinweg ins gesamte Internet herausfinden. Es gibt jedoch noch andere Wege, um die RTT zu bestimmen. Mittels arping wird die RTT über ARP Pakete bestimmt, oder über httping wird die Antwortzeit über das HTTP Protokoll ermittelt. Für Circuit Tests scheint der 'normale' ping über ICMP jedoch der sinnvollste.\\
+
+\noindent Bei der RTT gilt es zu beachten, dass bei zwei Devices $\{a,b\}$ die benötigte Übertragungszeit von a$\rightarrow$b $\neq$ b$\rightarrow$a sein kann. Beim Circuit Testing ist aber eher unwahrscheinlich, dass sich die Latenzzeit der beiden Übertragungswege gross unterscheiden, da in aller Regel in derselben Broadcastdomain oder über sehr wenige Hops getestet wird.\\
+
+\noindent Mögliche Einflussgrössen der RTT sind die Distanz, verwendete Kabel, Routing/Switching processing, Queueing Delay oder mögliche Übertragungsfehler.
+\subsubsection{}  
 \section{Routing Tests}
 \subsection{Scope}
 \subsection{Nutzen}
