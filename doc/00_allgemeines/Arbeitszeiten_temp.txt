@@ -1,6 +1,8 @@
-22.9.	0.5	dm	Kickoff Sitzung
-22.9.	0.5	as	Kickoff Sitzung
-27.9.	8.5	dm	Brainstorming Test Szenarien, Zeitplanung, Projektplanung, Teambesprechungen, git Repo und Dokumentenstruktur erstellt
-28.9.	4.5	dm	Projektplanung
-29.9.	0.5	dm	Projektplanung
-29.9.	1.0	dm	Meeting
+22.09.	0.5	dm	Kickoff Sitzung
+22.09.	0.5	as	Kickoff Sitzung
+27.09.	8.5	dm	Brainstorming Test Szenarien, Zeitplanung, Projektplanung, Teambesprechungen, git Repo und Dokumentenstruktur erstellt
+28.09.	4.5	dm	Projektplanung
+29.09.	0.5	dm	Projektplanung
+29.09.	1.0	dm	Meeting
+03.10.	4.0	dm	Recherche Network Testing
+04.10.	8.5	dm	Meeting, Recherche, Besprechung, Dokumentation Testing 
