@@ -75,3 +75,4 @@ local.properties
 *.mtc1
 *.out
 *.synctex.gz
+*.pdf

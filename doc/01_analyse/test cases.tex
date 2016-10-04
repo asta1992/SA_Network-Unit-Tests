@@ -140,10 +140,20 @@ Bei der Round Trip Time (RTT) möchte man herausfinden, wieviel Zeit für die Ü
 
 \noindent Der bekannteste Weg, um die RTT zu ermitteln, ist der ping-Befehl, welcher einen ICMP Request auslöst. Mit Ping kann man die RTT innerhalb der Broadcast Domain, aber auch über dessen Grenzen hinweg ins gesamte Internet herausfinden. Es gibt jedoch noch andere Wege, um die RTT zu bestimmen. Mittels arping wird die RTT über ARP Pakete bestimmt, oder über httping wird die Antwortzeit über das HTTP Protokoll ermittelt. Für Circuit Tests scheint der 'normale' ping über ICMP jedoch der sinnvollste.\\
 
-\noindent Bei der RTT gilt es zu beachten, dass bei zwei Devices $\{a,b\}$ die benötigte Übertragungszeit von a$\rightarrow$b $\neq$ b$\rightarrow$a sein kann. Beim Circuit Testing ist aber eher unwahrscheinlich, dass sich die Latenzzeit der beiden Übertragungswege gross unterscheiden, da in aller Regel in derselben Broadcastdomain oder über sehr wenige Hops getestet wird.\\
+\noindent Bei der RTT gilt es zu beachten, dass bei zwei Devices $\{a,b\}$ die benötigte Übertragungszeit von a$\rightarrow$b $\neq$ b$\rightarrow$a sein kann. Beim Circuit Testing ist aber eher unwahrscheinlich, dass sich die Latenzzeit der beiden Übertragungswege gross unterscheiden, da in aller Regel in derselben Broadcastdomain oder über sehr wenige Hops getestet wird. Die Einwegs-Latenz ist weitaus aufwändiger zu berechnen, da eine exakte Zeitsynchronisation zwischen a und b stattfinden muss.\\
 
-\noindent Mögliche Einflussgrössen der RTT sind die Distanz, verwendete Kabel, Routing/Switching processing, Queueing Delay oder mögliche Übertragungsfehler.
-\subsubsection{}  
+\noindent Mögliche Einflussgrössen der RTT sind die Distanz, verwendete Kabel, Routing/Switching processing, Queueing Delay oder mögliche Übertragungsfehler. Je nach Anwendungsfall können lange Antwortzeiten einen erheblichen Einfluss auf das Befinden der Netzwerkqualität haben. Besonders heikel sind Anwendungen im Voice oder Video Umfeld. 
+\subsubsection{Jitter}
+Im Kapitel oben wurde die Funktionsweise, die Ermittlungstechniken, die Einflussgrössen und die Auswirkungen der RTT beschrieben. Im Grunde genommen gilt dies alles auch für den Jitter. Beim Jitter handelt es sich um nichts anderes, als eine statistische Auswertung verschiedenster Antwortzeiten.\\
+
+\noindent Beim Jitter handelt es sich um die Standardabweichung der Antwortzeiten aus einer Menge von Messwerten. Um den Jitterwert einer Verbindung zu bestimmen, benötigen wir also zuerst eine Menge $R = \{r_1,...,r_n\}$ von RTT Messwerten. Nun bestimmen wir den Mittelwert $\mu$ der Messwerte auf der Menge $R$ mittels der Formel $\mu = \frac{r_1+...+r_n}{n}$. Nun können wir mittels der Formel
+\begin{equation}
+Jitter = \sqrt{\frac{(r_1-\mu)^2 + ... + (r_n-\mu)^2}{n}}
+\end{equation}
+den endgültigen Jitterwert bestimmen. Hier muss beachtet werden, dass je grösser die Anzahl der Messwerte ist, desto genauer und aussagekräftiger ist auch der resultierende Jitter-Wert.
+\\
+
+\noindent Für die Qualität des Netzwerks ist es zum einen wichtig, gute Antwortzeiten auf den Verbindungen zu erhalten, sprich einen guten Mittelwert davon. Entscheidend ist aber auch die Varianz in den Messwerten, da es unbefriedigend scheint, wenn häufig grosse Abweichungen vom Mittelwert entstehen. Daraus könnte resultieren, dass beispielsweise die Sprachqualität eins Telefongesprächs für eine kurze Zeit als gut empfunden wird und etwas später als sehr schlecht.
 \section{Routing Tests}
 \subsection{Scope}
 \subsection{Nutzen}
