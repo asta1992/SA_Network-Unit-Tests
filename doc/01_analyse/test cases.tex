@@ -148,14 +148,46 @@ Bei der Round Trip Time (RTT) möchte man herausfinden, wieviel Zeit für die Ü
 \subsection{Scope}
 \subsection{Nutzen}
 \subsection{Beispiele von Test Cases}
+
+
+
+
+
+
 \section{Traffic Tests}
 \subsection{Scope}
 \subsection{Nutzen}
 \subsection{Beispiele von Test Cases}
+\subsubsection{QoS}
+\subsubsection{Throughput}
+Throughput ist ein wichtiger Punkt im Bereich Netzwerktest. Hier gibt es zwei Möglichkeiten. Den Link-Throughput, sowie den End-to-End-Throughput.
+\minisec{Link-Throughput}
+Beim Link-Throughput wird der Layer 2 durchsatz gemessen. 
+\minisec{End-to-End-Throughput}
+
+
+
 \section{Application Tests}
 \subsection{Scope}
+Mit den Application Tests, werden Netzwerkservices getestet. Diese können zum Beispiel DNS, DHCP, Webservice usw. sein.
+Um sicherzustellen, damit bei einer Firewallumstellung alle Service noch funktionieren, schickt man Anfragen an die Services.
 \subsection{Nutzen}
+So kann man sicherstellen, dass alle Komponenten noch korrekt miteinander kommunizieren und das nichts geblockt wird.
+
 \subsection{Beispiele von Test Cases}
+\subsubsection{DNS}
+
+\subsubsection{DHCP}
+
+\subsubsection{Webservice}
+Ein Webservice kann sehr leicht getestet werden. Man kann dem Server eine Anfragen mit senden und weiss was die Antwort sein muss.
+Beispiel anfragen sind: \newline
+- GET www.example.com/index.html HTTP/1.1 \newline
+- GET www.example.com/user/12 HTTP/1.1 \newline
+\newline
+\includegraphics[scale=1]{figures/httpget.png}
+
+\subsubsection{SSH}
 
 \end{document}
 
