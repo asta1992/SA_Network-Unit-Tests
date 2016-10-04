@@ -154,6 +154,28 @@ den endgültigen Jitterwert bestimmen. Hier muss beachtet werden, dass je gröss
 \\
 
 \noindent Für die Qualität des Netzwerks ist es zum einen wichtig, gute Antwortzeiten auf den Verbindungen zu erhalten, sprich einen guten Mittelwert davon. Entscheidend ist aber auch die Varianz in den Messwerten, da es unbefriedigend scheint, wenn häufig grosse Abweichungen vom Mittelwert entstehen. Daraus könnte resultieren, dass beispielsweise die Sprachqualität eins Telefongesprächs für eine kurze Zeit als gut empfunden wird und etwas später als sehr schlecht.
+\subsubsection{Throughput}
+Unter Throughput oder Durchsatz wird die Übertragungsrate von Netzwerkpaketen in Bits pro Sekunde (bps) verstanden. Der Durchsatz ist mitunter das wichtigste Merkmal für die Leistungsfähigkeit einer Verbindung. Auf dem Level des Circuit Testings ist man an den Durchsatzraten von den Punkt-zu-Punkt Verbindungen im Netzwerk interessiert. Mit automatischen Throughput Tests können leicht Flaschenhälse im Netzwerk aufgedeckt werden. In einem hierarchisch aufgebauten Netzwerk sind wir in den höheren Schichten auf sehr hohe Datenraten angewiesen, da ansonsten das gesamte Netzwerk extrem verlangsamt wird.\\
+
+\noindent Im Grunde genommen ist der Durchsatz sehr einfach zu ermitteln. Wir müssen von zwei Devices $\{a,b\}$ eine Datenmenge $R_{Bytes}$ senden. Wenn wir also $R$ von $a \rightarrow b$ schicken, so müssen wir bei $b$ die Differenz der Ankunft des ersten Bits $t_0(R)$ zur Ankunft des letzten Bits $t_n(R)$ Messen. Um die Übertragungsrate in bps zu bestimmen rechnen wir
+\begin{equation}
+Durchsatz = \frac{R_{Bytes} * 8}{t_n(R) - t_0(R)}  
+\end{equation} 
+Bei Computernetzen rechnen wir, anders als beim Speicherplatz, in 10er Potenzen. Somit entsprechen 1000bps 1kbps und 1000kbps 1mbps usw. Beim Testen des Throughputs muss man jedoch stark auf die Methode achten, mit welcher die Übertragung stattgefunden hat. Je weiter unten man in der ISO/OSI Schicht ist, desto weniger Protokolloverhead fällt bei der Datenübertragung an. Man kann grundsätzlich berechnen, wieviel Overhead dies ist, jedoch kann die Konfiguration der Netzwerkdevices einen Einfluss darauf haben. Beispielsweise kann bei einem Device die Maximum Transfer Unit (MTU) festgesetzt werden. Diese setzt die Rahmengrösse für Layer 2 Pakete fest. Wenn nun die ankommenden Pakete zu gross sind, müssen sie fragmentiert werden. Dadurch würde das das Doppelte an Overhead entstehen.\\
+
+\noindent Wenn wir uns nun Testszenarien von Datenübertragungsraten für Circuit Tests überlegen, so wäre es sinnvoll, alles zu berücksichtigen, was sich auf den Durchsatz auswirken kann. Die Einflussgrössen wären beispielsweise Link Speed, Übertragungsprotokoll, Path MTU, Packet Loss, Dienstgüte (QoS), etc. Aus Sicht der Circuit Tests möchten wir uns noch nicht mit QoS befassen, deshalb achten wir darauf, dass wir möglichst unabhängig von QoS testen können. Grundsätzlich sind wir von allen Verbindungen interessiert, wie schnell sie sind, besonders bei Netzwerkgeräten wie Firewalls, Router, Switches und Servern.\\
+
+\noindent Die meisten Link Speeds werden heutzutage per Auto Negotiation ausgehandelt. Es ist deshalb denkbar, dass bei der Aushandlung etwas schief gegangen ist oder ein Kabel defekt ist. Deshalb können resultierende Link Speeds oder Duplex Modi vom gewünschten Zustand abweichen. Auf sehr performanceintensiven Verbindungen wird häufig auch auf Bündelung von Links (Trunking) zurückgegriffen. Falls einer dieser Links ausfällt, ist es möglich, dass dies gar nie bemerkt wird. Dies ist zwar grundsätzlich die Aufgabe des Monitorings, könnte aber auch mittels eines Tests festgestellt werden. Es ist aber auch möglich, dass der gewählte Load-Balancing Algorithmus nicht funktioniert oder eine ungleiche Lastverteilung verursacht. Mittels eines Tests könnte dies erkannt und gegebenenfalls auf einen anderen Algorithmus zurückgegriffen werden.\\
+
+\noindent
+Bei den Throughput Tests im Sinne des Circuit Testings muss darauf geachtet werden, keine Datenübertragungen mit Protokollen von höheren ISO/OSI Schichten durchzuführen. Wir sollten uns vor allem auf Punkt-Punkt Verbindungen (Layer 1 und Layer 2) und Layer 3 Verbindungen über wenige Hops beschränken. So testen wir unter anderem beispielsweise die Datenraten auf dem Uplink vom Distribution- auf den Core-Switch oder vom Access-Switch auf den UC-Server. Auch Tests zwischen unterschiedlichen Netzwerkstandorten wären denkbar. Es ist durchaus interessant zu testen, wie schnell der Durchsatz vom einen Datacenter zum anderen über die MPLS Cloud des Providers ist. Zusammengefasst möchten wir mit den Throughput Tests hier Verbindungen vor allem Punkt-zu-Punkt auf Layer 1 oder Layer 2 überprüfen, aber auch über Broadcastdomänen hinweg in entfernte Subnetze oder Standorte mit dem Ziel, die angestrebten Datenraten auf allen (notwendigen) Links sicherzustellen und mögliche Flaschenhälse im Netzwerk aufzudecken.\\
+
+\noindent Abschliessend gilt für Throughput Tests ganz allgemein anzumerken, dass diese den produktiven Betrieb in erheblichem Masse stören können und keinesfalls leichtfertig ausgeführt werden dürfen. Dies bedarf einer seriösen Zeitplanung und gegebenenfalls Information der Benutzer über mögliche Störungen im Netz.
+
+\subsection{Packet Loss} 
+
+
+
 \section{Routing Tests}
 \subsection{Scope}
 \subsection{Nutzen}
