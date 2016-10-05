@@ -118,8 +118,18 @@ Noch keine.
 
 \section{Device Tests}
 \subsection{Scope}
+Device Tests testen ein einzelnes Netzwerkgerät. Häufig geht es bei den Device Tests um Konfigurationsvergleiche. Durch einen solchen ConfigDiff kann man extrem viel testen.
 \subsection{Nutzen}
+Der Nutzen durch diese Tests ist enorm. Man kann so sicherstellen das alle Geräte sauber konfiguriert sind. Der Admin richtet eine Standardkonfig ein und schreibt die Tests dazu. Bei jedem neuen Gerät kann der Test ausgeführt werden und es wird angezeigt, ob alles vorhanden ist. Häufig vergisst man gewisse Benutzer oder kleinere Einstellungen. So können diese nicht mehr vergessen gehen.\newline\newline
+Dies spart Zeit fürs Suchen von Konfigurationsfehler und der ganze Vorgang wird effizienter. Auch wenn man bei bestehenden Netzen etwas neues konfiguriert, können so die restlichen Einstellungen getestet werden, damit man sich sicher ist, das alles miteinander funktioniert.
 \subsection{Beispiele von Test Cases}
+HW-Modul
+OS-Level/FW-Level
+Users
+Device Uptime
+
+
+
 \newpage
 \section{Circuit Tests}
 \subsection{Scope}
@@ -199,13 +209,9 @@ In grossen Netzwerken kann das Routing schnell komplex und unübersichtlich werd
 
 \section{Traffic Tests}
 \subsection{Scope}
-Durch die Traffic Tests kann man den Verkehr auf dem Netzwerk überprüfen. Das heisst es werden wichtige Punkte getestet, die das Verhalten der Pakete im Netzwerk beeinflusst. Wichitg sind vorallem die speziellen Flags, welche die Pakete auf dem Netzwerk erhalten. Dazu gehören insbesondere die QoS Flags.\newline
-Weiter ist auch der End-to-End Throughput ein wichtiger Teil des Traffic Tests. So kann man über mehrere Netzwerkgeräte hinweg die Geschwindigkeit testen.
-
-%was testet man
-% wie
-% Szenarien
-% was ist zu beachten
+Durch die Traffic Tests kann man den Verkehr auf dem Netzwerk überprüfen. Das heisst es werden wichtige Punkte getestet, die das Verhalten der Pakete im Netzwerk beeinflusst. Wichitg sind vorallem die speziellen Flags, welche die Pakete auf dem Netzwerk erhalten. Dazu gehören insbesondere die QoS Flags. Dieses ist wichtig für ein \newline
+Weiter ist auch der End-to-End Throughput ein wichtiger Teil des Traffic Tests. So kann man über mehrere Netzwerkgeräte hinweg die Geschwindigkeit testen.\newline\newline
+Die Traffic Tests sind in den oberen OSI-Layer. Es werden die Layer 4-7 getestet. Alle unteren Layer werden durch die Circuit und Routing Tests überprüft.
 
 \subsection{Nutzen}
 Um Fehler in den Paketen zu finden, sind die Traffic Tests unerlässlich. Man findet durch diese Tests die falsch konfigurierten QoS Einstellungen und kann das Netzwerk so enorm optimieren. \newline
@@ -215,6 +221,12 @@ Ein weiterer Punkt ist der Throughput. Mit dem End-to-End Throughput kann man gu
 
 \subsection{Beispiele von Test Cases}
 \subsubsection{QoS}
+Mit Quality of Service kann der Netzverkehr klassifiziert werden. Dienste wie zum Beispiel VoIP benötigen eine stabile und Latenzarme Leitung. Ist diese nicht gewährleistet, kann es zu Qualitätseinbussen oder sogar zum Abbruch der verbindung kommen. Aus diesem Grund wurde QoS - Quality of Service eingeführt. Durch QoS wird der Verkehr markiert. Hier gibt es mehrere Möglichkeiten. Beispiele dafür sind DiffServ, IntServ oder auch MPLS hat gewisse QoS Klassen. Wir konzentrieren und auf DiffServ, da es das verbreitetste ist.\newline\newline
+DiffServ bietet 64 verschiedene Klassen an. Nun ist es im Netzwerk wichtig, das diese Klassen richtig zugewiesen werden. Um dies zu testen, schickt man verschiedene Paket von einem Client zu einem anderen. Darunter sollten Pakete aus verschiedenen QoS-Klassen vorhanden sein. Beim Empfänger kann man nun das QoS Feld auslesen und auf Richtigkeit prüfen. Wenn die richtige Klasse angezeigt wird, ist der Test bestanden.\newline
+Ein weiterer Test wäre ein Test bei voller Last. So testet man, ob der Verkehr richtig priorisiert wird. Da dieser Test in einer produktiven Umgebung nicht umgesetzt werden kann, verzichten wir darauf.
+
+
+
 So ist es zum Beispiel wichtig, dass der VoIP Verkehr die richtigen QoS Flags besitzt, damit die Telefongespräche ohne Fehler stattfinden können. 
 \subsubsection{End-to-End Throughput}
 Im Traffic Test Teil wird der End-to-End Throughput betrachtet. Viele Informationen über den Throughput wurden im Bereich Circuit Testing schon beschrieben. Hier wird daher nur noch der Unterschied erklärt.\newline\newline
