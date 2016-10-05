@@ -172,10 +172,17 @@ Bei den Throughput Tests im Sinne des Circuit Testings muss darauf geachtet werd
 
 \noindent Abschliessend gilt für Throughput Tests ganz allgemein anzumerken, dass diese den produktiven Betrieb in erheblichem Masse stören können und keinesfalls leichtfertig ausgeführt werden dürfen. Dies bedarf einer seriösen Zeitplanung und gegebenenfalls Information der Benutzer über mögliche Störungen im Netz.
 
-\subsection{Packet Loss} 
+\subsubsection{Packet Loss} 
+Paketverluste können viele Ursachen haben. Manchmal ist ein Paketverlust auch gewollt, beispielsweise bei einer Firewall mittels Drop Policy. In diesem Abschnitt möchten wir uns aber vor allem mit ungewollten Paketverlusten beschäftigen. Diese können beispielsweise bei Fehlern im Übertragungsmedium, oder Überlast eines Routers sein. Die Folgen des Paketverlusts können unterschiedlich sein. Bei TCP Protokollen bewirken Paketverluste Retransmissions, deshalb wird der Durchsatz geringer. Bei Realtime Applikationen wie Video oder VoIP, welche UDP basiert sind, ist ein Qualitätsverlust bemerkbar. Eine gewisse Paketverlustrate ist kaum bemerkbar, aber ab einem gewissen Punkt ist beispielsweise ein Gespräch kaum hörbar.\\
 
+\noindent Packet Loss wird gängigerweise in \% der Gesamtheit angegeben. Um ihn Stichprobenartig zu ermitteln muss man also bei zwei Devices \{a,b\} nur eine gewisse Anzahl Request-Pakete $P$ von $a \rightarrow b$ schicken. Nun Antwortet Station $b$ auf jedes dieser Request Pakete mit einer Response. Station $a$ wiederum vergleicht nun die abgesendete Anzahl an Paketen $P$ mit der erhaltenen Anzahl $P'$. 
+Mit der Formel
+\begin{equation}
+Packet Loss = 1-\frac{P' * 100}{P}
+\end{equation}
+erhalten wir nun die Paketverlustrate in %.\\
 
-
+\noindent Man muss unbedingt bedenken, dass der PacketLoss je nach Situation variieren kann. Es ist daher beim Testen wichtig, dass man Unterschiedliche Protokolle und Paketgrössen verwendet um ein aussagekräftiges Ergebnis zu erzielen. Es ist auch denkbar, dass die Paketverlustrate beim Testbetrieb extrem niedrig ist, und wiederum bei Volllast viel höher, dies gilt es ebenfalls zu berücksichtigen. Packet Loss könnte beim ermitteln des Jitters zusätzlich errechnet werden. Ein mächtiges Tool wäre beispielsweise iperf.
 \section{Routing Tests}
 \subsection{Scope}
 \subsection{Nutzen}
