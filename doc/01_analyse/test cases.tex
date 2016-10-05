@@ -16,7 +16,7 @@
 %Titel Seite
 \usepackage{titling} %Wird benötigt damit \maketitle die Variabeln title, author und date nicht überschreibt
 \title{Test Cases}
-\subtitle{Projekt: software name}
+%\subtitle{Projekt: software name}
 \author{David Meister \and Andreas Stalder}		
  %mit /and können Personen hinzugefügt werden
 \date{\today}
@@ -27,7 +27,7 @@
 \pagestyle{fancy}
 \lhead{}
 \chead{}
-\rhead{software name}
+\rhead{Network testing}
 \lfoot{\thetitle \: v1.0 }
 \cfoot{\today}
 \rfoot{Seite \thepage}
@@ -71,7 +71,7 @@
 	\begin{center}
 %	\includegraphics[width=0.50\textwidth]{}
 	\end{center}
-	{\huge\bfseries software name\par}
+%	{\huge\bfseries software name\par}
 	\vspace{8cm}
 	\raggedright
 	{\bfseries HSR Studienarbeit Network Unit Testing\par}
@@ -89,6 +89,7 @@
     \begin{tabular}{@{} l l l l@{}}\toprule    
     {Datum} & {Version} & {Änderung} & {Autor}\\ \midrule
     27.09.16 & 1.0 & Erstellung erster Version & dm/as\\ \addlinespace
+    05.10.16 & 1.0 & Fertigstellung der erster Version & dm/as\\ \addlinespace
     \end{tabular}
 \caption{\textbf{Änderungsgeschichte}}
 \end{table}
@@ -102,47 +103,48 @@
 
 \section{Einführung}
 \subsection{Zweck}
-Dieses Dokument stellt den Projektplan für unser Studienarbeit dar, es dient zur Planung, Steuerung und Kontrolle.
+In diesem Dokument wurde sich mit Netzwerktesting im Allgemeinen befasst und mögliche relevante Testfälle ausgearbeitet und beschrieben. Es dient als Grundlage für die Anforderungen an die Studienarbeit.
 \subsection{Gültigkeitsbereich}
 Dieses Dokument ist über die gesamte Projektdauer gültig. Es wird in späteren Iterationen angepasst. Somit ist jeweils die neuste Version des Dokuments gültig und alte Versionen sind obsolet.
 \subsection{Referenzen}
 \begin{description}
-Noch keine.
-%  \item[jNetPcap] \hfill \\
-%  \url{http://jnetpcap.com/}
+\item[Enterprise Network Testing] \hfill \\
+\isbn{A. Sholomon, T. Kunath} \newline
+\isbn{ISBN-13: 978-1-58714-127-0}
 \end{description}
 \newpage
 \section{Einleitung}
-Die Bedeutung des Testens in Netzwerken wächst mit zunehmender Grösse und Komplexität stetig. Oft Arbeitet man als Netzwerk Engineer an Bereichen, welche Auswirkungen auf das Gesamte System haben könnten.\\
+Die Bedeutung des Testens in Netzwerken wächst mit zunehmender Grösse und Komplexität stetig. Oft arbeitet man als Netzwerk Engineer an Bereichen, welche Auswirkungen auf das gesamte System haben könnten.\\
 
-\noindent Manuelles Testen von allen beteiligten Geräten und Systemen kann sehr aufwändig und lückenhaft sein. Ein grosses Netzwerk hat viele Teilnehmer und Komponenten, welche für ein reibungsloses Zusammenspiel notwendig sind. Nach einem Austausch eines Geräts, oder nach Änderungen an einem anderen sollten möglichst Umfangreiche Tests durchgeführt werden, damit die Funktionalität im Ganzen sichergestellt werden kann.\\
+\noindent Manuelles Testen von allen beteiligten Geräten und Systemen kann sehr aufwändig und lückenhaft sein. Ein grosses Netzwerk hat viele Teilnehmer und Komponenten, welche für ein reibungsloses Zusammenspiel notwendig sind. Nach einem Austausch eines Gerätes, oder nach Änderungen an einem anderen sollten möglichst umfangreiche Tests durchgeführt werden, damit die Funktionalität im Ganzen sichergestellt werden kann.\\
 
 \noindent In der Software Entwicklung ist ein solches Vorgehen schon lange zum Standard geworden. Unter dem Deckmantel 'Continuous Integration' werden für einzelne Module und deren Zusammenspiel Tests geschrieben. Man unterscheidet zwischen Unit Tests (Testing einzelner Module) und Integrations- resp. Systemtests (Testing des Zusammenspiels der Module). Vor jeder Anpassung, Änderung oder Neueinführung werden diese Tests durchgeführt. Somit werden Unverträglichkeiten und schleichende Bugs vermieden.\\
 
-\noindent Schlussendlich dient das Testing dem Qualitätsmanagement. Durch gutes und umfangreiches Testing sollen unnötige Downtimes vermieden werden. Je nach Branche haben stellen Downtimes im Netzwerk einen erheblichen Business Impact dar, und bedeuten ein Verlust von viel Geld.\\
+\noindent Schlussendlich dient das Testing dem Qualitätsmanagement. Durch gutes und umfangreiches Testing sollen unnötige Downtimes vermieden werden. Je nach Branche haben stellen Downtimes im Netzwerk einen erheblichen Business Impact dar und bedeuten ein Verlust von viel Geld.\\
 
-\noindent In diesem Dokument sollen die Testing-relevanten Bereiche im Netzwerk aufgezeigt - und mögliche Test-Szenarien ausgearbeitet werden. 
+\noindent In diesem Dokument sollen die Testing-relevanten Bereiche im Netzwerk aufgezeigt und mögliche Test-Szenarien ausgearbeitet werden.
+\newpage
 \section{Device Tests}
 \subsection{Scope}
 Device Tests testen ein einzelnes Netzwerkgerät, wie zum Beispiel Switches, Router oder Firewalls. Häufig geht es bei den Device Tests um Konfigurationsvergleiche. Durch einen solchen showDiff kann man extrem viel testen.\newline\newline
-Häufige werden die Informationen direkt auf dem Gerät angezeigt und man muss auf alle Geräte verbinden. Dies kann durch die Tests umgangen werden. Wenn der Test sauber durchläuft, stimmt die Konfiguration so und man muss sich nicht mehr auf die Geräte verbinden.
+Häufige werden die Informationen direkt auf dem Gerät angezeigt und man muss sich auf alle Geräte verbinden. Dies kann durch die Tests umgangen werden. 
 \subsection{Nutzen}
-Der Nutzen durch diese Tests ist enorm. Man kann so sicherstellen das alle Geräte sauber konfiguriert sind. Der Admin richtet eine Standardkonfig ein und schreibt die Tests dazu. Bei jedem neuen Gerät kann der Test ausgeführt werden und es wird angezeigt, ob alles vorhanden ist. Häufig vergisst man gewisse Benutzer oder kleinere Einstellungen. So können diese nicht mehr vergessen gehen.\newline\newline
-Dies spart Zeit fürs Suchen von Konfigurationsfehler und der ganze Vorgang wird effizienter. Auch wenn man bei bestehenden Netzen etwas neues konfiguriert, können so die restlichen Einstellungen getestet werden, damit man sich sicher ist, das alles miteinander funktioniert.
+Der Nutzen durch diese Tests ist enorm. Der Admin richtet eine Standardkonfig ein und schreibt die Tests dazu. Die Tests decken einzelne Einstellungen der Konfig ab und vergleicht diese. Bei jedem neuen Gerät kann der Test ausgeführt werden und es wird angezeigt, ob alles vorhanden ist. Häufig vergisst man gewisse Benutzer oder kleinere Einstellungen. So können diese nicht mehr vergessen gehen.\newline\newline
+Dies spart Zeit fürs suchen von Konfigurationsfehlern und der ganze Vorgang wird effizienter. Auch wenn man bei bestehenden Netzen etwas neues konfiguriert, können so die restlichen Einstellungen getestet werden. Wenn der Test sauber durchläuft, stimmt die Konfiguration und man muss sich nicht mehr direkt auf die jeweiligen Geräte verbinden. 
 \subsection{Beispiele von Test Cases}
 \subsubsection{Allgemeine showDiffs}
 Mit dem showDiff Test kann angegeben werden, welchen Befehl man auf dem Gerät ausführen möchte und man erhält die Ausgabe zurück. Diese kann danach mit dem gewünschten Wert verglichen werden und der Test ist bestanden oder nicht.
 So gibt es eine riesige Anzahl von Tests, welche man ausführen könnte. Hier haben wir ein paar gängige Tests aufgelistet.
 \paragraph{Link Speed}\newline
-Ein falsch ausgehandelter Link Speed kann das Netzwerk stark ausbremsen. Deshalb ist es sehr praktisch, dass dies automatisch überprüft werden kann. So hat man eine Fehlerquelle leicht entdeckt und schnell angepasst. Dies spart viel Zeit, gegenüber dem manuellen überprüfen auf allen Geräten.
+Ein falsch ausgehandelter Link Speed kann das Netzwerk stark ausbremsen. Deshalb ist es sehr praktisch, dass dies automatisch überprüft werden kann. So hat man eine Fehlerquelle leicht entdeckt und schnell angepasst. Dies spart viel Zeit, gegenüber dem manuellen Überprüfen auf allen Geräten.
 \paragraph{Users}\newline
 Alle Geräte sollten gleich und vorallem sicher konfiguriert sein. Daher ist es wichtig das alle relevanten Benutzer vorhanden sind. Ist ein wichtiger Benutzer nicht vorhanden oder das Passwort fehlt, würde der Test dies anzeigen.
 \paragraph{HW-Modul}\newline
 Damit ein Gerät richtig funktioniert, müssen alle relevanten HW-Module installiert und funktionstüchtig sein. Durch einen showDiff kann man dies leicht abfragen und hat eine schnelle Rückmeldung durch den Test. Dieser Test könnte periodisch ausgeführt werden, um die Komponenten auf ihre Funk­ti­ons­tüch­tig­keit zu prüfen
 \paragraph{OS-/FW-Version}\newline
-Der OS- und FW-Version ist für einen Admin von bedeutung. Alle Geräte sollten den gleichen Stand haben und alte Geräte müssen eifach zu finden sein. Der Test überprüft alle Geräte und vergleicht den OS-Stand mit der gewünschten Version. Falls ein Gerät veraltet ist, wird dieses angezeigt, damit man ein Update einspielen kann.
+Die OS- und FW-Version ist für einen Administrator von Bedeutung. Alle Geräte sollten den gleichen Stand haben und alte Geräte müssen eifach zu finden sein. Der Test überprüft alle Geräte und vergleicht den OS-Stand mit der gewünschten Version. Falls ein Gerät veraltet ist, wird dieses angezeigt, damit man ein Update einspielen kann.
 \paragraph{Weitere Tests}\newline
-Man kann noch viele weitere Tests schreiben, da der Konfigvergleich viel spielraum gibt. So greifen auch andere Teststufen auf den showDiff-Befehl zu, da er sehr hilfreich ist. 
+Man kann noch viele weitere Tests schreiben, da der Konfigvergleich viel Ppielraum gibt. So greifen auch andere Teststufen auf den showDiff-Befehl zu, da er sehr hilfreich ist. 
 \newpage
 \section{Circuit Tests}
 \subsection{Scope}
@@ -150,20 +152,20 @@ Mit Circuit Tests möchte man die Verbindungen der Devices testen. Mögliche LAN
 
 \includegraphics[width=1\textwidth]{figures/Netzwerk_physisch.png}\\
 
-\noindent Wenn von Verbindungsqualität gesprochen wird, möchte man vor allem bestimmte Verbindungsspezifische Parameter wie Round Trip Times, Jitter, Throughput Packet Loss testen. Je nach Verbindung, welche es zu testen gilt, kann man sinnvolle Grenzwerte festlegen. So können gewisse Throughput Werte auf der WAN Verbindung einer Firewall akzeptabel sein, während derselbe Wert auf der LAN Verbindung zu niedrig wäre.\\
+\noindent Wenn von Verbindungsqualität gesprochen wird, möchte man vor allem bestimmte verbindungsspezifische Parameter wie Round Trip Times, Jitter, Throughput Packet Loss testen. Je nach Verbindung, welche es zu testen gilt, kann man sinnvolle Grenzwerte festlegen. So können gewisse Throughput Werte auf der WAN Verbindung einer Firewall akzeptabel sein, während derselbe Wert auf der LAN Verbindung zu niedrig wäre.\\
 
 \noindent Typischerweise bewegt man sich bei Circuit Tests auf den OSI-Layern 1-3. Es muss jeweils überlegt werden, welche Tests sinnvoll sind, um die komplette Funktionalität der Verbindung auf unterschiedlichen Test Cases abzubilden.   
 \subsection{Nutzen}
-Durch systematisches Testen der Verbindungen gewinnen wir Vertrauen in die Funktionalität der Verbindungen. Changes im Netzwerk, seien es einfache Konfigurationsänderungen, oder Austausch eines oder mehrerer Devices, können bei auftretenden Fehlern schwerwiegende Folgen mit sich bringen.\\
+Durch systematisches Testen der Verbindungen gewinnen wir Vertrauen in die Funktionalität der Verbindungen. Changes im Netzwerk, seien es einfache Konfigurationsänderungen oder Austausch eines oder mehrerer Devices, können bei auftretenden Fehlern schwerwiegende Folgen mit sich bringen.\\
 
-\noindent Als Verantwortlicher Netzwerk Engineer trägt man eine grosse Verantwortung. Beim unsystematischen ad-hoc Testing werden leider oft essenzielle Funktionen und Parameter nicht getestet. Es wird sich ganz auf das Know-How und die Erfahrung des Verantwortlichen Engineers gestützt. Unter Zeitdruck werden oft nur sehr wenige Tests durchgeführt, bis das Netzwerk wieder für den produktiven Betrieb freigegeben wird. Mit systematischen Circuit Tests werden beispielsweise fehlende Links und Verbindungsfehler auf allen Devices schnell erkannt. 
+\noindent Als Verantwortlicher Netzwerk Engineer trägt man eine grosse Verantwortung. Beim unsystematischen ad-hoc Testing werden leider oft essenzielle Funktionen und Parameter nicht getestet. Es wird sich ganz auf das Know-How und die Erfahrung des verantwortlichen Engineers gestützt. Unter Zeitdruck werden oft nur sehr wenige Tests durchgeführt, bis das Netzwerk wieder für den produktiven Betrieb freigegeben wird. Mit systematischen Circuit Tests werden beispielsweise fehlende Links und Verbindungsfehler auf allen Devices schnell erkannt. 
 \subsection{Beispiele von Test Cases}
 \subsubsection{Round Trip Time}
 Bei der Round Trip Time (RTT) möchte man herausfinden, wieviel Zeit für die Übertragung und Verarbeitung eines Datenpakets über die Verbindung benötigt wird. Da bei den Circuit Tests keine high-level Services getestet werden, sollen Datenpakete gesendet werden, für welche die Gegenstation extrem wenig Zeit benötigt, um diese zu Verarbeiten. Das Interesse besteht also hauptsächlich in der benötigten Zeit für den Übertragungsweg.\\
 
 \noindent Der bekannteste Weg, um die RTT zu ermitteln, ist der ping-Befehl, welcher einen ICMP Request auslöst. Mit Ping kann man die RTT innerhalb der Broadcast Domain, aber auch über dessen Grenzen hinweg ins gesamte Internet herausfinden. Es gibt jedoch noch andere Wege, um die RTT zu bestimmen. Mittels arping wird die RTT über ARP Pakete bestimmt, oder über httping wird die Antwortzeit über das HTTP Protokoll ermittelt. Für Circuit Tests scheint der 'normale' ping über ICMP jedoch der sinnvollste.\\
 
-\noindent Bei der RTT gilt es zu beachten, dass bei zwei Devices $\{a,b\}$ die benötigte Übertragungszeit von a$\rightarrow$b $\neq$ b$\rightarrow$a sein kann. Beim Circuit Testing ist aber eher unwahrscheinlich, dass sich die Latenzzeit der beiden Übertragungswege gross unterscheiden, da in aller Regel in derselben Broadcastdomain oder über sehr wenige Hops getestet wird. Die Einwegs-Latenz ist weitaus aufwändiger zu berechnen, da eine exakte Zeitsynchronisation zwischen a und b stattfinden muss.\\
+\noindent Bei der RTT gilt es zu beachten, dass bei zwei Devices $\{a,b\}$ die benötigte Übertragungszeit von a$\rightarrow$b $\neq$ b$\rightarrow$a sein kann. Beim Circuit Testing ist aber eher unwahrscheinlich, dass sich die Latenzzeit der beiden Übertragungswege gross unterscheiden, da in aller Regel in derselben Broadcast Domain oder über sehr wenige Hops getestet wird. Die Einwegs-Latenz ist weitaus aufwändiger zu berechnen, da eine exakte Zeitsynchronisation zwischen a und b stattfinden muss.\\
 
 \noindent Mögliche Einflussgrössen der RTT sind die Distanz, verwendete Kabel, Routing/Switching processing, Queueing Delay oder mögliche Übertragungsfehler. Je nach Anwendungsfall können lange Antwortzeiten einen erheblichen Einfluss auf das Befinden der Netzwerkqualität haben. Besonders heikel sind Anwendungen im Voice oder Video Umfeld. 
 \subsubsection{Jitter}
@@ -184,19 +186,19 @@ Unter Throughput oder Durchsatz wird die Übertragungsrate von Netzwerkpaketen i
 \begin{equation}
 Durchsatz = \frac{R_{Bytes} * 8}{t_n(R) - t_0(R)}  
 \end{equation} 
-Bei Computernetzen rechnen wir, anders als beim Speicherplatz, in 10er Potenzen. Somit entsprechen 1000bps 1kbps und 1000kbps 1mbps usw. Beim Testen des Throughputs muss man jedoch stark auf die Methode achten, mit welcher die Übertragung stattgefunden hat. Je weiter unten man in der ISO/OSI Schicht ist, desto weniger Protokolloverhead fällt bei der Datenübertragung an. Man kann grundsätzlich berechnen, wieviel Overhead dies ist, jedoch kann die Konfiguration der Netzwerkdevices einen Einfluss darauf haben. Beispielsweise kann bei einem Device die Maximum Transfer Unit (MTU) festgesetzt werden. Diese setzt die Rahmengrösse für Layer 2 Pakete fest. Wenn nun die ankommenden Pakete zu gross sind, müssen sie fragmentiert werden. Dadurch würde das das Doppelte an Overhead entstehen.\\
+Bei Computernetzen rechnen wir, anders als beim Speicherplatz, in 10er Potenzen. Somit entsprechen 1000bps 1kbps und 1000kbps 1mbps usw. Beim Testen des Throughputs muss man jedoch stark auf die Methode achten, mit welcher die Übertragung stattgefunden hat. Je weiter unten man in der ISO/OSI Schicht ist, desto weniger Protokolloverhead fällt bei der Datenübertragung an. Man kann grundsätzlich berechnen, wieviel Overhead dies ist, jedoch kann die Konfiguration der Netzwerkdevices einen Einfluss darauf haben. Beispielsweise kann bei einem Device die Maximum Transfer Unit (MTU) festgesetzt werden. Diese setzt die Rahmengrösse für Layer 2 Pakete fest. Wenn nun die ankommenden Pakete zu gross sind, müssen sie fragmentiert werden. Dadurch würde das Doppelte an Overhead entstehen.\\
 
 \noindent Wenn wir uns nun Testszenarien von Datenübertragungsraten für Circuit Tests überlegen, so wäre es sinnvoll, alles zu berücksichtigen, was sich auf den Durchsatz auswirken kann. Die Einflussgrössen wären beispielsweise Link Speed, Übertragungsprotokoll, Path MTU, Packet Loss, Dienstgüte (QoS), etc. Aus Sicht der Circuit Tests möchten wir uns noch nicht mit QoS befassen, deshalb achten wir darauf, dass wir möglichst unabhängig von QoS testen können. Grundsätzlich sind wir von allen Verbindungen interessiert, wie schnell sie sind, besonders bei Netzwerkgeräten wie Firewalls, Router, Switches und Servern.\\
 
 \noindent Die meisten Link Speeds werden heutzutage per Auto Negotiation ausgehandelt. Es ist deshalb denkbar, dass bei der Aushandlung etwas schief gegangen ist oder ein Kabel defekt ist. Deshalb können resultierende Link Speeds oder Duplex Modi vom gewünschten Zustand abweichen. Auf sehr performanceintensiven Verbindungen wird häufig auch auf Bündelung von Links (Trunking) zurückgegriffen. Falls einer dieser Links ausfällt, ist es möglich, dass dies gar nie bemerkt wird. Dies ist zwar grundsätzlich die Aufgabe des Monitorings, könnte aber auch mittels eines Tests festgestellt werden. Es ist aber auch möglich, dass der gewählte Load-Balancing Algorithmus nicht funktioniert oder eine ungleiche Lastverteilung verursacht. Mittels eines Tests könnte dies erkannt und gegebenenfalls auf einen anderen Algorithmus zurückgegriffen werden.\\
 
 \noindent
-Bei den Throughput Tests im Sinne des Circuit Testings muss darauf geachtet werden, keine Datenübertragungen mit Protokollen von höheren ISO/OSI Schichten durchzuführen. Wir sollten uns vor allem auf Punkt-Punkt Verbindungen (Layer 1 und Layer 2) und Layer 3 Verbindungen über wenige Hops beschränken. So testen wir unter anderem beispielsweise die Datenraten auf dem Uplink vom Distribution- auf den Core-Switch oder vom Access-Switch auf den UC-Server. Auch Tests zwischen unterschiedlichen Netzwerkstandorten wären denkbar. Es ist durchaus interessant zu testen, wie schnell der Durchsatz vom einen Datacenter zum anderen über die MPLS Cloud des Providers ist. Zusammengefasst möchten wir mit den Throughput Tests hier Verbindungen vor allem Punkt-zu-Punkt auf Layer 1 oder Layer 2 überprüfen, aber auch über Broadcastdomänen hinweg in entfernte Subnetze oder Standorte mit dem Ziel, die angestrebten Datenraten auf allen (notwendigen) Links sicherzustellen und mögliche Flaschenhälse im Netzwerk aufzudecken.\\
+Bei den Throughput Tests im Sinne des Circuit Testings muss darauf geachtet werden, keine Datenübertragungen mit Protokollen von höheren ISO/OSI Schichten durchzuführen. Wir sollten uns vor allem auf Punkt-zu-Punkt Verbindungen (Layer 1 und Layer 2) und Layer 3 Verbindungen über wenige Hops beschränken. So testen wir unter anderem beispielsweise die Datenraten auf dem Uplink vom Distribution- auf den Core-Switch oder vom Access-Switch auf den UC-Server. Auch Tests zwischen unterschiedlichen Netzwerkstandorten wären denkbar. Es ist durchaus interessant zu testen, wie schnell der Durchsatz vom einen Datacenter zum anderen über die MPLS Cloud des Providers ist. Zusammengefasst möchten wir mit den Throughput Tests hier Verbindungen vor allem Punkt-zu-Punkt auf Layer 1 oder Layer 2 überprüfen, aber auch über Broadcastdomänen hinweg in entfernte Subnetze oder Standorte mit dem Ziel, die angestrebten Datenraten auf allen (notwendigen) Links sicherzustellen und mögliche Flaschenhälse im Netzwerk aufzudecken.\\
 
 \noindent Abschliessend gilt für Throughput Tests ganz allgemein anzumerken, dass diese den produktiven Betrieb in erheblichem Masse stören können und keinesfalls leichtfertig ausgeführt werden dürfen. Dies bedarf einer seriösen Zeitplanung und gegebenenfalls Information der Benutzer über mögliche Störungen im Netz.
 
 \subsubsection{Packet Loss} 
-Paketverluste können viele Ursachen haben. Manchmal ist ein Paketverlust auch gewollt, beispielsweise bei einer Firewall mittels Drop Policy. In diesem Abschnitt möchten wir uns aber vor allem mit ungewollten Paketverlusten beschäftigen. Diese können beispielsweise bei Fehlern im Übertragungsmedium, oder Überlast eines Routers sein. Die Folgen des Paketverlusts können unterschiedlich sein. Bei TCP Protokollen bewirken Paketverluste Retransmissions, deshalb wird der Durchsatz geringer. Bei Realtime Applikationen wie Video oder VoIP, welche UDP basiert sind, ist ein Qualitätsverlust bemerkbar. Eine gewisse Paketverlustrate ist kaum bemerkbar, aber ab einem gewissen Punkt ist beispielsweise ein Gespräch kaum hörbar.\\
+Paketverluste können viele Ursachen haben. Manchmal ist ein Paketverlust auch gewollt, beispielsweise bei einer Firewall mittels Drop Policy. In diesem Abschnitt möchten wir uns aber vor allem mit ungewollten Paketverlusten beschäftigen. Diese können beispielsweise bei Fehlern im Übertragungsmedium oder Überlast eines Routers sein. Die Folgen des Paketverlusts können unterschiedlich sein. Bei TCP Protokollen bewirken Paketverluste Retransmissions, deshalb wird der Durchsatz geringer. Bei Realtime Applikationen wie Video oder VoIP, welche UDP basiert sind, ist ein Qualitätsverlust bemerkbar. Eine gewisse Paketverlustrate ist kaum bemerkbar, aber ab einem gewissen Punkt ist beispielsweise ein Gespräch kaum hörbar.\\
 
 \noindent Packet Loss wird gängigerweise in \% der Gesamtheit angegeben. Um ihn Stichprobenartig zu ermitteln muss man also bei zwei Devices \{a,b\} nur eine gewisse Anzahl Request-Pakete $P$ von $a \rightarrow b$ schicken. Nun Antwortet Station $b$ auf jedes dieser Request Pakete mit einer Response. Station $a$ wiederum vergleicht nun die abgesendete Anzahl an Paketen $P_{req}$ mit der erhaltenen Anzahl $P_{res}$. 
 Mit der Formel
@@ -205,7 +207,7 @@ Packet Loss = 1-\frac{P_{res} * 100}{P_{req}}
 \end{equation}
 erhalten wir nun die Paketverlustrate in \%.\\
 
-\noindent Man muss unbedingt bedenken, dass der PacketLoss je nach Situation variieren kann. Es ist daher beim Testen wichtig, dass man Unterschiedliche Protokolle und Paketgrössen verwendet um ein aussagekräftiges Ergebnis zu erzielen. Es ist auch denkbar, dass die Paketverlustrate beim Testbetrieb extrem niedrig ist, und wiederum bei Volllast viel höher, dies gilt es ebenfalls zu berücksichtigen. Packet Loss könnte beim ermitteln des Jitters zusätzlich errechnet werden. Ein mächtiges Tool wäre beispielsweise iperf.
+\noindent Man muss unbedingt bedenken, dass der Packet Loss je nach Situation variieren kann. Es ist daher beim Testen wichtig, dass man unterschiedliche Protokolle und Paketgrössen verwendet um ein aussagekräftiges Ergebnis zu erzielen. Es ist auch denkbar, dass die Paketverlustrate beim Testbetrieb extrem niedrig ist, und wiederum bei Volllast viel höher, dies gilt es ebenfalls zu berücksichtigen. Packet Loss könnte beim ermitteln des Jitters zusätzlich errechnet werden. Ein mächtiges Tool wäre beispielsweise iperf.
 \newpage
 \section{Routing Tests}
 \subsection{Scope}
@@ -220,7 +222,7 @@ In grossen Netzwerken kann das Routing schnell komplex und unübersichtlich werd
 \noindent Mit systematischen Routing Tests kann man innert kürzester Zeit Sicherheit über die Funktionalität des Routings und die Erreichbarkeit der Netzwerke gewinnen. Ein manuelles durchprobieren der Netz-Erreichbarkeiten ist zwar grundsätzlich möglich, aber mit ansteigender Grösse der Netzwerke ist dieses Vorgehen extrem aufwändig. 
 \subsection{Beispiele von Test Cases}
 \subsubsection{Reachability}
-In diesem Bereich soll die Erreichbarkeit, respektive das Routing getestet werden indem Zugriffe von Subnetzen in andere Subnetze getätigt werden. Der Verbindungsweg zweier Stationen soll hier erst einmal als Black-Box betrachtet werden. Die Verbindungsqualität ist in diesem Schritt auch nicht von Relevanz, es soll lediglich im Netzwerk getestet werden, ob das Routing zwischen den Netzen funktioniert.\\
+In diesem Bereich soll die Erreichbarkeit, respektive das Routing, getestet werden indem Zugriffe von Subnetzen in andere Subnetze getätigt werden. Der Verbindungsweg zweier Stationen soll hier erst einmal als Black-Box betrachtet werden. Die Verbindungsqualität ist in diesem Schritt auch nicht von Relevanz, es soll lediglich im Netzwerk getestet werden, ob das Routing zwischen den Netzen funktioniert.\\
 
 \noindent Der einfachste Weg um die Reachability zu testen ist ping. Bei den Netzwerkgeräten ist ein ping-Tool vorhanden. Somit kann ein Router von allen seinen direkt angeschlossenen Netzen einen Ping an unterschiedlichste Destinationen absetzen.
 \subsubsection{Routing Protocols}
@@ -235,40 +237,37 @@ Häufig ist es wichtig, welchen Weg Pakete im Netzwerk nehmen. Manchmal ist es n
 \noindent Tools, um den Weg aufzuzeigen, wären beispielsweise traceroute oder pathping.  
 \section{Traffic Tests}
 \subsection{Scope}
-Durch die Traffic Tests kann man den Verkehr auf dem Netzwerk überprüfen. Das heisst es werden wichtige Punkte getestet, die das Verhalten der Pakete im Netzwerk beeinflusst. Wichitg sind vorallem die speziellen Flags, welche die Pakete auf dem Netzwerk erhalten. Dazu gehören insbesondere die QoS Flags. Dieses ist wichtig für ein \newline
+Durch die Traffic Tests kann man den End-to-End Traffic, auf dem Netzwerk überprüfen. Das heisst, es werden wichtige Punkte getestet, die das Verhalten der Pakete im Netzwerk beeinflussen. Wichitg sind vorallem die speziellen Flags, welche die Pakete auf dem Netzwerk erhalten. Es ist dabei durchaus erwünscht, das der VoIP-Verkehr schneller durch das Netz geleitet wird.\newline
 Weiter ist auch der End-to-End Throughput ein wichtiger Teil des Traffic Tests. So kann man über mehrere Netzwerkgeräte hinweg die Geschwindigkeit testen.\newline\newline
-Die Traffic Tests sind in den oberen OSI-Layer. Es werden die Layer 4-7 getestet. Alle unteren Layer werden durch die Circuit und Routing Tests überprüft.
+In diesem Kapitel soll ausschliesslich der Layer 4 getestet werden. Alle unteren Layer werden durch die Circuit und Routing Tests überprüft.
 
 \subsection{Nutzen}
-Um Fehler in den Paketen zu finden, sind die Traffic Tests unerlässlich. Man findet durch diese Tests die falsch konfigurierten QoS Einstellungen und kann das Netzwerk so enorm optimieren. \newline
+Um unterschiedliche Arten von Netzwerkverkehr (File Transfer, VoIP) zu testen, sind die Traffic Tests unerlässlich. Man findet durch diese Tests die falsch konfigurierten QoS Einstellungen und kann das Netzwerk so enorm optimieren. \newline
 Zum Nachverfolgen der QoS Flags kann man mehrere Tests schreiben und so zwischen jedem Gerät die Flags auslesen und vergleichen.\newline\newline\newline
 Man hat bei jeder Änderung am Netzwerk sofort den Überblick, ob alles noch richtig funktioniert.\newline\newline
-Ein weiterer Punkt ist der Throughput. Mit dem End-to-End Throughput kann man gut abschwätzen, ob Services, welche viel Traffic verursachen richtig funktionieren. Hier wird nicht nur der einzelne Link gemessen, sondern viele Netzwerkgeräte und Links dazwischen. So erhält man eine gute Gesammtübersicht über die Netzgeschwindigkeit.
+Ein weiterer Punkt ist der Throughput. Mit dem End-to-End Throughput kann man gut abschätzen, ob Services, welche viel Traffic verursachen, richtig funktionieren. Hier wird nicht nur der einzelne Link gemessen, sondern viele Netzwerkgeräte und Links zusammen. So erhält man eine gute Gesamtübersicht über die Netzgeschwindigkeit.
 
 \subsection{Beispiele von Test Cases}
 \subsubsection{QoS}
-Mit Quality of Service kann der Netzverkehr klassifiziert werden. Dienste wie zum Beispiel VoIP benötigen eine stabile und Latenzarme Leitung. Ist diese nicht gewährleistet, kann es zu Qualitätseinbussen oder sogar zum Abbruch der verbindung kommen. Aus diesem Grund wurde QoS - Quality of Service eingeführt. Durch QoS wird der Verkehr markiert. Hier gibt es mehrere Möglichkeiten. Beispiele dafür sind DiffServ, IntServ oder auch MPLS hat gewisse QoS Klassen. Wir konzentrieren und auf DiffServ, da es das verbreitetste ist.\newline\newline
-DiffServ bietet 64 verschiedene Klassen an. Nun ist es im Netzwerk wichtig, das diese Klassen richtig zugewiesen werden. Um dies zu testen, schickt man verschiedene Paket von einem Client zu einem anderen. Darunter sollten Pakete aus verschiedenen QoS-Klassen vorhanden sein. Beim Empfänger kann man nun das QoS Feld auslesen und auf Richtigkeit prüfen. Wenn die richtige Klasse angezeigt wird, ist der Test bestanden.\newline
-Ein weiterer Test wäre ein Test bei voller Last. So testet man, ob der Verkehr richtig priorisiert wird. Da dieser Test in einer produktiven Umgebung nicht umgesetzt werden kann, verzichten wir darauf.
+Mit Quality of Service kann der Netzverkehr klassifiziert werden. Dienste wie zum Beispiel VoIP benötigen eine stabile und latenzarme Leitung. Ist diese nicht gewährleistet, kann es zu Qualitätseinbussen oder sogar zum Abbruch der Verbindung kommen. Aus diesem Grund wurde QoS - Quality of Service eingeführt. Durch QoS wird der Verkehr geregelt und klassifiziert. Hier gibt es mehrere Möglichkeiten. Beispiele dafür sind DiffServ, IntServ oder auch MPLS hat gewisse QoS Klassen. Wir konzentrieren uns auf DiffServ, da es das verbreitetste ist.\newline\newline
+DiffServ bietet 64 verschiedene Klassen an. Nun ist es im Netzwerk wichtig, dass diese Klassen richtig zugewiesen werden. Um dies zu testen, schickt man verschiedene Pakete von einem Client zu einem anderen. Darunter sollten Pakete aus verschiedenen QoS-Klassen vorhanden sein. Beim Empfänger kann man nun das QoS Feld auslesen und auf Richtigkeit prüfen. Wenn die richtige Klasse angezeigt wird, ist der Test bestanden.\newline\newline
+Eine weitere Möglichkeit wäre ein Test bei voller Last. So testet man, ob der Verkehr richtig priorisiert wird. In einer produktiven Umgebung sollte man damit aber eher aufpassen, da es zu Störungen kommen kann.
 
-
-
-So ist es zum Beispiel wichtig, dass der VoIP Verkehr die richtigen QoS Flags besitzt, damit die Telefongespräche ohne Fehler stattfinden können. 
 \subsubsection{End-to-End Throughput}
 Im Traffic Test Teil wird der End-to-End Throughput betrachtet. Viele Informationen über den Throughput wurden im Bereich Circuit Testing schon beschrieben. Hier wird daher nur noch der Unterschied erklärt.\newline\newline
 Im Gegensatz zum Throughput Test bei Circuit Test werden hier auch die oberen Layer getestet. Auch werden nicht nur ein oder wenige Links, sondern gleich mehrere Links und Devices gemessen.
-So kann man ein Gesamtüberblick über das Netzwerk schaffen und weiss, wie perfomrant es ist.\newline\newline
+So kann man ein Gesamtüberblick über das Netzwerk schaffen und weiss, wie performant es ist.\newline\newline
 Es gibt zwei grundlegende Varianten. Man kann über TCP oder über UDP messen. Dies macht ein grosser Unterschied in der Messung. 
-UDP ist viel schlanker gebaut und hat dementsprechen weniger Overhead. TCP hat mit seinem grossen Header und dem Handshake einen gewaltigen Nachteil im Throughput Test. Dies macht sich bei den Zahlen deutlich bemerkbar.\newline\newline
+UDP ist viel schlanker gebaut und hat dementsprechend weniger Overhead. TCP hat mit seinem grossen Header und dem Handshake einen gewaltigen Nachteil im Throughput Test. Dies macht sich bei den Zahlen deutlich bemerkbar.\newline\newline
 Daher ist es wichtig die richtige Methode zu wählen.
-Möchte man zum Beispiel den VoIP Throughput messen, muss man UDP benutzen. Und für normalen Webverkehr nimt man TCP. Es muss daher immer sorgfälltig abgeklärt werden, welche Methode für den speziellen Fall die bessere ist. Sonst kann es sein, dass man denkt der Test sei gut verlaufen und die Applikation läuft trotzdem langsam, da TCP anstelle von UDP verwendet wurde.\newline\newline
+Möchte man zum Beispiel den VoIP Throughput messen, muss man UDP benutzen. Und für normalen Webverkehr nimt man TCP. Es muss daher immer sorgfälltig abgeklärt werden, welche Methode für den speziellen Fall die bessere ist. Sonst kann es sein, dass man denkt, der Test sei gut verlaufen und die Applikation läuft trotzdem langsam, da TCP anstelle von UDP verwendet wurde.\newline\newline
 Auch hier gibt es wieder zu bedenken, dass ein Throughput Test das Netzwerk flutet und zu Störungen führen kann. Throughput Tests sollten zu Randzeiten oder gut geplannt ausgeführt werden. 
-
+\newpage
 \section{Application Tests}
 \subsection{Scope}
-Mit den Application Tests, werden Netzwerkservices getestet. Diese können zum Beispiel DNS, DHCP, Webservice usw. sein.
+Mit den Application Tests, werden Netzwerkservices getestet. Diese können zum Beispiel DNS, DHCP, Webservices usw. sein.
 Um sicherzustellen das alle Services noch einwandfrei funktionieren, sollte man nach jeder Netzwerkumstellung alle Services testen. So werden mit den Application Tests die Verfügbarkeit der Services getestet.\newline\newline
-Wichtige Punkte in diesem Bereich sind die korrekten Einstellungen und die Erreichbarkeit der Services. So ist es wichtig das der DNS Service im Netzwerk erreichbar ist und korrekte Antworten liefert. Sonst sind viele andere Servives beeinträchtigt.\newline\newline
+Wichtige Punkte in diesem Bereich sind die korrekten Einstellungen und die Erreichbarkeit der Services. So ist es wichtig das der DNS Service im Netzwerk erreichbar ist und korrekte Antworten liefert. Sonst sind viele andere Services beeinträchtigt.\newline\newline
 Ein weitere wichtiger Punkt ist die allgemeine Erreichbarkeit von Ports. Wenn man an der Firewall die Regeln anpasst, muss man wissen, ob alle anderen Services trotzdem noch erreichbar sind.\newline\newline
 Um die Application Tests zu bestehen müssen natürlich auch die Tests der unteren Layer einwandfrei funktionieren. Erst dann kann man die Application Tests sauber durchführen.
 \subsection{Nutzen}
@@ -277,20 +276,19 @@ Bei Ausfällen von ganzen Services ist der Schaden enorm. Die Benutzer können g
 
 \subsection{Beispiele von Test Cases}
 \subsubsection{DNS}
-DNS ist einer der wichtigsten Dienste im Netzwerk. Es gibt weltweit tausende Server, welche die Auflösung für Millionen von Website macht. Viele Firmen haben auch einen internet DNS-Server, um die lokalen Anfragen zu beantworten. Da viele netzwerkfähige Applikation einen DNS-Dienst benötigen, sollte dieser auch unbediengt getestet werden. Daher ist es enorm wichtig, dass dieser Dienst getestet werden kann.\newline\newline
-Ein DNS-Server kann man ziemlich eifach testen. Man stellt ihm eine Anfrage und betrachtet die Antwort. Stimmt diese mit dem gewünschten Resultat überein, ist alles in Ordnung. Dazu gibt es mehrere Tools, wie zum Beispiel nslookup.Hier kann man interne, sowie auch externe Adressen auflösen lassen. Beide müssen ohne Probleme funktionieren.\newline\newline
+DNS ist einer der wichtigsten Dienste im Netzwerk. Es gibt weltweit tausende Server, welche die Auflösung für Millionen von Website macht. Viele Firmen haben auch einen internet DNS-Server, um die lokalen Anfragen zu beantworten. Da viele netzwerkfähige Applikation einen DNS-Dienst benötigen, sollte dieser auch unbedingt getestet werden. Daher ist es enorm wichtig, dass dieser Dienst getestet werden kann.\newline\newline
+Eine Namensauflösung kann man einfach testen. Man stellt ihm eine Anfrage und betrachtet die Antwort. Stimmt diese mit dem gewünschten Resultat überein, ist alles in Ordnung. Dazu gibt es mehrere Tools, wie zum Beispiel nslookup. Hier kann man interne, sowie auch externe Adressen auflösen lassen. Beide müssen ohne Probleme funktionieren.\newline\newline
 Folgende Daten kann man aus dem DNS auslesen: SOA, NS, A/AAAA, CNAME und MX Records. Alle sind wichtige Records und sollten getestet werden. Am wenigsten Sinn machen die A und AAAA Records, da es da sehr viele gibt.\newline\newline
-Ein mögliches Testszenario wäre die Abfrage aller eigenen NS (Nameserver). Damit der DNS richtig funktioniert, müssen diese Einträge richtig sein. Deshalb schreibt man beim Aussetzen des DNS-Server diese Test und hat bei jeder umstellung einen Check, ob alles noch passt. Ein weiterer möglicher Test wäre die Abfrage des MX Records. Dieser Mailserver Eintrag ist wichtig, damit das Mailing funktioniert. Auch hier könnte man einen Test schreiben, damit man immer sicher ist, das sich nichts geändert hat.\newline\newline
-Der DNS-Server ist auch über das WAN erreichbar. Daher sollten diese Tests auch aus dem WAN ausgeführt werden. Alle nötigen Records kann man wie von intern mit nslookup abfragen.\newline\newline
+Ein mögliches Testszenario wäre die Abfrage aller eigenen NS (Nameserver). Damit der DNS richtig funktioniert, müssen diese Einträge richtig sein. Deshalb schreibt man beim Aussetzen des DNS-Server diese Test und hat bei jeder Umstellung einen Check, ob alles noch passt. Ein weiterer möglicher Test wäre die Abfrage des MX Records. Dieser Mailserver Eintrag ist wichtig, damit das Mailing funktioniert. Auch hier könnte man einen Test schreiben, damit man immer sicher ist, das sich nichts geändert hat.\newline\newline
 DNSSEC ist eine sehr neue Technik, aber auch hier gibt es nützliche Tests. Zum Beispiel das Ablaufdatum der Zertifikate könnte man sehr gut abfragen. Dazu schreibt man einen automatischen Test, der jeden Tag das Datum überprüft und fehlschlägt, falls das Datum zu nahe am Grenzwert ist. So kann man sich sicher sein, dass man nie ein abgelaufenes Zertifikat hat. Dies ist zwar eher ein Monitoring, aber kann natürlich auch als Test funktionieren.
 \subsubsection{DHCP}
 Heutzutage ist der DHCP-Service nicht mehr wegzudenken. Ohne ihn fehlen allen Clients die IP-Adressen und sie können sich nicht ins Netzwerk verbinden. Meistens merkt man nichts vom DHCP, da er sein Arbeit ohne grosse Probleme verrichtet. Aber wenn Fehler vorhanden sind, ist es sehr schwer diese zu finden. \newline\newline
-Um einen DHCP-Service zu testen, schickt man dem Server anfragen. Für dies gibt es mehrere Tools, welche das übernehmen. Wird kein Server gefunden, liegt das Problem in einem tiefern Bereich des OSI-Layer.\newline
+Um einen DHCP-Service zu testen, schickt man dem Server Anfragen. Für dies gibt es mehrere Tools, welche das übernehmen. Wird kein Server gefunden, liegt das Problem in einem tiefern Bereich des OSI-Layer.\newline
 Erhält man eine Antwort, ist es wichtig, dass der Adressbereich übereinstimmt. Man vergleicht die gewünschte Adresse mit der erhaltenen. Durch die Subnetzmaske weiss man genau welcher Bereich dynamisch sein darf.\newline\newline Neben den IP-Adressen sind auch die weiteren Felder wichtig. Zum Beispiel DNS-Server, Gateway, Lease Time, uws. All diese Felder können überprüft und verglichen werden.\newline\newline
 Möchte man gleich mehrere Anfragen hintereinander testen, kann man einen MAC Address Generator verwenden. Dieser gibt einem immer eine neue MAC-Adresse und man erhält vom Server wieder eine neue IP-Adresse zugewiefen. Dies sollte aber mit bedacht gemacht werden, denn anstonsten ist der DHCP-Pool irgendwann  leer und die anderen Clients bekommen keine Adresse mehr. 
 \subsubsection{Webservice}
-Ein grosser Teil der Netzwerke beinhaltet Webservices. Diese sind nicht mehr wegzudenken. Daher ist es wichtig auch diese in einem Netzwerk zu testen. Hier gibt es Fragen wie 'Ist der Dienst erreichbar?' oder 'Gibt der Dienst die richtge anwort?' zu klären. Mit den Netzwerktests testen wir aber nur den erstsen Teil. Der Webserver soll von aussen erreichbar sein und antworten. Ob die Antwort richtig ist, liegt dann beim Softwareentwickler.\newline\newline
-Der Webservice kann durch mehrere Komponenten beinträchtigt werden. Meistens beitzt man eine 3-Tier Architektur und bei jedem Tier kann es zu Fehlern kommen. Daher ist es sehr schwer herauszufinden, wo der Fehler entstanden ist. Mit einer falschen Firewallregeln könnte der Webservice bereits unerreichbar werden. Daher ist es für jeden Admin sehr wichtig, dass  bei Änderungen ein Feedback angezeigt wird. Falls der Service beeinträchtigt ist, kann man schnell handeln.\newline\newline
+Ein grosser Teil der Netzwerke beinhaltet Webservices. Diese sind nicht mehr wegzudenken. Daher ist es wichtig auch diese in einem Netzwerk zu testen. Hier gibt es Fragen wie 'Ist der Dienst erreichbar?' oder 'Gibt der Dienst die richtge Anwort?' zu klären. Mit den Netzwerktests testen wir aber nur den ersten Teil. Der Webserver soll von aussen erreichbar sein und antworten. Ob die Antwort richtig ist, liegt dann beim Softwareentwickler.\newline\newline
+Der Webservice kann durch mehrere Komponenten beinträchtigt werden. Meistens beitzt man eine 3-Tier Architektur und bei jedem Tier kann es zu Fehlern kommen. Daher ist es sehr schwer herauszufinden, wo der Fehler entstanden ist. Mit einer falschen Firewallregeln könnte der Webservice bereits unerreichbar werden. Daher ist es für jeden Administrator sehr wichtig, dass bei Änderungen ein Feedback angezeigt wird. Falls der Service beeinträchtigt ist, kann man schnell handeln.\newline\newline
 Eine einfache Methode einen Webserver zu testen, ist es eine GET Anfrage zu schicken. Diese kann wie folgt aussehen:\newline
 - GET www.example.com/index.html HTTP/1.1 \newline
 - GET www.example.com/user/12 HTTP/1.1 \newline
@@ -301,7 +299,7 @@ Ist der Webservice erreichbar, wird er mit einem Statuscode (z.B 200) antworten.
 Weiter kann der Load Balancer getestet werden. Dies ist aber eher eine komplexere Aufgabe. Um den Load Balancer zu testen, schickt man mehrere Anfragen an den Server. Nun sieht man sich auf allen Load Balancer den Datenverkehr an und sieht, ob der Verkehr sauber verteilt wurde. Hier ist aber zu beachten, dass solche Tests gut geplant werden und an Randstunden ausgeführt werden.
 \subsubsection{Porterreichbarkeit}
 Sobald man in den oberen OSI-Layern angekommen ist, wird ein Port benötigt. Daher ist es wichtig, dass die benötigten Ports des jeweiligen Services auch erreichbar sind.\newline\newline
-Ports werden hauptsächlich an zwei Geräten konfiguriert. Auf der Firewall werden Regeln hinzugefügt, welche Ports in das Netzwerk gelangen dürfen. Auf dem Server werden die Ports geöffnet und auf Listen gesetzt. Damit der Service einwandfrei läuft, müssen beide Konfigurationen stimmen. Der Firewallteil kann man mit konfigvergleichen sicherstellen. Dies ist im oberen Abschnitt unter Device Tests aufgeführt.\newline\newline
+Ports werden hauptsächlich an zwei Geräten konfiguriert. Auf der Firewall werden Regeln hinzugefügt, welche Ports in das Netzwerk gelangen dürfen. Auf dem Server werden die Ports geöffnet und auf Listen gesetzt. Damit der Service einwandfrei läuft, müssen beide Konfigurationen stimmen. Der Firewallteil kann man mit Konfigvergleichen sicherstellen. Dies ist im oberen Abschnitt unter Device Tests aufgeführt.\newline\newline
 Da die Firewall nicht auf Portscanns antwortet, muss man den Server testen. Durch Portanfragen auf dem Server (z.B. mit nmap) findet man schnell die offenen Ports. Es ist auch möglich ganze Portbereiche zu scannen, um den kompletten Server zu testen, anstelle eines einzelnen Services.\newline\newline
 Eine weitere Einsatzmöglichkeit sind Security Test. Man schreibt für jeden Server einen Test, indem man seine offenen Ports abfragt. Wenn der Test durchläuft und keine Fehler anzeigt, ist das Netzwerk in diesem Bereich richtig konfiguriert. Findet man aber offene Ports, welche nicht offen sein sollten, sieht man das in der Auswertung. Die offenen Ports können nun wieder geschlossen werden und der Server hat keine unnötigen Services aktiviert.\newline\newline
 Mit Portscans sollte man aber vorsichtig sein, da diese bei gewissen Admins als Angriff gewertet werden. Eine Abklärung vor dem Test ist hier von Vorteil, damit keine Missverständnisse enstehen.
