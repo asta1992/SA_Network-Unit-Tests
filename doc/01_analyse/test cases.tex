@@ -124,8 +124,25 @@ Die Bedeutung des Testens in Netzwerken wächst mit zunehmender Grösse und Komp
 \noindent In diesem Dokument sollen die Testing-relevanten Bereiche im Netzwerk aufgezeigt - und mögliche Test-Szenarien ausgearbeitet werden. 
 \section{Device Tests}
 \subsection{Scope}
+Device Tests testen ein einzelnes Netzwerkgerät, wie zum Beispiel Switches, Router oder Firewalls. Häufig geht es bei den Device Tests um Konfigurationsvergleiche. Durch einen solchen showDiff kann man extrem viel testen.\newline\newline
+Häufige werden die Informationen direkt auf dem Gerät angezeigt und man muss auf alle Geräte verbinden. Dies kann durch die Tests umgangen werden. Wenn der Test sauber durchläuft, stimmt die Konfiguration so und man muss sich nicht mehr auf die Geräte verbinden.
 \subsection{Nutzen}
+Der Nutzen durch diese Tests ist enorm. Man kann so sicherstellen das alle Geräte sauber konfiguriert sind. Der Admin richtet eine Standardkonfig ein und schreibt die Tests dazu. Bei jedem neuen Gerät kann der Test ausgeführt werden und es wird angezeigt, ob alles vorhanden ist. Häufig vergisst man gewisse Benutzer oder kleinere Einstellungen. So können diese nicht mehr vergessen gehen.\newline\newline
+Dies spart Zeit fürs Suchen von Konfigurationsfehler und der ganze Vorgang wird effizienter. Auch wenn man bei bestehenden Netzen etwas neues konfiguriert, können so die restlichen Einstellungen getestet werden, damit man sich sicher ist, das alles miteinander funktioniert.
 \subsection{Beispiele von Test Cases}
+\subsubsection{Allgemeine showDiffs}
+Mit dem showDiff Test kann angegeben werden, welchen Befehl man auf dem Gerät ausführen möchte und man erhält die Ausgabe zurück. Diese kann danach mit dem gewünschten Wert verglichen werden und der Test ist bestanden oder nicht.
+So gibt es eine riesige Anzahl von Tests, welche man ausführen könnte. Hier haben wir ein paar gängige Tests aufgelistet.
+\paragraph{Link Speed}\newline
+Ein falsch ausgehandelter Link Speed kann das Netzwerk stark ausbremsen. Deshalb ist es sehr praktisch, dass dies automatisch überprüft werden kann. So hat man eine Fehlerquelle leicht entdeckt und schnell angepasst. Dies spart viel Zeit, gegenüber dem manuellen überprüfen auf allen Geräten.
+\paragraph{Users}\newline
+Alle Geräte sollten gleich und vorallem sicher konfiguriert sein. Daher ist es wichtig das alle relevanten Benutzer vorhanden sind. Ist ein wichtiger Benutzer nicht vorhanden oder das Passwort fehlt, würde der Test dies anzeigen.
+\paragraph{HW-Modul}\newline
+Damit ein Gerät richtig funktioniert, müssen alle relevanten HW-Module installiert und funktionstüchtig sein. Durch einen showDiff kann man dies leicht abfragen und hat eine schnelle Rückmeldung durch den Test. Dieser Test könnte periodisch ausgeführt werden, um die Komponenten auf ihre Funk­ti­ons­tüch­tig­keit zu prüfen
+\paragraph{OS-/FW-Version}\newline
+Der OS- und FW-Version ist für einen Admin von bedeutung. Alle Geräte sollten den gleichen Stand haben und alte Geräte müssen eifach zu finden sein. Der Test überprüft alle Geräte und vergleicht den OS-Stand mit der gewünschten Version. Falls ein Gerät veraltet ist, wird dieses angezeigt, damit man ein Update einspielen kann.
+\paragraph{Weitere Tests}\newline
+Man kann noch viele weitere Tests schreiben, da der Konfigvergleich viel spielraum gibt. So greifen auch andere Teststufen auf den showDiff-Befehl zu, da er sehr hilfreich ist. 
 \newpage
 \section{Circuit Tests}
 \subsection{Scope}
@@ -218,13 +235,9 @@ Häufig ist es wichtig, welchen Weg Pakete im Netzwerk nehmen. Manchmal ist es n
 \noindent Tools, um den Weg aufzuzeigen, wären beispielsweise traceroute oder pathping.  
 \section{Traffic Tests}
 \subsection{Scope}
-Durch die Traffic Tests kann man den Verkehr auf dem Netzwerk überprüfen. Das heisst es werden wichtige Punkte getestet, die das Verhalten der Pakete im Netzwerk beeinflusst. Wichitg sind vorallem die speziellen Flags, welche die Pakete auf dem Netzwerk erhalten. Dazu gehören insbesondere die QoS Flags.\newline
-Weiter ist auch der End-to-End Throughput ein wichtiger Teil des Traffic Tests. So kann man über mehrere Netzwerkgeräte hinweg die Geschwindigkeit testen.
-
-%was testet man
-% wie
-% Szenarien
-% was ist zu beachten
+Durch die Traffic Tests kann man den Verkehr auf dem Netzwerk überprüfen. Das heisst es werden wichtige Punkte getestet, die das Verhalten der Pakete im Netzwerk beeinflusst. Wichitg sind vorallem die speziellen Flags, welche die Pakete auf dem Netzwerk erhalten. Dazu gehören insbesondere die QoS Flags. Dieses ist wichtig für ein \newline
+Weiter ist auch der End-to-End Throughput ein wichtiger Teil des Traffic Tests. So kann man über mehrere Netzwerkgeräte hinweg die Geschwindigkeit testen.\newline\newline
+Die Traffic Tests sind in den oberen OSI-Layer. Es werden die Layer 4-7 getestet. Alle unteren Layer werden durch die Circuit und Routing Tests überprüft.
 
 \subsection{Nutzen}
 Um Fehler in den Paketen zu finden, sind die Traffic Tests unerlässlich. Man findet durch diese Tests die falsch konfigurierten QoS Einstellungen und kann das Netzwerk so enorm optimieren. \newline
@@ -234,6 +247,12 @@ Ein weiterer Punkt ist der Throughput. Mit dem End-to-End Throughput kann man gu
 
 \subsection{Beispiele von Test Cases}
 \subsubsection{QoS}
+Mit Quality of Service kann der Netzverkehr klassifiziert werden. Dienste wie zum Beispiel VoIP benötigen eine stabile und Latenzarme Leitung. Ist diese nicht gewährleistet, kann es zu Qualitätseinbussen oder sogar zum Abbruch der verbindung kommen. Aus diesem Grund wurde QoS - Quality of Service eingeführt. Durch QoS wird der Verkehr markiert. Hier gibt es mehrere Möglichkeiten. Beispiele dafür sind DiffServ, IntServ oder auch MPLS hat gewisse QoS Klassen. Wir konzentrieren und auf DiffServ, da es das verbreitetste ist.\newline\newline
+DiffServ bietet 64 verschiedene Klassen an. Nun ist es im Netzwerk wichtig, das diese Klassen richtig zugewiesen werden. Um dies zu testen, schickt man verschiedene Paket von einem Client zu einem anderen. Darunter sollten Pakete aus verschiedenen QoS-Klassen vorhanden sein. Beim Empfänger kann man nun das QoS Feld auslesen und auf Richtigkeit prüfen. Wenn die richtige Klasse angezeigt wird, ist der Test bestanden.\newline
+Ein weiterer Test wäre ein Test bei voller Last. So testet man, ob der Verkehr richtig priorisiert wird. Da dieser Test in einer produktiven Umgebung nicht umgesetzt werden kann, verzichten wir darauf.
+
+
+
 So ist es zum Beispiel wichtig, dass der VoIP Verkehr die richtigen QoS Flags besitzt, damit die Telefongespräche ohne Fehler stattfinden können. 
 \subsubsection{End-to-End Throughput}
 Im Traffic Test Teil wird der End-to-End Throughput betrachtet. Viele Informationen über den Throughput wurden im Bereich Circuit Testing schon beschrieben. Hier wird daher nur noch der Unterschied erklärt.\newline\newline
