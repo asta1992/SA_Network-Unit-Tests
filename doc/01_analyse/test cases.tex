@@ -204,9 +204,22 @@ Bei den Routing Tests werden die logischen Strukturen des Netzwerks getestet. In
 \subsection{Nutzen}
 In grossen Netzwerken kann das Routing schnell komplex und unübersichtlich werden. Viele Routing Einträge auf unterschiedlichsten Devices geschehen dynamisch mittels Routing Protokollen. Man ist kaum in der Lage, sämtliche Routing-Tabellen auf allen Devices zu überblicken. Routing ist ein sehr zentraler und wichtiger Aspekt im Netzwerk. Wenn Fehler im Routing auftreten, kann dies Teile oder das gesamte Netzwerk ausser Betrieb setzen.\\
 
-\noindent Mit systematischen Tests 
+\noindent Mit systematischen Routing Tests kann man innert kürzester Zeit Sicherheit über die Funktionalität des Routings und die Erreichbarkeit der Netzwerke gewinnen. Ein manuelles durchprobieren der Netz-Erreichbarkeiten ist zwar grundsätzlich möglich, aber mit ansteigender Grösse der Netzwerke ist dieses Vorgehen extrem aufwändig. 
 \subsection{Beispiele von Test Cases}
+\subsubsection{Reachability}
+In diesem Bereich soll die Erreichbarkeit, respektive das Routing getestet werden indem Zugriffe von Subnetzen in andere Subnetze getätigt werden. Der Verbindungsweg zweier Stationen soll hier erst einmal als Black-Box betrachtet werden. Die Verbindungsqualität ist in diesem Schritt auch nicht von Relevanz, es soll lediglich im Netzwerk getestet werden, ob das Routing zwischen den Netzen funktioniert.\\
 
+\noindent Der einfachste Weg um die Reachability zu testen ist ping. Bei den Netzwerkgeräten ist ein ping-Tool vorhanden. Somit kann ein Router von allen seinen direkt angeschlossenen Netzen einen Ping an unterschiedlichste Destinationen absetzen.
+\subsubsection{Routing Protocols}
+Für den Austausch der Routing-Informationen und den dynamischen Aufbau der Routing Tabellen werden Routing Protokolle eingesetzt. Dabei wird unterschieden, ob innerhalb eines Autonomen Systems (AS) oder zwischen unterschiedlichen AS geroutet wird. Beispielprotokolle fürs Routing innerhalb eines AS wären OSPF, RIP, EIGRP, IS-IS und das heute einzig eingesetzte Protokoll fürs AS Routing ist BGP. Diese Routing-Protokolle verwenden unterschiedliche Algorithmen und besitzen andere Eigenschaften und Informationen über das Netzwerk.\\
+
+\noindent Mögliche Test Cases für Routing Protokolle schauen wir uns am Beispiel OSPF an. So möchte man beispielsweise die Adjacencies benachbarter Router testen, indem überprüft wird, ob, und wie häufig Link State Advertisements ausgetauscht werden. Ebenfalls interessant ist das Verhalten beim Ausfall eines Links, was eine Neuberechnung des SPF Trees bedeutet. Wie lange dauert es, bis das Netzwerk wieder in einem konsistenten Zustand ist (Konvergenz)? Solche Tests könnten mit Hilfe von show-Outputs direkt aus den Devices herausgelesen werden. So kann man vergleichen ob das erwartete Resultat eingetroffen ist. 
+\subsubsection{Routing Paths}
+Häufig ist es wichtig, welchen Weg Pakete im Netzwerk nehmen. Manchmal ist es notwendig, unterschiedliche Pfade für dasselbe Ziel zu haben. Sei dies aus Gründen der Redundanz für die Ausfallsicherheit oder Load-Sharing für mehr Throughput. Wichtige Verbindungen, beispielsweise an den Core-Switches, sind redundant ausgelegt. Fällt ein Link aus, so muss ein anderer Link existieren, um ans Ziel zu gelangen. Bei unterschiedlichen Routen auf die selbe Destination mit gleichen Kosten (equal cost paths) muss ein Load-Sharing stattfinden. So müssten die Flows gleichmässig auf die zur Verfügung stehenden Routen verteilt werden.\\
+
+\noindent Grundsätzlich muss getestet werden, ob Pakete den vorgesehenen Weg nehmen. Oft ist es wichtig, dass ein bestimmter Verkehr über eine gewisse Verbindung läuft, während ein anderer Verkehr einen unterschiedlichen Weg nehmen sollte.\\
+
+\noindent Tools, um den Weg aufzuzeigen, wären beispielsweise traceroute oder pathping.  
 \section{Traffic Tests}
 \subsection{Scope}
 Durch die Traffic Tests kann man den Verkehr auf dem Netzwerk überprüfen. Das heisst es werden wichtige Punkte getestet, die das Verhalten der Pakete im Netzwerk beeinflusst. Wichitg sind vorallem die speziellen Flags, welche die Pakete auf dem Netzwerk erhalten. Dazu gehören insbesondere die QoS Flags. Dieses ist wichtig für ein \newline

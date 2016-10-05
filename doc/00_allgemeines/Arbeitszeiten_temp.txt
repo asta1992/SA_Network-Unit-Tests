@@ -6,3 +6,4 @@
 29.09.	1.0	dm	Meeting
 03.10.	4.0	dm	Recherche Network Testing
 04.10.	8.5	dm	Meeting, Recherche, Besprechung, Dokumentation Testing 
+04.10.	2.0	dm	Dokumentation Testing
