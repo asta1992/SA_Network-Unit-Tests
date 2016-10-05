@@ -118,18 +118,25 @@ Noch keine.
 
 \section{Device Tests}
 \subsection{Scope}
-Device Tests testen ein einzelnes Netzwerkgerät. Häufig geht es bei den Device Tests um Konfigurationsvergleiche. Durch einen solchen ConfigDiff kann man extrem viel testen.
+Device Tests testen ein einzelnes Netzwerkgerät, wie zum Beispiel Switches, Router oder Firewalls. Häufig geht es bei den Device Tests um Konfigurationsvergleiche. Durch einen solchen showDiff kann man extrem viel testen.\newline\newline
+Häufige werden die Informationen direkt auf dem Gerät angezeigt und man muss auf alle Geräte verbinden. Dies kann durch die Tests umgangen werden. Wenn der Test sauber durchläuft, stimmt die Konfiguration so und man muss sich nicht mehr auf die Geräte verbinden.
 \subsection{Nutzen}
 Der Nutzen durch diese Tests ist enorm. Man kann so sicherstellen das alle Geräte sauber konfiguriert sind. Der Admin richtet eine Standardkonfig ein und schreibt die Tests dazu. Bei jedem neuen Gerät kann der Test ausgeführt werden und es wird angezeigt, ob alles vorhanden ist. Häufig vergisst man gewisse Benutzer oder kleinere Einstellungen. So können diese nicht mehr vergessen gehen.\newline\newline
 Dies spart Zeit fürs Suchen von Konfigurationsfehler und der ganze Vorgang wird effizienter. Auch wenn man bei bestehenden Netzen etwas neues konfiguriert, können so die restlichen Einstellungen getestet werden, damit man sich sicher ist, das alles miteinander funktioniert.
 \subsection{Beispiele von Test Cases}
-HW-Modul
-OS-Level/FW-Level
-Users
-Device Uptime
-
-
-
+\subsubsection{Allgemeine showDiffs}
+Mit dem showDiff Test kann angegeben werden, welchen Befehl man auf dem Gerät ausführen möchte und man erhält die Ausgabe zurück. Diese kann danach mit dem gewünschten Wert verglichen werden und der Test ist bestanden oder nicht.
+So gibt es eine riesige Anzahl von Tests, welche man ausführen könnte. Hier haben wir ein paar gängige Tests aufgelistet.
+\paragraph{Link Speed}\newline
+Ein falsch ausgehandelter Link Speed kann das Netzwerk stark ausbremsen. Deshalb ist es sehr praktisch, dass dies automatisch überprüft werden kann. So hat man eine Fehlerquelle leicht entdeckt und schnell angepasst. Dies spart viel Zeit, gegenüber dem manuellen überprüfen auf allen Geräten.
+\paragraph{Users}\newline
+Alle Geräte sollten gleich und vorallem sicher konfiguriert sein. Daher ist es wichtig das alle relevanten Benutzer vorhanden sind. Ist ein wichtiger Benutzer nicht vorhanden oder das Passwort fehlt, würde der Test dies anzeigen.
+\paragraph{HW-Modul}\newline
+Damit ein Gerät richtig funktioniert, müssen alle relevanten HW-Module installiert und funktionstüchtig sein. Durch einen showDiff kann man dies leicht abfragen und hat eine schnelle Rückmeldung durch den Test. Dieser Test könnte periodisch ausgeführt werden, um die Komponenten auf ihre Funk­ti­ons­tüch­tig­keit zu prüfen
+\paragraph{OS-/FW-Version}\newline
+Der OS- und FW-Version ist für einen Admin von bedeutung. Alle Geräte sollten den gleichen Stand haben und alte Geräte müssen eifach zu finden sein. Der Test überprüft alle Geräte und vergleicht den OS-Stand mit der gewünschten Version. Falls ein Gerät veraltet ist, wird dieses angezeigt, damit man ein Update einspielen kann.
+\paragraph{Weitere Tests}\newline
+Man kann noch viele weitere Tests schreiben, da der Konfigvergleich viel spielraum gibt. So greifen auch andere Teststufen auf den showDiff-Befehl zu, da er sehr hilfreich ist. 
 \newpage
 \section{Circuit Tests}
 \subsection{Scope}
