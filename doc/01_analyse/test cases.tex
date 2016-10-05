@@ -188,38 +188,61 @@ Bei den Throughput Tests im Sinne des Circuit Testings muss darauf geachtet werd
 
 \section{Traffic Tests}
 \subsection{Scope}
+Durch die Traffic Tests kann man den Verkehr auf dem Netzwerk überprüfen. Das heisst es werden wichtige Punkte getestet, die das Verhalten der Pakete im Netzwerk beeinflusst. Wichitg sind vorallem die speziellen Flags, welche die Pakete auf dem Netzwerk erhalten. Dazu gehören insbesondere die QoS und VLAN Flags.\newline
+Weiter ist auch der End-to-End Throughput ein wichtiger Teil des Traffic Tests. So kann man über mehrere Netzwerkgeräte hinweg die Geschwindigkeit testen.
+
 \subsection{Nutzen}
+Um Fehler in den Paketen zu finden, sind die Traffic Tests unerlässlich. Man findet durch diese Tests die falsch konfigurierten QoS Einstellungen und kann das Netzwerk so enorm optimieren. Auch bei den VLANs gibt es immer wieder Konfigurationsfehler, welche man so leicht finden kann.\newline
+Bei Änderungen an der VLAN einstellung kann so direkt geprüft werden, ob die richtigen Tags gesetzt wurden.\newline
+Auch zum Nachverfolgen der QoS Flags kann man mehrere Tests schreiben und so zwischen jedem Gerät die Flags auslesen und vergleichen.\newline
+So hat man bei jeder Änderung am Netzwerk sofort den Überblick, ob alles noch richtig funktioniert.\newline
+Ein weiterer Punkt ist der Throughput. Mit dem End-to-End Throughput kann man gut abschwätzen, ob Services, welche viel Traffic verursachen richtig funktionieren. Hier wird nicht nur der einzelne Link gemessen, sondern viele Netzwerkgeräte und Links dazwischen. So erhält man eine gute Gesammtübersicht über die Netzgeschwindigkeit.
+
 \subsection{Beispiele von Test Cases}
 \subsubsection{QoS}
-\subsubsection{Throughput}
-Throughput ist ein wichtiger Punkt im Bereich Netzwerktest. Hier gibt es zwei Möglichkeiten. Den Link-Throughput, sowie den End-to-End-Throughput.
-\minisec{Link-Throughput}
-Beim Link-Throughput wird der Layer 2 durchsatz gemessen. 
-\minisec{End-to-End-Throughput}
-
-
+Durch Q
+So ist es zum Beispiel wichtig, dass der VoIP Verkehr die richtigen QoS Flags besitzt, damit die Telefongespräche ohne Fehler stattfinden können. 
+\subsubsection{VLAN}
+\subsubsection{End-to-End Throughput}
+Im Traffic Test Teil wird der End-to-End Throughput betrachtet. Viele Informationen über den Throughput wurden im Bereich Circuit Testing schon beschrieben. Hier wird daher nur noch der Unterschied erklärt.\newline
+Im Gegensatz zum Throughput Test bei Circuit Test werden hier auch die oberen Layer getestet. Auch werden nicht nur ein oder wenige Links, sondern gleich mehrere Links und Devices gemessen.
+So kann man ein Gesamtüberblick über das Netzwerk schaffen und weiss, wie perfomrant es ist.\newline
+Es gibt zwei grundlegende Varianten. Man kann über TCP oder über UDP messen. Dies macht ein grosser Unterschied in der Messung. 
+UDP ist viel schlanker gebaut und hat dementsprechen weniger Overhead. TCP hat mit seinem grossen Header und dem Handshake einen gewaltigen Nachteil im Throughput Test. Dies macht sich bei den Zahlen deutlich bemerkbar.\newline
+Daher ist es wichtig die richtige Methode zu wählen.
+Möchte man zum Beispiel den VoIP Throughput messen, muss man UDP benutzen. Und für normalen Webverkehr nimt man TCP. Es muss daher immer sorgfälltig abgeklärt werden, welche Methode für den speziellen Fall die bessere ist. Sonst kann es sein, dass man denkt der Test sei gut verlaufen und die Applikation läuft trotzdem langsam, da TCP anstelle von UDP verwendet wurde.\newline
+Auch hier gibt es wieder zu bedenken, dass ein Throughput Test das Netzwerk flutet und zu Störungen führen kann. Throughput Tests sollten zu Randzeiten oder gut geplannt ausgeführt werden. 
 
 \section{Application Tests}
 \subsection{Scope}
 Mit den Application Tests, werden Netzwerkservices getestet. Diese können zum Beispiel DNS, DHCP, Webservice usw. sein.
-Um sicherzustellen, damit bei einer Firewallumstellung alle Service noch funktionieren, schickt man Anfragen an die Services.
+Um sicherzustellen das alle Services noch einwandfrei funktionieren, sollte man nach jeder Netzwerkumstellung alle Services testen. So werden mit den Application Tests die Verfügbarkeit der Services getestet.\newline
+Wichtige Punkte in diesem Bereich sind die korrekten Einstellungen und die Erreichbarkeit der Services. So ist es wichtig das der DNS Service im Netzwerk erreichbar ist und korrekte Antworten liefert. Sonst sind viele andere Servives beeinträchtigt.\newline
+Ein weitere wichtiger Punkt ist die allgemeine Erreichbarkeit von Ports. Wenn man an der Firewall die Regeln anpasst, muss man wissen, ob alle anderen Services trotzdem noch erreichbar sind.\newline
+Um die Application Tests zu bestehen müssen natürlich auch die Tests der unteren Layer einwandfrei funktionieren. Erst dann kann man die Application Tests sauber durchführen.
 \subsection{Nutzen}
-So kann man sicherstellen, dass alle Komponenten noch korrekt miteinander kommunizieren und das nichts geblockt wird.
+Mit den Application Tests kann man sicherstellen, dass bei Änderungen am Netzwerk alle Services noch erreichbar sind. Dies ist sehr nützlich, wenn man zum Beispiel neue Firewallregeln erfasst hat. So kann man den Fehler schnell eingrenzen und ausfindig machen.\newline
+Bei Ausfällen von ganzen Services ist der Schaden enorm. Die Benutzer können gar nicht mehr arbeiten oder sie sind beträchtlich eingeschränkt. Daher ist es sehr wichtig, dass man nach jeder Umstellung oder Konfigurationsanpassung die Tests laufen kann und so eine schnelle Übersicht hat, ob alles noch funktioniert.
 
 \subsection{Beispiele von Test Cases}
 \subsubsection{DNS}
+DNS ist ein sehr wichtiger Dienst im Netzwerk. Jede Netzwerkfähige Applikation benötigt diesen Dienst, um die Namen richtig auflösen zu können. Daher ist es enorm wichtig diesen Dienst testen zu können.
 
+Es gibt mehere Möglichkeiten diesen Dienst zu Testen 
 \subsubsection{DHCP}
 
 \subsubsection{Webservice}
-Ein Webservice kann sehr leicht getestet werden. Man kann dem Server eine Anfragen mit senden und weiss was die Antwort sein muss.
-Beispiel anfragen sind: \newline
+Ein grosser Teil der Netzwerke beinhaltet Webservices. Diese sind nicht mehr wegzudenken. Daher ist es wichtig auch diese in einem Netzwerk zu testen. Hier gibt es Fragen wie 'Ist der Dienst erreichbar?' oder 'Gibt der Dienst die richtge anwort?' zu klären. Mit den Netzwerktests testen wir aber nur den erstsen Teil. Der Webserver soll von aussen erreichbar sein und antworten. Ob die Antwort richtig ist, liegt dann beim Softwareentwickler.\newline
+
+Eine einfache Methode einen Webserver zu testen, ist es eine GET Anfrage zu schicken. Diese kann wie folgt aussehen:
 - GET www.example.com/index.html HTTP/1.1 \newline
 - GET www.example.com/user/12 HTTP/1.1 \newline
-\newline
+Ist der Webservice erreichbar, wird er mit einem Statuscode antworten.
 \includegraphics[scale=1]{figures/httpget.png}
 
-\subsubsection{SSH}
+Der Webservice kann durch mehrere Komponenten beinträchtigt werden. Meistens beitzt man eine 3-Tier Architektur und bei jedem Tier kann es zu Fehlern kommen. Daher ist es sehr schwer herauszufinden, wo der Fehler entstanden ist. So kann man mit einer falschen Firewallregeln den Webservice unerreichbar machen.
 
+\subsubsection{Porterreichbarkeit}
+Sobald man in den oberen OSI-Layern angekommen ist, benötigt man einen Port. Daher ist es wichtig, dass die benötigten Ports des jeweiligen Services auch erreichbar sind. Bei jeder 
 \end{document}
 
