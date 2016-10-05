@@ -125,7 +125,7 @@ Noch keine.
 \subsection{Scope}
 Mit Circuit Tests möchte man die Verbindungen der Devices testen. Mögliche LAN Devices sind unter anderem Access-, Distribution-, und Core Switches, aber auch Router oder Firewalls. Denkbar sind auch Verbindungen im WAN Bereich, ob Ethernet, ATM oder MPLS. Diese Devices haben jeweils unterschiedliche Verbindungen zueinander. Circuit Tests überprüfen Anhand verschiedener Bewertungskriterien die Qualität und Charakteristika dieser Verbindungen.\\
 
-\includegraphics[width=1\textwidth]{figures/Netzwerk_logisch.png}\\
+\includegraphics[width=1\textwidth]{figures/Netzwerk_physisch.png}\\
 
 \noindent Wenn von Verbindungsqualität gesprochen wird, möchte man vor allem bestimmte Verbindungsspezifische Parameter wie Round Trip Times, Jitter, Throughput Packet Loss testen. Je nach Verbindung, welche es zu testen gilt, kann man sinnvolle Grenzwerte festlegen. So können gewisse Throughput Werte auf der WAN Verbindung einer Firewall akzeptabel sein, während derselbe Wert auf der LAN Verbindung zu niedrig wäre.\\
 
@@ -183,15 +183,19 @@ Packet Loss = 1-\frac{P' * 100}{P}
 erhalten wir nun die Paketverlustrate in %.\\
 
 \noindent Man muss unbedingt bedenken, dass der PacketLoss je nach Situation variieren kann. Es ist daher beim Testen wichtig, dass man Unterschiedliche Protokolle und Paketgrössen verwendet um ein aussagekräftiges Ergebnis zu erzielen. Es ist auch denkbar, dass die Paketverlustrate beim Testbetrieb extrem niedrig ist, und wiederum bei Volllast viel höher, dies gilt es ebenfalls zu berücksichtigen. Packet Loss könnte beim ermitteln des Jitters zusätzlich errechnet werden. Ein mächtiges Tool wäre beispielsweise iperf.
+\newpage
 \section{Routing Tests}
 \subsection{Scope}
+Bei den Routing Tests werden die logischen Strukturen des Netzwerks getestet. In fast jedem Netzwerk existieren eine Vielzahl von Subnetzen. Damit eine Kommunikation von unterschiedlichen Layer 3 Netzwerken untereinander stattfinden kann, muss geroutet werden. Jeder Router muss sicherstellen, dass alle notwendigen Layer 3 Netze geroutet werden, seien sie direkt an ihm angeschlossen, oder über eine Weiterleitung an einen anderen Router. Falls ein Subnetz nicht geroutet wird, erhält der Client eine 'Destination Network unreachable' Fehlermeldung. Die zuständigen Layer 3 Switches, Router und Firewalls tätigen bei einem einkommenden IP-Paket einen Lookup in ihre Routing Tabelle. Die Routing Tabelle kann manuell mittels statischen Routen, aber auch dynamisch mittels Routing-Protokollen angepasst werden.\\
+
+\includegraphics[width=1\textwidth]{figures/Netzwerk_logisch.png}\\
+
+\noindent Mit den Routing Tests möchten wir die Erreichbarkeit der Netze aus unterschiedlichen Subnetzen überprüfen, aber auch das Verhalten der verwendeten Routing-Protokolle wie beispielsweise OSPF oder BGP. 
 \subsection{Nutzen}
+In grossen Netzwerken kann das Routing schnell komplex und unübersichtlich werden. Viele Routing Einträge auf unterschiedlichsten Devices geschehen dynamisch mittels Routing Protokollen. Man ist kaum in der Lage, sämtliche Routing-Tabellen auf allen Devices zu überblicken. Routing ist ein sehr zentraler und wichtiger Aspekt im Netzwerk. Wenn Fehler im Routing auftreten, kann dies Teile oder das gesamte Netzwerk ausser Betrieb setzen.\\
+
+\noindent Mit systematischen Tests 
 \subsection{Beispiele von Test Cases}
-
-
-
-
-
 
 \section{Traffic Tests}
 \subsection{Scope}
