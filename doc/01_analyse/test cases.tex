@@ -29,7 +29,7 @@
 \chead{}
 \rhead{software name}
 \lfoot{\thetitle \: v1.0 }
-\cfoot{\today }
+\cfoot{\today}
 \rfoot{Seite \thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 
@@ -227,22 +227,32 @@ Bei Ausfällen von ganzen Services ist der Schaden enorm. Die Benutzer können g
 \subsection{Beispiele von Test Cases}
 \subsubsection{DNS}
 DNS ist ein sehr wichtiger Dienst im Netzwerk. Jede Netzwerkfähige Applikation benötigt diesen Dienst, um die Namen richtig auflösen zu können. Daher ist es enorm wichtig diesen Dienst testen zu können.
+%was testet man
+% wie
+% Szenarien
+% was ist zu beachten
 
-Es gibt mehere Möglichkeiten diesen Dienst zu Testen 
 \subsubsection{DHCP}
-
+Heutzutage ist der DHCP-Service nicht mehr wegzudenken. Ohne ihn fehlen allen Clients die IP-Adressen und sie können sich nicht ins Netzwerk verbinden. Meistens merkt man nichts vom DHCP, da er sein Arbeit ohne grosse Probleme verrichtet. Aber wenn Fehler vorhanden sind, ist es sehr schwer diese zu finden. \newline\newline
+Um einen DHCP-Service zu testen, schickt man dem Server anfragen. Für dies gibt es mehrere Tools, welche das übernehmen. Wird kein Server gefunden, liegt das Problem in einem tiefern Bereich des OSI-Layer.\newline
+Erhält man eine Antwort, ist es wichtig, dass der Adressbereich übereinstimmt. Man vergleicht die gewünschte Adresse mit der erhaltenen. Durch die Subnetzmaske weiss man genau welcher Bereich dynamisch sein darf. Neben den IP-Adressen sind auch die weiteren Felder wichtig. Zum Beispiel DNS-Server, Gateway, Lease Time, uws. All diese Felder können überprüft und verglichen werden.\newline\newline
+Möchte man gleich mehrere Anfragen hintereinander testen, kann man einen MAC Address Generator verwenden. Dieser gibt einem immer eine neue MAC-Adresse und man erhält vom Server wieder eine neue IP-Adresse zugewiefen. Dies sollte aber mit bedacht gemacht werden, denn anstonsten ist der DHCP-Pool irgendwann  leer und die anderen Clients bekommen keine Adresse mehr. 
 \subsubsection{Webservice}
-Ein grosser Teil der Netzwerke beinhaltet Webservices. Diese sind nicht mehr wegzudenken. Daher ist es wichtig auch diese in einem Netzwerk zu testen. Hier gibt es Fragen wie 'Ist der Dienst erreichbar?' oder 'Gibt der Dienst die richtge anwort?' zu klären. Mit den Netzwerktests testen wir aber nur den erstsen Teil. Der Webserver soll von aussen erreichbar sein und antworten. Ob die Antwort richtig ist, liegt dann beim Softwareentwickler.\newline
-
-Eine einfache Methode einen Webserver zu testen, ist es eine GET Anfrage zu schicken. Diese kann wie folgt aussehen:
+Ein grosser Teil der Netzwerke beinhaltet Webservices. Diese sind nicht mehr wegzudenken. Daher ist es wichtig auch diese in einem Netzwerk zu testen. Hier gibt es Fragen wie 'Ist der Dienst erreichbar?' oder 'Gibt der Dienst die richtge anwort?' zu klären. Mit den Netzwerktests testen wir aber nur den erstsen Teil. Der Webserver soll von aussen erreichbar sein und antworten. Ob die Antwort richtig ist, liegt dann beim Softwareentwickler.\newline\newline
+Der Webservice kann durch mehrere Komponenten beinträchtigt werden. Meistens beitzt man eine 3-Tier Architektur und bei jedem Tier kann es zu Fehlern kommen. Daher ist es sehr schwer herauszufinden, wo der Fehler entstanden ist. Mit einer falschen Firewallregeln könnte der Webservice bereits unerreichbar werden. Daher ist es für jeden Admin sehr wichtig, dass  bei Änderungen ein Feedback angezeigt wird. Falls der Service beeinträchtigt ist, kann man schnell handeln.\newline\newline
+Eine einfache Methode einen Webserver zu testen, ist es eine GET Anfrage zu schicken. Diese kann wie folgt aussehen:\newline
 - GET www.example.com/index.html HTTP/1.1 \newline
 - GET www.example.com/user/12 HTTP/1.1 \newline
-Ist der Webservice erreichbar, wird er mit einem Statuscode antworten.
+Ist der Webservice erreichbar, wird er mit einem Statuscode (z.B 200) antworten. Hier in der Grafik sieht man den Vorgang.
+\begin{center}
 \includegraphics[scale=1]{figures/httpget.png}
-
-Der Webservice kann durch mehrere Komponenten beinträchtigt werden. Meistens beitzt man eine 3-Tier Architektur und bei jedem Tier kann es zu Fehlern kommen. Daher ist es sehr schwer herauszufinden, wo der Fehler entstanden ist. So kann man mit einer falschen Firewallregeln den Webservice unerreichbar machen.
-
+\end{center}
+Weiter kann der Load Balancer getestet werden. Dies ist aber eher eine komplexere Aufgabe. Um den Load Balancer zu testen, schickt man mehrere Anfragen an den Server. Nun sieht man sich auf allen Load Balancer den Datenverkehr an und sieht, ob der Verkehr sauber verteilt wurde. Hier ist aber zu beachten, dass solche Tests gut geplant werden und an Randstunden ausgeführt werden.
 \subsubsection{Porterreichbarkeit}
-Sobald man in den oberen OSI-Layern angekommen ist, benötigt man einen Port. Daher ist es wichtig, dass die benötigten Ports des jeweiligen Services auch erreichbar sind. Bei jeder 
+Sobald man in den oberen OSI-Layern angekommen ist, benötigt man einen Port. Daher ist es wichtig, dass die benötigten Ports des jeweiligen Services auch erreichbar sind.\newline\newline
+Ports konfiguriert man an zwei Geräten. Auf der Firewall werden Regeln hinzugefügt, welche Ports in das Netzwerk gelangen dürfen. Auf dem Server werden die Ports geöffnet und auf Listen gesetzt. Damit der Service einwandfrei läuft, müssen beide Konfigurationen stimmen. Der Firewallteil kann man mit konfigvergleichen sicherstellen. Dies ist im oberen Abschnitt unter Device Tests aufgeführt.\newline\newline
+Da die Firewall nicht auf Portscanns antwortet, muss man den Server testen. Durch Portanfragen auf dem Server (z.B. mit nmap) findet man schnell die offenen Ports. Es ist auch möglich ganze Portbereiche zu scannen, um den kompletten Server zu testen, anstelle eines einzelnen Services.\\ \newline\newline
+Eine weitere Einsatzmöglichkeit sind Security Test. Man schreibt für jeden Server einen Test, indem man seine offenen Ports abfragt. Wenn der Test durchläuft und keine Fehler anzeigt, ist das Netzwerk in diesem Bereich richtig konfiguriert. Findet man aber offene Ports, welche nicht offen sein sollten, sieht man das in der Auswertung. Die offenen Ports können nun wieder geschlossen werden und der Server hat keine unnötigen Services aktiviert.\newline\newline
+Mit Portscans sollte man aber vorsichtig sein, da diese bei gewissen Admins als Angriff gewertet werden. Eine Abklärung vor dem Test ist hier von Vorteil, damit keine Missverständnisse enstehen.
 \end{document}
 
