@@ -22,6 +22,41 @@ Number of failures: 0
 Operation time to live: 0
 
 
+__________________________________________________________________________________________________________________________
+__________________________________________________________________________________________________________________________|
+
+
+
+DNS
+
+Befehl:
+ip sla 1
+ dns host1 name-server 172.20.2.132
+ tag DNS-Test
+ip sla schedule 1 start-time now
+sh ip sla stat 1
+no ip sla 1
+
+Ausgabe:
+Round Trip Time (RTT) for       Index 3
+Type of operation: dns
+Latest operation start time: *04:07:33.884 UTC Mon Mar 1 1993
+Latest operation return code: OK
+Number of successes: 1
+Number of failures: 0
+Operation time to live: 0
+
+
+
+__________________________________________________________________________________________________________________________
+__________________________________________________________________________________________________________________________|
+
+
+
+
+
+
+
 Spanning-Tre
 __________________________________________________________________________________________________________________________
 Befehl:
@@ -254,3 +289,87 @@ Disabled
 Primary Secondary Type              Ports
 ------- --------- ----------------- ------------------------------------------
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+http://ciscotroubles.blogspot.ch/2014/02/cisco-3750-spec-file.html
+
+
+###
+show arp
+<?xml version="1.0" encoding="UTF-8"?>
+<ODMSpec>
+<SpecVersion>built-in</SpecVersion>
+<Command><Name>show arp</Name></Command>
+<DataModel>
+<Container name="ShowArp">
+<Table name="ARPtable">
+<Header name="Protocol" type="String" start="0" end="9"/>
+<Header name="Address" type="IpAddress" start="10" end="26"/>
+<Header name="Age (min)" type="String" start="27" end="37"/>
+<Header name="Hardware Addr" type="String" start="38" end="53"/>
+<Header name="Type" type="String" start="54" end="60"/>
+<Header name="Interface" type="String" start="61" end="-1"/>
+</Table>
+</Container>
+</DataModel>
+</ODMSpec>
+
+
+
+
+DLS1#show arp | format flash:/betaspec.odm
+<?xml version="1.0" encoding="UTF-8"?>
+  <ShowArp xmlns="ODM://flash:/betaspec.odm//show_arp">
+    <SpecVersion>built-in</SpecVersion>
+    <ARPtable>
+      <entry>
+        <Protocol>Internet</Protocol>
+        <Address>10.1.1.11</Address>
+        <Agemin>-</Agemin>
+        <HardwareAddr>0014.a905.2c41</HardwareAddr>
+        <Type>ARPA</Type>
+        <Interface>Vlan99</Interface>
+      </entry>
+      <entry>
+        <Protocol>Internet</Protocol>
+        <Address>10.1.1.12</Address>
+        <Agemin>59</Agemin>
+        <HardwareAddr>0017.5983.c1c1</HardwareAddr>
+        <Type>ARPA</Type>
+        <Interface>Vlan99</Interface>
+      </entry>
+      <entry>
+        <Protocol>Internet</Protocol>
+        <Address>10.1.1.1</Address>
+        <Agemin>20</Agemin>
+        <HardwareAddr>503d.e52b.a206</HardwareAddr>
+        <Type>ARPA</Type>
+        <Interface>Vlan99</Interface>
+      </entry>
+    </ARPtable>
+  </ShowArp>
