@@ -1,0 +1,77 @@
+Routing Tests
+
+-----------------------------------------------------------------------------------
+OSPF Neighbors
+Befehl:
+sh ip ospf neighbor
+
+Ausgabe:
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+172.16.25.7       1   FULL/DR         00:00:36    172.16.254.18   Port-channel4
+172.16.25.2       1   INIT/DROTHER    00:00:34    172.16.254.13   Port-channel2
+
+
+Damit können die Neighbors und ihre States angezeigt werden (sollten FULL, d.h. adjacent sein)
+
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+Router Link States
+Befehl:
+sh ip ospf database
+
+Ausgabe:
+            OSPF Router with ID (172.16.25.7) (Process ID 1)
+
+                Router Link States (Area 0)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+172.16.25.1     172.16.25.1     363         0x80000010 0x002E18 3
+172.16.25.2     172.16.25.2     95          0x80000014 0x008D8E 4
+172.16.25.4     172.16.25.4     101         0x80000012 0x005B38 4
+172.16.25.7     172.16.25.7     1849        0x80000012 0x00D0E9 7
+
+                Net Link States (Area 0)
+
+Link ID         ADV Router      Age         Seq#       Checksum
+172.16.254.2    172.16.25.2     510         0x8000000E 0x0046A5
+172.16.254.18   172.16.25.7     598         0x8000000E 0x00E3EA
+192.168.200.1   172.16.25.4     101         0x80000001 0x00A8D5
+192.168.200.2   172.16.25.2     102         0x80000001 0x00B2CC
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+Routing Table
+Befehl:
+sh ip route
+
+Ausgabe:
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is 192.168.100.1 to network 0.0.0.0
+
+     172.16.0.0/16 is variably subnetted, 13 subnets, 3 masks
+O       172.16.254.0/30 [110/2] via 192.168.200.2, 01:28:28, FastEthernet0/7
+O       172.16.254.4/30 [110/3] via 192.168.200.2, 01:28:28, FastEthernet0/7
+C       172.16.254.12/30 is directly connected, Port-channel2
+C       172.16.254.16/30 is directly connected, Port-channel4
+O       172.16.25.7/32 [110/2] via 172.16.254.18, 01:28:28, Port-channel4
+O       172.16.25.1/32 [110/3] via 192.168.200.2, 01:28:28, FastEthernet0/7
+C       172.16.25.0/24 is directly connected, Loopback100
+O       172.16.25.2/32 [110/2] via 192.168.200.2, 01:28:29, FastEthernet0/7
+O       172.16.21.0/24 [110/2] via 172.16.254.18, 01:28:29, Port-channel4
+O       172.16.4.0/24 [110/2] via 172.16.254.18, 01:28:29, Port-channel4
+O       172.16.1.0/24 [110/2] via 172.16.254.18, 01:28:29, Port-channel4
+O       172.16.2.0/24 [110/2] via 172.16.254.18, 01:28:29, Port-channel4
+O       172.16.3.0/24 [110/2] via 172.16.254.18, 01:28:35, Port-channel4
+     192.168.200.0/30 is subnetted, 1 subnets
+C       192.168.200.0 is directly connected, FastEthernet0/7
+C    192.168.100.0/24 is directly connected, FastEthernet0/16
+S*   0.0.0.0/0 [254/0] via 192.168.100.1
+-----------------------------------------------------------------------------------
