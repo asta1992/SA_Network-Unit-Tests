@@ -1,0 +1,47 @@
+Routing Path Tests
+
+-----------------------------------------------------------------------------------
+Befehl:
+tracert <Target IP>
+
+Ausgabe:
+  1 172.16.254.17 0 msec 0 msec 8 msec
+  2 192.168.200.2 0 msec 0 msec 0 msec
+  3 172.16.254.1 9 msec *  0 msec
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+Befehl:
+ip sla 1
+path-echo <Destination IP> 
+request-data-size <0-16384>
+ip sla schedule 1 start-time now life 0
+show ip sla statistics aggregated
+no ip sla 1
+
+
+Ausgabe:
+Round Trip Time (RTT) for       Index 2
+Type of operation: path-echo
+Start Time Index: *01:08:15.008 UTC Mon Mar 1 1993
+Path Index: 1
+Hop in Path Index: 1
+Number of successes: 1
+Number of failures: 0
+Target Address 172.16.254.17
+
+Start Time Index: *01:08:15.008 UTC Mon Mar 1 1993
+Path Index: 1
+Hop in Path Index: 2
+Number of successes: 1
+Number of failures: 0
+Target Address 192.168.200.2
+
+Start Time Index: *01:08:15.008 UTC Mon Mar 1 1993
+Path Index: 1
+Hop in Path Index: 3
+Number of successes: 1
+Number of failures: 0
+Target Address 172.16.254.1
+
+Test dauert sehr lange!
