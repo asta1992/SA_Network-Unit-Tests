@@ -1,0 +1,12 @@
+Throughput iperf ubuntu
+
+Befehl:
+
+Server: iperf -s -t
+
+Client: iperf -c <Server IP> -t
+
+
+Ausgabe:
+Interval	Transfer	Bandwidth
+0.0-10.0sec	6.3GBytes	5.41 Gbits/sec

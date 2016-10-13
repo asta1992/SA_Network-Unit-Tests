@@ -1,0 +1,24 @@
+ICMP Echo
+
+
+Befehl:
+ip sla 1
+icmp-echo <Destination IP> 
+request-data-size <0-16384>
+ip sla schedule 1 start-time now life 0
+show ip sla statistics 1
+no ip sla 1
+
+
+Ausgabe:
+IPSLAs Latest Operation Statistics
+
+IPSLA operation id: 1
+        Latest RTT: 1 milliseconds
+Latest operation start time: 04:17:28 UTC Mon Mar 1 1993
+Latest operation return code: OK
+Number of successes: 1
+Number of failures: 0
+Operation time to live: 0
+
+
