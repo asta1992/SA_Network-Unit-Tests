@@ -140,24 +140,38 @@ Linux: ... eth0: Link is up at 1000 Mbps, full duplex
 
 \newpage
 \section{Traffic Tests}
-\subsection{Link Speed}
+\subsection{Connectivity}
 \subsubsection{Beschreibung}
 In diesem Testszenario soll die Connectivity mittels ICMP ping Befehl getestet werden.
 \subsubsection{Tools}
 - Verbindung über SSH auf Cisco UI / Linux Shell
+- ping
+- ip sla
 
 \subsubsection{Devices}
 - Cisco Switch/Router
 - Linux OS
 \subsubsection{Commands}
-Cisco: "ping destinationIP -source vlan x"
-Linux: ""
-\subsubsection{Parameter}
-Physisches/Logisches Interface
-\subsubsection{Ausgabe}
-Cisco: Port Fa06	Name 	Status connected	Vlan routed	Duplex a-full	Speed a-100	Type 10/100BaseTX
+Cisco: "ping <destinationIP> [parameter]"
+Linux: "ping -c 1 <destinationIP>"
 
-Linux: ... eth0: Link is up at 1000 Mbps, full duplex
+Cisco ip sla: 	"ip sla 1"
+			 	"icmp-echo <destinationIP>"
+			  	"request-data-size <0-16384>"
+			  	"ip sla schedule 1 start-time now life 0"
+			  	"sh ip sla statistics 1"
+
+\subsubsection{Parameter}
+- Zwingend Destination, Entry Number (ip sla), optional Source Interface
+\subsubsection{Ausgabe}
+Cisco ping: "Succes rate is x percent (x/5)"
+Linux ping: "x packets transmitted, x received, ..."
+
+Cisco ip sla: "IPSLA Operation id, Latest RTT, start time, return code, number of successes, number of failures,..."
+
+\subsubsection{Bemerkungen}
+Mit IP SLA könnte man das Ergebnis via XML erhalten
+"show ip sla statistics 1 | format"
 \newpage
 \section{Network Service Tests}
 
