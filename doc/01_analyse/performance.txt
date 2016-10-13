@@ -1,0 +1,42 @@
+Throughput iperf ubuntu
+-------------------------------------------------------------------
+TCP
+Befehl:
+
+Server: iperf -s -t
+
+Client: iperf -c <Server IP> -t
+
+
+Ausgabe:
+Interval	Transfer	Bandwidth
+0.0-10.0sec	6.3GBytes	5.41 Gbits/sec
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+UDP
+Befehl:
+
+Server: iperf -s -u
+
+Client: iperf -c <Server IP> -u -b <Size>
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+
+-------------------------------------------------------------------
+Throughput netperf ubuntu
+-------------------------------------------------------------------
+TCP
+Befehl:
+
+Server: netserver -D -d -4 -v 2 -p 5000 -L <Local IP Address>
+
+Client: netperf -L <Local IP Address> -H <Server IP Address> -t TCP_STREAM -f M
+-------------------------------------------------------------------
+UDP
+Befehl:
+
+Server: netserver -D -d -4 -v 2 -p 5000 -L <Local IP Address>
+
+Client: netperf -L <Local IP Address> -H <Server IP Address> -t UDP_STREAM -f M
