@@ -113,18 +113,293 @@ Dieses Dokument ist über die gesamte Projektdauer gültig. Es wird in späteren
 
 \newpage
 \section{Tools}
+%TODO
 
+ping
+nslookup
+nmap
+IP SLA
+show (cisco)
+ssh
+dhcpcheck
+ntpq
+iperf
+tracepath
 \newpage
 \section{Device Tests}
+
+\subsection{Check Username}
+\subsubsection{Beschreibung}
+Mit diesem Test kann man überprüfen, ob alle benötigten Benutzer vorhanden sind.
+\subsubsection{Tools}
+- Verbindung über SSH auf Cisco UI / Linux Shell
+\subsubsection{Devices}
+- Cisco Switch/Router
+\subsubsection{Commands}
+Cisco: sh run | i username
+\subsubsection{Parameter}
+Keine
+\subsubsection{Ausgabe}
+username admin privilege 15 secret 5 1G8E3yyKZWRKXRfLPS9Ncq/hxA/
+\subsubsection{Bemerkungen}
+Keine
+
 \subsection{Check Version}
 \subsubsection{Beschreibung}
-\subsubsection{Cisco IOS}
-\paragraph{Befehl}
-\paragraph{Ausgabe}
+Durch diesen Test kann man den Versionstand von Switches und Router Testen.
+\subsubsection{Tools}
+- Verbindung über SSH auf Cisco UI / Linux Shell
+\subsubsection{Devices}
+- Cisco Switch/Router
+\subsubsection{Commands}
+Cisco: sh version
+\subsubsection{Parameter}
+Keine
+\subsubsection{Ausgabe}
+...\newline
+...\newline
+Switch Ports Model              SW Version            SW Image\newline
+------ ----- -----              ----------            ----------\newline
+*    1 26    WS-C2960-24TC-L    15.0(2)SE8            C2960-LANBASEK9-M
 \subsubsection{Bemerkungen}
+Keine
 
 \newpage
 \section{Topology Tests}
+
+\subsection{Spanning-Tree / Port State}
+\subsubsection{Beschreibung}
+State eines Interfaces auf jedem VLAN.
+\subsubsection{Tools}
+- Verbindung über SSH auf Cisco UI / Linux Shell
+\subsubsection{Devices}
+- Cisco Switch/Router
+\subsubsection{Commands}
+show spanning-tree interface <Interface> state
+\subsubsection{Parameter}
+Interface: Interface auf dem Switch/Router
+\subsubsection{Ausgabe}
+VLAN0020            blocking
+\subsubsection{Bemerkungen}
+Keine
+
+\subsection{Spanning-Tree / mst}
+\subsubsection{Beschreibung}
+Ist MST aktiviert oder nicht?
+\subsubsection{Tools}
+- Verbindung über SSH auf Cisco UI / Linux Shell
+\subsubsection{Devices}
+- Cisco Switch/Router
+\subsubsection{Commands}
+show spanning-tree mst
+\subsubsection{Parameter}
+Keine
+\subsubsection{Ausgabe}
+Switch is not in mst mode
+\subsubsection{Bemerkungen}
+Keine
+
+
+
+\subsection{Spanning-Tree / mst}
+\subsubsection{Beschreibung}
+Testet, ob die richtigen Interface geblockt sind.
+\subsubsection{Tools}
+- Verbindung über SSH auf Cisco UI / Linux Shell
+\subsubsection{Devices}
+- Cisco Switch/Router
+\subsubsection{Commands}
+sh spanning-tree blockedports
+\subsubsection{Parameter}
+Keine
+\subsubsection{Ausgabe}
+Name                 Blocked Interfaces List\newline
+-------------------- ------------------------------------\newline
+VLAN0020             Fa0/20\newline
+\subsubsection{Bemerkungen}
+Keine
+
+
+\subsection{Spanning-Tree / UplinkFast}
+\subsubsection{Beschreibung}
+Ist UplinkFast aktiviert oder nicht?
+\subsubsection{Tools}
+- Verbindung über SSH auf Cisco UI / Linux Shell
+\subsubsection{Devices}
+- Cisco Switch/Router
+\subsubsection{Commands}
+show spanning-tree portfast
+\subsubsection{Parameter}
+Keine
+\subsubsection{Ausgabe}
+UplinkFast is disabled
+\subsubsection{Bemerkungen}
+Keine
+
+
+\subsection{Spanning-Tree / Portfast}
+\subsubsection{Beschreibung}
+In diesem Test kann jedes Interface auf Portfast getestet werden.
+\subsubsection{Tools}
+- Verbindung über SSH auf Cisco UI / Linux Shell
+\subsubsection{Devices}
+- Cisco Switch/Router
+\subsubsection{Commands}
+show spanning-tree interface <Interface> state
+\subsubsection{Parameter}
+Interface: Interface auf dem Switch/Router
+\subsubsection{Ausgabe}
+VLAN0020            enabled
+\subsubsection{Bemerkungen}
+Keine
+
+
+\subsection{Spanning-Tree / Interface Settings}
+\subsubsection{Beschreibung}
+In diesem Testszenario testet man alle VLAN-Einstellungen eines Interfaces.
+\subsubsection{Tools}
+- Verbindung über SSH auf Cisco UI / Linux Shell
+\subsubsection{Devices}
+- Cisco Switch/Router
+\subsubsection{Commands}
+show spanning-tree interface <Interface>
+\subsubsection{Parameter}
+Interface: Interface auf dem Switch/Router
+\subsubsection{Ausgabe}
+Vlan                Role Sts Cost      Prio.Nbr Type\newline
+------------------- ---- --- --------- -------- --------------------------------\newline
+VLAN0020            Desg FWD 19        128.21   P2p Edge\newline
+
+Vlan                Role Sts Cost      Prio.Nbr Type\newline
+------------------- ---- --- --------- -------- --------------------------------\newline
+VLAN0001            Root FWD 19        128.5    P2p\newline
+VLAN0010            Root FWD 19        128.5    P2p\newline
+\subsubsection{Bemerkungen}
+Keine
+
+
+
+
+\subsection{Spanning-Tree / Root für ein VLAN}
+\subsubsection{Beschreibung}
+Um den Root eines VLANs zu testen kann dieser Test verwendet werden.
+\subsubsection{Tools}
+- Verbindung über SSH auf Cisco UI / Linux Shell
+\subsubsection{Devices}
+- Cisco Switch/Router
+\subsubsection{Commands}
+show spanning-tree vlan <VLAN-ID> root port
+\subsubsection{Parameter}
+VLAN-ID: Die ID des gewünschten VLANs.
+\subsubsection{Ausgabe}
+VLAN0020         FastEthernet0/21
+\subsubsection{Bemerkungen}
+Keine
+
+
+\subsection{Spanning-Tree / Alle Rootports}
+\subsubsection{Beschreibung}
+Test über alle VLANs, ob die richtigen Interface als Rootport gesetzt sind.
+\subsubsection{Tools}
+- Verbindung über SSH auf Cisco UI / Linux Shell
+\subsubsection{Devices}
+- Cisco Switch/Router
+\subsubsection{Commands}
+show spanning-tree root
+\subsubsection{Parameter}
+VLAN-ID: Die ID des gewünschten VLANs.
+\subsubsection{Ausgabe}
+Vlan                   Root ID          Cost    Time  Age Dly  Root Port\newline
+---------------- -------------------- --------- ----- --- ---  ------------\newline
+VLAN0001         32769 001a.2fd4.4000        19    2   20  15  Fa0/5\newline
+VLAN0010          8202 001a.2fd4.4000        19    2   20  15  Fa0/5\newline
+VLAN0011          8203 001a.2fd4.4000        19    2   20  15  Fa0/5\newline
+\subsubsection{Bemerkungen}
+Keine
+
+
+
+\subsection{CDP Neighbor Check}
+\subsubsection{Beschreibung}
+Dieser Test überprüft, ob alle CDP Neighbor vorhanden sind.
+\subsubsection{Tools}
+- Verbindung über SSH auf Cisco UI / Linux Shell
+\subsubsection{Devices}
+- Cisco Switch/Router
+\subsubsection{Commands}
+show cdp neighbors
+\subsubsection{Parameter}
+Keine
+\subsubsection{Ausgabe}
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge\newline
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone,\newline
+                  D - Remote, C - CVTA, M - Two-port Mac Relay\newline
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID\newline
+HQ_AS7           Fas 0/14          161             R S I  WS-C2960- Fas 0/21\newline
+HQ_AS8           Fas 0/15          172              S I   WS-C2960- Fas 0/20\newline
+\subsubsection{Bemerkungen}
+Keine
+
+
+
+
+
+\subsection{VLAN Check}
+\subsubsection{Beschreibung}
+Überprüft, ob die Interface zum richtigen VLAN zugewiesen sind.
+\subsubsection{Tools}
+- Verbindung über SSH auf Cisco UI / Linux Shell
+\subsubsection{Devices}
+- Cisco Switch/Router
+\subsubsection{Commands}
+show vlan id <VLAN-ID>
+\subsubsection{Parameter}
+Keine
+\subsubsection{Ausgabe}
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge\newline
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone,\newline
+                  D - Remote, C - CVTA, M - Two-port Mac Relay\newline
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID\newline
+HQ_AS7           Fas 0/14          161             R S I  WS-C2960- Fas 0/21\newline
+HQ_AS8           Fas 0/15          172              S I   WS-C2960- Fas 0/20\newline
+\subsubsection{Bemerkungen}
+Keine
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \newpage
 \section{Traffic Tests}
@@ -160,8 +435,153 @@ Cisco ip sla: "IPSLA Operation id, Latest RTT, start time, return code, number o
 \subsubsection{Bemerkungen}
 Mit IP SLA könnte man das Ergebnis via XML erhalten
 "show ip sla statistics 1 | format"
+
+
+\subsection{NTP-Response}
+\subsubsection{Beschreibung}
+Um die Funktionalität des NTP Servers zu testen, kann man diesen Test verwenden.
+\subsubsection{Tools}
+- ntpq
+\subsubsection{Devices}
+- Linux OS
+\subsubsection{Commands}
+ntpq -p <ntp-server>
+\subsubsection{Parameter}
+- IP-Adresse oder Hostname des NTP-Servers
+\subsubsection{Ausgabe}
+     remote           refid      st t when poll reach   delay   offset  jitter\newline
+==============================================================================\newline
+-soho.solnet.ch  162.23.41.56     2 s  494  512  357    1.313   -0.367   0.233\newline
+-bryan.solnet.ch 192.36.143.151   2 s  196  512  377    1.263   -3.990   0.175\newline
+ wernerstats.sol 212.101.4.252    2 s 792d   64    0    0.000    0.000   0.000\newline \subsubsection{Bemerkungen}
+Keine
+
+
+\subsection{Webservice-Response}
+\subsubsection{Beschreibung}
+Mit diesem Test kann die Erreichbarkeit eines Webservers getestet werden.
+\subsubsection{Tools}
+- curl
+\subsubsection{Devices}
+- Linux OS
+\subsubsection{Commands}
+curl -Is <webserver> | head -n 1
+\subsubsection{Parameter}
+- IP-Adresse oder Hostname des NTP-Servers
+\subsubsection{Ausgabe}
+HTTP/1.1 200 OK
+\subsubsection{Bemerkungen}
+Keine
+
+\subsection{Portscan}
+\subsubsection{Beschreibung}
+Dieses Testszenario gibt zurück, ob ein Port erreichbar ist.
+\subsubsection{Tools}
+- nmap
+\subsubsection{Devices}
+- Linux OS
+\subsubsection{Commands}
+nmap -p<port> <host>
+nmap -p<start-ende> <host>
+nmap -p<port1, port4> <host>
+\subsubsection{Parameter}
+- port: Einzelner Port
+- start-ende: Portbereich
+- port1, port4: Mehrere Ports
+- IP-Adresse oder Hostname des NTP-Servers
+\subsubsection{Ausgabe}
+Starting Nmap 6.47 ( http://nmap.org ) at 2016-10-12 16:21 W. Europe Daylight Time\newline
+Nmap scan report for host057.lab.ins.hsr.ch (152.96.9.57)\newline
+Host is up (0.00s latency).\newline
+PORT    STATE SERVICE\newline
+135/tcp open  msrpc\newline
+MAC Address: 00:19:99:B3:37:39 (Fujitsu Technology Solutions)\newline
+Nmap done: 1 IP address (1 host up) scanned in 1.08 seconds\newline
+\subsubsection{Bemerkungen}
+In manchen Unternehmen wird ein Portscan als Attacke gewertet. Man sollte dies vorher unbediengt abklären.
+Bei Firewalls sollte man vorsichtig sein, denn gewisse Firewalls erkennen Portscans und blocken danach den Verkehr. So kann man vom Netz ausgeschlossen werden.
+
+
+
 \newpage
 \section{Network Service Tests}
+\subsection{DHCP-Response}
+\subsubsection{Beschreibung}
+In diesem Testszenario wird der DHCP-Dienst auf Funktionalität getestet.
+\subsubsection{Tools}
+- Verbindung über SSH auf Cisco UI / Linux Shell
+- IP SLA
+- dhcpcheck
+\subsubsection{Devices}
+- Cisco OS
+- Linux OS
+\subsubsection{Commands}
+\paragraph{Cisco}
+ip sla 1
+dhcp <DHCP-Server>
+ip sla schedule 1 start-time now life 0
+sh ip sla stat 1
+no ip sla 1
+			
+\paragraph{Linux}
+%TODO
+\subsubsection{Parameter}
+- DHCP-Server: IP-Adresse oder Hostname des DHCP-Diestes
+\subsubsection{Ausgabe}
+\paragraph{Cisco}
+Round Trip Time (RTT) for       Index 1
+Type of operation: dhcp
+Latest operation start time: *04:07:33.884 UTC Mon Mar 1 1993
+Latest operation return code: OK
+Number of successes: 1
+Number of failures: 0
+Operation time to live: 0
+\paragraph{Linux}
+%TODO
+\subsubsection{Bemerkungen}
+Keine
+
+
+\subsection{DNS-Response}
+\subsubsection{Beschreibung}
+Mit diesem Test kann man einen DNS-Server testen, ob er erreichbar ist und korrekt funktioniert.
+\subsubsection{Tools}
+- Verbindung über SSH auf Cisco UI / Linux Shell
+- IP SLA
+- nslookup
+\subsubsection{Devices}
+- Linux OS
+\subsubsection{Commands}
+\paragraph{Cisco}
+ip sla 1
+dns <hostname> name-server <nameserver>
+tag DNS-Test
+ip sla schedule 1 start-time now
+sh ip sla stat 1
+no ip sla 1
+			
+\paragraph{Linux}
+nslookup <hostname> [type]
+\subsubsection{Parameter}
+- hostname: Ein Hostname den man auflösen möchte.
+- nameserver: Nameserver, welche die Abfrage erledigen soll.
+- type: Typ der Abfrage. Z. B. mx, ns, uws.
+\subsubsection{Ausgabe}
+\paragraph{Cisco}
+Round Trip Time (RTT) for       Index 1
+Type of operation: dns
+Latest operation start time: *04:07:33.884 UTC Mon Mar 1 1993
+Latest operation return code: OK
+Number of successes: 1
+Number of failures: 0
+Operation time to live: 0
+\paragraph{Linux}
+%TODO
+\subsubsection{Bemerkungen}
+Keine
+
+
+
 
 \newpage
 \section{Ausgabeformate}
