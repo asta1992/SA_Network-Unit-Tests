@@ -114,6 +114,16 @@
     backgroundcolor=\color{background},
 }
 
+\lstdefinelanguage{yaml}{
+    basicstyle=\normalfont,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+}
+
+\usepackage{booktabs}
+
 \begin{document}
 
 %\clearpage\maketitle
@@ -173,18 +183,32 @@ In diesem Dokument werden die im Dokument "Network Testing Analyse" untersuchten
 
 \newpage
 \section{Tools}
-%TODO
 
-ping
-nslookup
-nmap
-IP SLA
-show (cisco)
-ssh
-dhcping
-ntpq
-iperf
-tracepath
+\begin{table}[h!]
+  \centering
+  \caption{Verwendete Tools}
+  \label{tab:table1}
+  \begin{tabular}{l l p{9cm}}
+    \toprule
+    Name & OS & Beschreibung\\
+    \midrule
+    ping & Linux \& Cisco & Ping ist ein sehr verbreitetes Tool um die Connectivity zu testen. Es wird eine Anfrage an ein Gerät geschickt und weiss sofort, ob das Gerät erreichbar ist.\\
+    traceroute & Linux \& Cisco & Traceroute zeigt alle Geräte auf, welche sich zwischem dem eigenen und dem Ziel-Rechner befinden.\\
+    nslookup & Linux & Mit nslookup kann man DNS-Abfragen generieren. Man gibt ein Hostname an und nslookup schickt die Anfrage an den nächsten DNS-Server.\\
+    ssh & Linux & Um eine Verbindung auf entfernte Rechner zu ermöglichen, wird ssh verwendet.\\
+    ntpq & Linux & Auf dem Linux System wird ntpq verwendet um die Zeit einzustellen. Es kann aber auch zum Testen eines NTP-Server verwendet werden.\\
+    curl & Linux & Curl ist ein Datentransfer Tool, welches verschiedene Formate unterstützt. Am häufigstens wird es für die http und https Anfragengenerierung verwendet.\\
+    nmap & Linux & Nmao ist ein Werkzeug für die Netzwerkanalyse und zum überprüfen von Sicherheitsrelevanten Einstellungen. Dieses Tool ist sehr gut geeignet um Ports zu scannen.\\
+    dhcping & Linux & Mit dhcping kann der Benutzer überprüfen, ob der DHCP-Server noch richtig funktioniert.\\
+    iperf & Linux & In Linuxumgebungen kann man mit iperf den Durchsatz über das Netzwerk testen. Dies kann entweder über TCP oder über UDP gemacht werden.\\
+    show & Cisco & Um Informationen über Cisco-Geräte zu erhalten, kann der show Befehl verwendet werden. So kann auf den Router und Switch alle Konfigurationen herausgelesen werden.\\
+    IP SLA & Cisco &  Mit dem IP SLA Feature der Cisco Netzwerkgeräten kann man Netzwerktests generieren, ausführen und auswerten. Dazu gehören zum Beispiel ping, traceroute, dns usw. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+
 \newpage
 \section{Device Tests}
 
@@ -343,7 +367,7 @@ Keine
 \subsubsection{Beschreibung}
 Um den Root eines VLANs zu testen kann dieser Test verwendet werden.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
+- Verbindung über SSH auf Cisco UI 
 \subsubsection{Devices}
 - Cisco Switch/Router
 \subsubsection{Commands}
@@ -360,7 +384,7 @@ Keine
 \subsubsection{Beschreibung}
 Test über alle VLANs, ob die richtigen Interface als Rootport gesetzt sind.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
+- Verbindung über SSH auf Cisco UI
 \subsubsection{Devices}
 - Cisco Switch/Router
 \subsubsection{Commands}
@@ -382,7 +406,7 @@ Keine
 \subsubsection{Beschreibung}
 Dieser Test überprüft, ob alle CDP Neighbor vorhanden sind.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
+- Verbindung über SSH auf Cisco UI
 \subsubsection{Devices}
 - Cisco Switch/Router
 \subsubsection{Commands}
@@ -407,7 +431,7 @@ Keine
 \subsubsection{Beschreibung}
 Überprüft, ob die Interface zum richtigen VLAN zugewiesen sind.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
+- Verbindung über SSH auf Cisco UI
 \subsubsection{Devices}
 - Cisco Switch/Router
 \subsubsection{Commands}
@@ -428,16 +452,15 @@ Keine
 \subsubsection{Beschreibung}
 Mit diesem Test werden die einzelnen Routingstationen eines Pakets im Netzwerk aufgezeigt. 
 \subsubsection{Tools}
-- traceroute
-- ip sla
+- traceroute\newline
+- IP SLA\newline
 \subsubsection{Devices}
-- Linux OS
-- Cisco IOS
+- Linux OS\newline
+- Cisco IOS\newline
 \subsubsection{Commands}
-\paragraph{Traceroute}\hfill
-
-\noindent traceroute <Target IP>
-\paragraph{ip sla}\hfill
+\minisec{Traceroute}\hfill
+\noindent traceroute <Target-IP>
+\minisec{IP SLA}\hfill
 
 \noindent ip sla <id>\\
 path-echo <Destination IP>\\
@@ -449,12 +472,12 @@ no ip sla <id>
 Target IP Address
 \subsubsection{Ausgabe}
 \newline
-\paragraph{traceroute}\hfill
+\minisec{traceroute}\hfill
 
   \noindent 1 172.16.254.17 0 msec 0 msec 8 msec\\
   2 192.168.200.2 0 msec 0 msec 0 msec\\
   3 172.16.254.1 9 msec *  0 msec
-\paragraph{ip sla}\hfill
+\minisec{IP SLA}\hfill
 
 \noindent Round Trip Time (RTT) for       Index 2\\
 Type of operation: path-echo\\
@@ -479,9 +502,8 @@ Number of successes: 1\\
 Number of failures: 0\\
 Target Address 172.16.254.1
 \subsubsection{Bemerkungen}
-Der ip sla Test dauert sehr lange (mehrere Minuten) und ist wohl deshalb unbrauchbar.
+Der IP SLA Test dauert sehr lange (mehrere Minuten) und ist wohl deshalb unbrauchbar.
 
-<<<<<<< HEAD
 \subsection{OSPF Neighbors Tests}
 \subsubsection{Beschreibung}
 Dieser Test zeigt die OSPF Neighbors und deren Status an. Damit können Adjacencies überprüft werden.
@@ -521,9 +543,7 @@ Keine
 172.16.25.2     172.16.25.2     95          0x80000014 0x008D8E 4\\
 172.16.25.4     172.16.25.4     101         0x80000012 0x005B38 4\\
 172.16.25.7     172.16.25.7     1849        0x80000012 0x00D0E9 7\\
-
                 Net Link States (Area 0)\\
-
 \noindent Link ID         ADV Router      Age         Seq#       Checksum\\
 172.16.254.2    172.16.25.2     510         0x8000000E 0x0046A5\\
 172.16.254.18   172.16.25.7     598         0x8000000E 0x00E3EA\\
@@ -551,30 +571,19 @@ Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP\\
        i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2\\
        ia - IS-IS inter area, * - candidate default, U - per-user static route\\
        o - ODR, P - periodic downloaded static route\\
-
 \noindent Gateway of last resort is 192.168.100.1 to network 0.0.0.0\\
-
 \noindent     172.16.0.0/16 is variably subnetted, 13 subnets, 3 masks\\
-O       172.16.254.0/30 [110/2] via 192.168.200.2, 01:28:28, FastEthernet0/7\\
 O       172.16.254.4/30 [110/3] via 192.168.200.2, 01:28:28, FastEthernet0/7\\
 C       172.16.254.12/30 is directly connected, Port-channel2\\
-C       172.16.254.16/30 is directly connected, Port-channel4\\
 O       172.16.25.7/32 [110/2] via 172.16.254.18, 01:28:28, Port-channel4\\
 O       172.16.25.1/32 [110/3] via 192.168.200.2, 01:28:28, FastEthernet0/7\\
 C       172.16.25.0/24 is directly connected, Loopback100\\
-O       172.16.25.2/32 [110/2] via 192.168.200.2, 01:28:29, FastEthernet0/7\\
-O       172.16.21.0/24 [110/2] via 172.16.254.18, 01:28:29, Port-channel4\\
-O       172.16.4.0/24 [110/2] via 172.16.254.18, 01:28:29, Port-channel4\\
-O       172.16.1.0/24 [110/2] via 172.16.254.18, 01:28:29, Port-channel4\\
-O       172.16.2.0/24 [110/2] via 172.16.254.18, 01:28:29, Port-channel4\\
 O       172.16.3.0/24 [110/2] via 172.16.254.18, 01:28:35, Port-channel4\\
      192.168.200.0/30 is subnetted, 1 subnets\\
-C       192.168.200.0 is directly connected, FastEthernet0/7\\
 C    192.168.100.0/24 is directly connected, FastEthernet0/16\\
 S*   0.0.0.0/0 [254/0] via 192.168.100.1
 \subsubsection{Bemerkungen}
 Keine
-=======
 \subsection{Check Interface Status}
 \subsubsection{Beschreibung}
 Mit diesem Test können die Statuswerte der Interfaces getestet werden.
@@ -597,10 +606,6 @@ Fa0/5                        notconnect   20           auto   auto 10/100BaseTX\
 \subsubsection{Bemerkungen}
 Keine
 
-
-
->>>>>>> c8a81b572c385e15db6f47086e6ca7c3dc93b6f4
-
 \newpage
 \section{Traffic Tests}
 \subsection{Connectivity}
@@ -610,7 +615,6 @@ In diesem Testszenario soll die Connectivity mittels ICMP ping Befehl getestet w
 - Verbindung über SSH auf Cisco UI / Linux Shell\newline
 - ping\newline
 - IP SLA\newline
-
 \subsubsection{Devices}
 - Cisco Switch/Router\newline
 - Linux OS \newline
@@ -626,7 +630,7 @@ sh ip sla statistics 1"\newline
 \minisec{Linux}
 Linux: "ping -c 1 <Dest-IP>"
 \subsubsection{Parameter}
-- Zwingend Destination, Entry Number (ip sla), optional Source Interface
+- Zwingend Destination, Entry Number (IP SLA), optional Source Interface
 \subsubsection{Ausgabe}
 \minisec{Cisco}
 Ping: \newline	 
@@ -646,13 +650,7 @@ Operation time to live: 0\newline
 rtt min/avg/max/mdev = 90.278/526.202/962.126/435.924 ms\newline
 
 \subsubsection{Bemerkungen}
-<<<<<<< HEAD
-Mit IP SLA könnte man das Ergebnis via XML erhalten
-"show ip sla statistics 1 | format"
-=======
 Keine
->>>>>>> c8a81b572c385e15db6f47086e6ca7c3dc93b6f4
-
 \subsection{NTP-Response}
 \subsubsection{Beschreibung}
 Um die Funktionalität des NTP Servers zu testen, kann man diesen Test verwenden.
@@ -681,11 +679,11 @@ Dieser Test misst den End-to-End Throughput zweier Devices.
 \subsubsection{Devices}
 - Linux OS
 \subsubsection{Commands}
-\paragraph{TCP}
+\minisec{TCP}
 Server: iperf -s -t
 Client: iperf -c <Server IP> -t
 
-\paragraph{UDP}
+\minisec{UDP}
 Server: iperf -s 
 Client: iperf -c <Server IP> -u -b <Anzahl bps>
 \subsubsection{Parameter}
@@ -746,15 +744,15 @@ Bei Firewalls sollte man vorsichtig sein, denn gewisse Firewalls erkennen Portsc
 \subsubsection{Beschreibung}
 Dieser Test misst den Jitter Wert zwischen zwei UDP Endpunkten.
 \subsubsection{Tools}
-ip sla
+- IP SLA
 \subsubsection{Devices}
 - Cisco Device
 \subsubsection{Commands}
-\paragraph{Responder}\hfill
+\minisec{Responder}\hfill
 
 \noindent ip sla responder udp-echo ipaddress <Responder IP address> port <Responder port>\\
 
-\paragraph{Requestor}\hfill
+\minisec{Requestor}\hfill
 
 \noindent ip sla <id>\\
 udp-jitter <Responder IP> <Responder Port>
@@ -763,13 +761,13 @@ ip sla schedule <id> start-time now life <count>\\
 show ip sla statistics <id>\\
 no ip sla <id>
 \subsubsection{Parameter}
-- Responder IP Address
-- Data Size
-- Recurring count
+- Responder IP Address\newline
+- Data Size\newline
+- Recurring count\newline
 \subsubsection{Ausgabe}
 IPSLAs Latest Operation Statistics\\
 
-\noindent IPSLA operation id: <id>\\
+\noindent IP SLA operation id: <id>\\
 Type of operation: udp-jitter\\
         Latest RTT: 3 milliseconds\\
 Latest operation start time: 05:25:57 UTC Mon Mar 1 1993\\
@@ -829,10 +827,7 @@ Operation time to live: 0\newline
 Got answer from: 192.168.43.1
 \subsubsection{Bemerkungen}
 Keine
-<<<<<<< HEAD
 
-=======
->>>>>>> c8a81b572c385e15db6f47086e6ca7c3dc93b6f4
 \subsection{DNS-Response}
 \subsubsection{Beschreibung}
 Mit diesem Test kann man einen DNS-Server testen, ob er erreichbar ist und korrekt funktioniert.
@@ -876,8 +871,7 @@ Address: 2a00:1450:4016:805::2003\newline
 \subsubsection{Bemerkungen}
 Keine
 
-<<<<<<< HEAD
-=======
+
 \section{API Beispiel - Arista}
 \subsection{Beschreibung}
 Viele der neuen Geräte besitzen bereits ein API, wie hier zum Beispiel die Arista Geräte. Diese können leicht über eine Webadresse abgefragt werden und so erhält man ohne grosse Mühe die gewünschten Informationen. So kann man auf die ganzen SSH Verbindungen verzichten und direkt auf das Gerät verbinden.
@@ -984,17 +978,16 @@ Damit dies aber funktioniert, muss man die ODM Dateien noch auf das gewünschte 
 #(config) #format global flash:/spec_file.odm
 #sh format flash:/spec_file.odm validate
 \end{lstlisting}
->>>>>>> c8a81b572c385e15db6f47086e6ca7c3dc93b6f4
 \newpage
 \section{Ausgabeformate}
 Durch all die verschiedenen Geräte und Schnittstellen, werden und auch verschiedene Formate zurückgeschickt. Die drei häufigsten Formate sind: XML, JSON und normaler Text. In diesem Abschnitt wird auf jedes Format eingegangen und erklärt was dieses Format für und bedeutet. Hier stellen sich Fragen wie das Parsen oder die Lesbarkeit.
 \subsection{XML}
-\subsection{Beschreibung}
+\subsubsection{Beschreibung}
 Die Extensible Markup Language oder auch XML ist ein sehr verbreitetes Format. Es wird von vielen Geräten unterstützt und man kann leicht mit dem Format arbeiten.
 In vielen Programmiersprachen gibt es Methoden, welche das XML in Objekte umwandelt. Daher ist es leicht mit dem Format zu arbeiten.
-\subsection{Einsatzbereich}
+\subsubsection{Einsatzbereich}
 XML werden wir vorallem von den Ciscogeräten erhalten. Wie oben beschrieben kann man via Spec-Files die Show-Befehle in XML umwandeln und so zurück schicken.
-\subsection{Beispiel}
+\subsubsection{Beispiel}
 Hier sieht man ein Beispiel XML:\newline
 \begin{lstlisting}[language=xml]
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1013,10 +1006,11 @@ Hier sieht man ein Beispiel XML:\newline
   </ShowArp>
 \end{lstlisting}
 \subsection{JSON}
+\subsubsection{Beschreibung}
 JavaScript Object Notation oder kurz JSON ist ein heute weit verbreitetes Format. Die meisten Webentwicklungen und Web-APIs setzen auf JSON. Daher gibt es auch viele Parser. Es ist sehr einfach aufgebaut und so auch leicht lesbar.
-\subsection{Einsatzbereich}
+\subsubsection{Einsatzbereich}
 JSON wird vorallem von modernen APIs angeboten. Durch REST Abfragen auf dem Webinterface erhält man als Response ein JSON. Ältere Systeme setzen aber eher auf XML.
-\subsection{Beispiel}
+\subsubsection{Beispiel}
 \begin{lstlisting}[language=json,firstnumber=1]
 {
 	"interfaceStatuses": {
@@ -1036,12 +1030,45 @@ JSON wird vorallem von modernen APIs angeboten. Durch REST Abfragen auf dem Webi
 	}
 }
 \end{lstlisting}
+
+\subsection{YAML}
+\subsubsection{Beschreibung}
+YAML ist eine sehr gut lesbare Datenserialisiersprache. Sie stammt unter anderem aus dem Konzept von XML und den Programmiersprachen C, Perl und Python. Bei YAML gibt es verschiedene Typen, wie zum Beispiel Listen, Arrays oder auch Skalare.
+\subsubsection{Einsatzbereich}
+YAML ist sehr verbreitet und wird von vielen Programmiersprachen unterstützt. Eine Implementierung besteht zum Beispiel bei C, C++, Java, Perl, Python oder auch bei .Net. Somit ist der Einsatzbereich sehr gross.
+\subsubsection{Beispiel}
+\begin{lstlisting}[language=yaml]
+receipt:     Oz-Ware Purchase Invoice
+date:        2012-08-06
+customer:
+    first_name:   Dorothy
+    family_name:  Gale
+
+items:
+    - part_no:   A4786
+      descrip:   Water Bucket (Filled)
+      price:     1.47
+      quantity:  4
+
+    - part_no:   E1628
+      descrip:   High Heeled "Ruby" Slippers
+      size:      8
+      price:     133.7
+      quantity:  1
+
+bill-to:  &id001
+    street: |
+            123 Tornado Alley
+            Suite 16
+    city:   East Centerville
+    state:  KS
+\end{lstlisting}
 \subsection{Plain Text}
-\subsection{Beschreibung}
+\subsubsection{Beschreibung}
 Programme wie zum Beispiel ping oder tracepath unterstützen kein XML oder JSON Format. Diese geben ihre Ausgabe als normalen String aus. 
-\subsection{Einsatzbereich}
+\subsubsection{Einsatzbereich}
 Es gibt im Linuxbereich viele Tools ohne XML oder JSON Output. Die meisten Linux-Tools unterstützen kein Format oder es ist sehr aufwendig eines zu parsen. Daher muss man diese mit einem Regex untersuchen und in ein gutes Format bringen.
-\subsection{Bespiel}
+\subsubsection{Bespiel}
 --- 8.8.8.8 ping statistics ---\newline
 3 packets transmitted, 3 received, 0\% packet loss, time 2003ms\newline
 rtt min/avg/max/mdev = 60.752/72.075/88.623/11.963 ms\newline
@@ -1049,4 +1076,7 @@ rtt min/avg/max/mdev = 60.752/72.075/88.623/11.963 ms\newline
 \subsection{Unser Standardformat}
 Da es in der Zukunft immer mehr in Richtung APIs geht, werden wir uns auf das JSON Format festlegen. Die APIs unterstützen alle das JSON Format und daher haben wir einen immer kleineren Parser und Regex aufwand. Das heisst, dass alle Plain Text und XML Ausgaben in JSON umgewandelt werden.
 \end{document}
+
+
+
 
