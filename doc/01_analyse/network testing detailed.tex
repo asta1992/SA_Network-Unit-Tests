@@ -107,9 +107,17 @@ Anforderungen.
 \subsection{Gültigkeitsbereich}
 Dieses Dokument ist über die gesamte Projektdauer gültig. Es wird in späteren Iterationen angepasst. Somit ist jeweils die neuste Version des Dokuments gültig und alte Versionen sind obsolet.
 \subsection{Referenzen}
-
+\begin{description}
+  \item[Network Testing Analyse] \hfill \\
+  network-testing-analyse.pdf \\
+\end{description}
 \newpage
 \section{Einleitung}
+In diesem Dokument werden die im Dokument "Network Testing Analyse" untersuchten Test-Szenarien technisch untersucht. Bei den Tests wurden ausschliesslich Linux und Cisco Devices berücksichtigt.\\
+
+\noindent Diese Tests sollen die benötigten Tools, ausführende Kommandos und Rückgabe aufzeigen. Mit diesen Ergebnissen können später Entscheidungen für die Weiterverarbeitung der Testergebnisse getroffen werden. Es muss untersucht werden, welche Formate dafür geeignet sind und wie das Parsing funktionieren soll.\\
+
+\noindent Grundsätzlich besteht die Schwierigkeit an der unendlichen Vielfalt an Möglichkeiten der Outputs. Jedes Device und jeder Hersteller liefert seine eigenen Outputs welche für die Weiterverarbeitung angepasst werden müssen. Die Outputs können beispielsweise Strukturiert im XML oder JSON Format vorliegen, aber auch völlig unstrukturiert. In diesem Falle müsste man manuell die benötigten Zeilen resp. Werte parsen.
 
 \newpage
 \section{Tools}
@@ -367,39 +375,155 @@ HQ_AS8           Fas 0/15          172              S I   WS-C2960- Fas 0/20\new
 \subsubsection{Bemerkungen}
 Keine
 
+\subsection{Routing Path Tests}
+\subsubsection{Beschreibung}
+Mit diesem Test werden die einzelnen Routingstationen eines Pakets im Netzwerk aufgezeigt. 
+\subsubsection{Tools}
+- traceroute
+- ip sla
+\subsubsection{Devices}
+- Linux OS
+- Cisco IOS
+\subsubsection{Commands}
+\paragraph{Traceroute}\hfill
 
+\noindent traceroute <Target IP>
+\paragraph{ip sla}\hfill
 
+\noindent ip sla <id>\\
+path-echo <Destination IP>\\
+request-data-size 0\\
+ip sla schedule 1 start-time now life 0\\
+show ip sla statistics aggregated\\
+no ip sla <id>
+\subsubsection{Parameter}
+Target IP Address
+\subsubsection{Ausgabe}
+\newline
+\paragraph{traceroute}\hfill
 
+  \noindent 1 172.16.254.17 0 msec 0 msec 8 msec\\
+  2 192.168.200.2 0 msec 0 msec 0 msec\\
+  3 172.16.254.1 9 msec *  0 msec
+\paragraph{ip sla}\hfill
 
+\noindent Round Trip Time (RTT) for       Index 2\\
+Type of operation: path-echo\\
+Start Time Index: *01:08:15.008 UTC Mon Mar 1 1993\\
+Path Index: 1\\
+Hop in Path Index: 1\\
+Number of successes: 1\\
+Number of failures: 0\\
+Target Address 172.16.254.17\\
 
+\noindent Start Time Index: *01:08:15.008 UTC Mon Mar 1 1993\\
+Path Index: 1\\
+Hop in Path Index: 2\\
+Number of successes: 1\\
+Number of failures: 0\\
+Target Address 192.168.200.2\\
 
+\noindent Start Time Index: *01:08:15.008 UTC Mon Mar 1 1993\\
+Path Index: 1\\
+Hop in Path Index: 3\\
+Number of successes: 1\\
+Number of failures: 0\\
+Target Address 172.16.254.1
+\subsubsection{Bemerkungen}
+Der ip sla Test dauert sehr lange (mehrere Minuten) und ist wohl deshalb unbrauchbar.
 
+\subsection{OSPF Neighbors Tests}
+\subsubsection{Beschreibung}
+Dieser Test zeigt die OSPF Neighbors und deren Status an. Damit können Adjacencies überprüft werden.
+\subsubsection{Tools}
+- Verbindung über SSH auf Cisco UI
+\subsubsection{Devices}
+- Cisco Router
+\subsubsection{Commands}
+sh ip ospf neighbor
+\subsubsection{Parameter}
+Keine
+\subsubsection{Ausgabe}
+Neighbor ID     Pri   State           Dead Time   Address         Interface\\
+172.16.25.7       1   FULL/DR         00:00:36    172.16.254.18   Port-channel4\\
+172.16.25.2       1   INIT/DROTHER    00:00:34    172.16.254.13   Port-channel2
+\subsubsection{Bemerkungen}
+Keine
 
+\subsection{OSPF Database Tests}
+\subsubsection{Beschreibung}
+Mit der OSPF Datenbank können relevante Informationen über die OSPF Area angezeigt werden.
+\subsubsection{Tools}
+- Verbindung über SSH auf Cisco UI
+\subsubsection{Devices}
+- Cisco Router
+\subsubsection{Commands}
+sh ip ospf database
+\subsubsection{Parameter}
+Keine
+\subsubsection{Ausgabe}
+            OSPF Router with ID (172.16.25.7) (Process ID 1)\\
 
+                Router Link States (Area 0)\\
 
+\noindent Link ID         ADV Router      Age         Seq#       Checksum Link count\\
+172.16.25.1     172.16.25.1     363         0x80000010 0x002E18 3\\
+172.16.25.2     172.16.25.2     95          0x80000014 0x008D8E 4\\
+172.16.25.4     172.16.25.4     101         0x80000012 0x005B38 4\\
+172.16.25.7     172.16.25.7     1849        0x80000012 0x00D0E9 7\\
 
+                Net Link States (Area 0)\\
 
+\noindent Link ID         ADV Router      Age         Seq#       Checksum\\
+172.16.254.2    172.16.25.2     510         0x8000000E 0x0046A5\\
+172.16.254.18   172.16.25.7     598         0x8000000E 0x00E3EA\\
+192.168.200.1   172.16.25.4     101         0x80000001 0x00A8D5\\
+192.168.200.2   172.16.25.2     102         0x80000001 0x00B2CC
+\subsubsection{Bemerkungen}
+Keine
 
+\subsection{Routing Table Tests}
+\subsubsection{Beschreibung}
+Mit der Routing Table kann der aktuelle Zustand des Geräts betr. Routing ausgelesen werden. So kann der SOLL Zustand mit dem IST Zustand verglichen werden.
+\subsubsection{Tools}
+- Verbindung über SSH auf Cisco UI
+\subsubsection{Devices}
+- Cisco Router
+\subsubsection{Commands}
+sh ip route
+\subsubsection{Parameter}
+Keine
+\subsubsection{Ausgabe}
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP\\
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area\\
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2\\
+       E1 - OSPF external type 1, E2 - OSPF external type 2\\
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2\\
+       ia - IS-IS inter area, * - candidate default, U - per-user static route\\
+       o - ODR, P - periodic downloaded static route\\
 
+\noindent Gateway of last resort is 192.168.100.1 to network 0.0.0.0\\
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\noindent     172.16.0.0/16 is variably subnetted, 13 subnets, 3 masks\\
+O       172.16.254.0/30 [110/2] via 192.168.200.2, 01:28:28, FastEthernet0/7\\
+O       172.16.254.4/30 [110/3] via 192.168.200.2, 01:28:28, FastEthernet0/7\\
+C       172.16.254.12/30 is directly connected, Port-channel2\\
+C       172.16.254.16/30 is directly connected, Port-channel4\\
+O       172.16.25.7/32 [110/2] via 172.16.254.18, 01:28:28, Port-channel4\\
+O       172.16.25.1/32 [110/3] via 192.168.200.2, 01:28:28, FastEthernet0/7\\
+C       172.16.25.0/24 is directly connected, Loopback100\\
+O       172.16.25.2/32 [110/2] via 192.168.200.2, 01:28:29, FastEthernet0/7\\
+O       172.16.21.0/24 [110/2] via 172.16.254.18, 01:28:29, Port-channel4\\
+O       172.16.4.0/24 [110/2] via 172.16.254.18, 01:28:29, Port-channel4\\
+O       172.16.1.0/24 [110/2] via 172.16.254.18, 01:28:29, Port-channel4\\
+O       172.16.2.0/24 [110/2] via 172.16.254.18, 01:28:29, Port-channel4\\
+O       172.16.3.0/24 [110/2] via 172.16.254.18, 01:28:35, Port-channel4\\
+     192.168.200.0/30 is subnetted, 1 subnets\\
+C       192.168.200.0 is directly connected, FastEthernet0/7\\
+C    192.168.100.0/24 is directly connected, FastEthernet0/16\\
+S*   0.0.0.0/0 [254/0] via 192.168.100.1
+\subsubsection{Bemerkungen}
+Keine
 
 \newpage
 \section{Traffic Tests}
@@ -436,7 +560,6 @@ Cisco ip sla: "IPSLA Operation id, Latest RTT, start time, return code, number o
 Mit IP SLA könnte man das Ergebnis via XML erhalten
 "show ip sla statistics 1 | format"
 
-
 \subsection{NTP-Response}
 \subsubsection{Beschreibung}
 Um die Funktionalität des NTP Servers zu testen, kann man diesen Test verwenden.
@@ -456,6 +579,30 @@ ntpq -p <ntp-server>
  wernerstats.sol 212.101.4.252    2 s 792d   64    0    0.000    0.000   0.000\newline \subsubsection{Bemerkungen}
 Keine
 
+\subsection{Throughput}
+\subsubsection{Beschreibung}
+Dieser Test misst den End-to-End Throughput zweier Devices.
+\subsubsection{Tools}
+- iperf
+\subsubsection{Devices}
+- Linux OS
+\subsubsection{Commands}
+\paragraph{TCP}
+Server: iperf -s -t
+Client: iperf -c <Server IP> -t
+
+\paragraph{UDP}
+Server: iperf -s 
+Client: iperf -c <Server IP> -u -b <Anzahl bps>
+\subsubsection{Parameter}
+- TCP/UDP
+- Server IP Addresse
+- UDP max. Bandbreite
+\subsubsection{Ausgabe}
+Interval	Transfer	Bandwidth\newline
+0.0-10.0sec	6.3GBytes	5.41 Gbits/sec
+\subsubsection{Bemerkungen}
+Dieser Test verursacht unter Umständen eine hohe Netzwerklast und ist im produktiven Betrieb nicht empfohlen.
 
 \subsection{Webservice-Response}
 \subsubsection{Beschreibung}
@@ -501,7 +648,56 @@ Nmap done: 1 IP address (1 host up) scanned in 1.08 seconds\newline
 In manchen Unternehmen wird ein Portscan als Attacke gewertet. Man sollte dies vorher unbediengt abklären.
 Bei Firewalls sollte man vorsichtig sein, denn gewisse Firewalls erkennen Portscans und blocken danach den Verkehr. So kann man vom Netz ausgeschlossen werden.
 
+\subsection{UDP Jitter Test}
+\subsubsection{Beschreibung}
+Dieser Test misst den Jitter Wert zwischen zwei UDP Endpunkten.
+\subsubsection{Tools}
+ip sla
+\subsubsection{Devices}
+- Cisco Device
+\subsubsection{Commands}
+\paragraph{Responder}\hfill
 
+\noindent ip sla responder udp-echo ipaddress <Responder IP address> port <Responder port>\\
+
+\paragraph{Requestor}\hfill
+
+\noindent ip sla <id>\\
+udp-jitter <Responder IP> <Responder Port>
+request-data-size <16-17512>\\
+ip sla schedule <id> start-time now life <count>\\
+show ip sla statistics <id>\\
+no ip sla <id>
+\subsubsection{Parameter}
+- Responder IP Address
+- Data Size
+- Recurring count
+\subsubsection{Ausgabe}
+IPSLAs Latest Operation Statistics\\
+
+\noindent IPSLA operation id: <id>\\
+Type of operation: udp-jitter\\
+        Latest RTT: 3 milliseconds\\
+Latest operation start time: 05:25:57 UTC Mon Mar 1 1993\\
+Latest operation return code: OK\\
+RTT Values:\\
+        Number Of RTT: 10               RTT Min/Avg/Max: 3/3/4 milliseconds\\
+Latency one-way time:\\
+        Number of Latency one-way Samples: 0\\
+        Source to Destination Latency one way Min/Avg/Max: 0/0/0 milliseconds\\
+        Destination to Source Latency one way Min/Avg/Max: 0/0/0 milliseconds\\
+Jitter Time:\\
+        Number of SD Jitter Samples: 0\\
+        Number of DS Jitter Samples: 0\\
+        Source to Destination Jitter Min/Avg/Max: 0/0/0 milliseconds\\
+        Destination to Source Jitter Min/Avg/Max: 0/0/0 milliseconds\\
+Packet Loss Values:\\
+        Loss Source to Destination: 0\\
+        Source to Destination Loss Periods Number: 0\\
+        Source to Destination Loss Period Length Min/Max: 0/0\\
+        Source to Destination Inter Loss Period Length Min/Max: 0/0\\
+\subsubsection{Bemerkungen}
+Keine
 
 \newpage
 \section{Network Service Tests}
@@ -541,7 +737,6 @@ Operation time to live: 0
 \subsubsection{Bemerkungen}
 Keine
 
-
 \subsection{DNS-Response}
 \subsubsection{Beschreibung}
 Mit diesem Test kann man einen DNS-Server testen, ob er erreichbar ist und korrekt funktioniert.
@@ -579,9 +774,6 @@ Operation time to live: 0
 %TODO
 \subsubsection{Bemerkungen}
 Keine
-
-
-
 
 \newpage
 \section{Ausgabeformate}

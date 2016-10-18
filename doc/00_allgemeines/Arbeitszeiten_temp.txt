@@ -8,3 +8,4 @@
 05.10.	6.5	dm	Dokumentation Testing
 06.10.	1.0	dm	Meeting
 10.10.	4.0	dm	Überarbeitung Network Testing Analyse Dokument, Erstellung Network Testing Detailed Dokument, Erstellung Requirements Dokument
+17.10.	4.0	dm	Besprechung Requirements und Architektur, Testing detailed Dokument Test Cases und Einleitung
