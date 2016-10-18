@@ -12,6 +12,8 @@
 \setstretch {1.3}
 \usepackage{float}
 \usepackage[bottom = 3.50cm]{geometry}
+\usepackage{listings} 
+
 
 %Titel Seite
 \usepackage{titling} %Wird benötigt damit \maketitle die Variabeln title, author und date nicht überschreibt
@@ -61,6 +63,56 @@
 \usepackage{lipsum}
 
 
+%json Formatter
+\usepackage{listings}
+\usepackage{xcolor}
+
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{black}
+
+\lstdefinelanguage{json}{
+    basicstyle=\normalfont,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
+
+%python formatter
+\lstdefinelanguage{python}{
+    basicstyle=\normalfont,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+}
+
+\lstdefinelanguage{xml}{
+    basicstyle=\normalfont,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+}
 
 \begin{document}
 
@@ -129,7 +181,7 @@ nmap
 IP SLA
 show (cisco)
 ssh
-dhcpcheck
+dhcping
 ntpq
 iperf
 tracepath
@@ -140,7 +192,7 @@ tracepath
 \subsubsection{Beschreibung}
 Mit diesem Test kann man überprüfen, ob alle benötigten Benutzer vorhanden sind.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
+- Verbindung über SSH auf Cisco UI 
 \subsubsection{Devices}
 - Cisco Switch/Router
 \subsubsection{Commands}
@@ -156,7 +208,7 @@ Keine
 \subsubsection{Beschreibung}
 Durch diesen Test kann man den Versionstand von Switches und Router Testen.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
+- Verbindung über SSH auf Cisco UI
 \subsubsection{Devices}
 - Cisco Switch/Router
 \subsubsection{Commands}
@@ -168,7 +220,7 @@ Keine
 ...\newline
 Switch Ports Model              SW Version            SW Image\newline
 ------ ----- -----              ----------            ----------\newline
-*    1 26    WS-C2960-24TC-L    15.0(2)SE8            C2960-LANBASEK9-M
+*    1 26    WS-C2960-24TC-L    15.0(2)SE8            C2960-LANBASEK9-M\newline
 \subsubsection{Bemerkungen}
 Keine
 
@@ -179,7 +231,7 @@ Keine
 \subsubsection{Beschreibung}
 State eines Interfaces auf jedem VLAN.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
+- Verbindung über SSH auf Cisco UI 
 \subsubsection{Devices}
 - Cisco Switch/Router
 \subsubsection{Commands}
@@ -195,7 +247,7 @@ Keine
 \subsubsection{Beschreibung}
 Ist MST aktiviert oder nicht?
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
+- Verbindung über SSH auf Cisco UI
 \subsubsection{Devices}
 - Cisco Switch/Router
 \subsubsection{Commands}
@@ -213,7 +265,7 @@ Keine
 \subsubsection{Beschreibung}
 Testet, ob die richtigen Interface geblockt sind.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
+- Verbindung über SSH auf Cisco UI 
 \subsubsection{Devices}
 - Cisco Switch/Router
 \subsubsection{Commands}
@@ -232,7 +284,7 @@ Keine
 \subsubsection{Beschreibung}
 Ist UplinkFast aktiviert oder nicht?
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
+- Verbindung über SSH auf Cisco UI 
 \subsubsection{Devices}
 - Cisco Switch/Router
 \subsubsection{Commands}
@@ -249,7 +301,7 @@ Keine
 \subsubsection{Beschreibung}
 In diesem Test kann jedes Interface auf Portfast getestet werden.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
+- Verbindung über SSH auf Cisco UI 
 \subsubsection{Devices}
 - Cisco Switch/Router
 \subsubsection{Commands}
@@ -266,7 +318,7 @@ Keine
 \subsubsection{Beschreibung}
 In diesem Testszenario testet man alle VLAN-Einstellungen eines Interfaces.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
+- Verbindung über SSH auf Cisco UI
 \subsubsection{Devices}
 - Cisco Switch/Router
 \subsubsection{Commands}
@@ -277,7 +329,6 @@ Interface: Interface auf dem Switch/Router
 Vlan                Role Sts Cost      Prio.Nbr Type\newline
 ------------------- ---- --- --------- -------- --------------------------------\newline
 VLAN0020            Desg FWD 19        128.21   P2p Edge\newline
-
 Vlan                Role Sts Cost      Prio.Nbr Type\newline
 ------------------- ---- --- --------- -------- --------------------------------\newline
 VLAN0001            Root FWD 19        128.5    P2p\newline
@@ -342,7 +393,6 @@ Keine
 Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge\newline
                   S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone,\newline
                   D - Remote, C - CVTA, M - Two-port Mac Relay\newline
-
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID\newline
 HQ_AS7           Fas 0/14          161             R S I  WS-C2960- Fas 0/21\newline
 HQ_AS8           Fas 0/15          172              S I   WS-C2960- Fas 0/20\newline
@@ -368,7 +418,6 @@ Keine
 Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge\newline
                   S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone,\newline
                   D - Remote, C - CVTA, M - Two-port Mac Relay\newline
-
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID\newline
 HQ_AS7           Fas 0/14          161             R S I  WS-C2960- Fas 0/21\newline
 HQ_AS8           Fas 0/15          172              S I   WS-C2960- Fas 0/20\newline
@@ -432,6 +481,7 @@ Target Address 172.16.254.1
 \subsubsection{Bemerkungen}
 Der ip sla Test dauert sehr lange (mehrere Minuten) und ist wohl deshalb unbrauchbar.
 
+<<<<<<< HEAD
 \subsection{OSPF Neighbors Tests}
 \subsubsection{Beschreibung}
 Dieser Test zeigt die OSPF Neighbors und deren Status an. Damit können Adjacencies überprüft werden.
@@ -524,6 +574,32 @@ C    192.168.100.0/24 is directly connected, FastEthernet0/16\\
 S*   0.0.0.0/0 [254/0] via 192.168.100.1
 \subsubsection{Bemerkungen}
 Keine
+=======
+\subsection{Check Interface Status}
+\subsubsection{Beschreibung}
+Mit diesem Test können die Statuswerte der Interfaces getestet werden.
+\subsubsection{Tools}
+- Verbindung über SSH auf Cisco UI
+\subsubsection{Devices}
+- Cisco Switch/Router
+\subsubsection{Commands}
+show interfaces status
+\subsubsection{Parameter}
+Keine
+\subsubsection{Ausgabe}
+Port      Name               Status       Vlan       Duplex  Speed Type\newline
+Fa0/1                        notconnect   1            auto   auto 10/100BaseTX\newline
+Fa0/2                        notconnect   1            auto   auto 10/100BaseTX\newline
+Fa0/3                        notconnect   20           auto   auto 10/100BaseTX\newline
+Fa0/4                        notconnect   20           auto   auto 10/100BaseTX\newline
+Fa0/5                        notconnect   20           auto   auto 10/100BaseTX\newline
+....\newline
+\subsubsection{Bemerkungen}
+Keine
+
+
+
+>>>>>>> c8a81b572c385e15db6f47086e6ca7c3dc93b6f4
 
 \newpage
 \section{Traffic Tests}
@@ -531,34 +607,51 @@ Keine
 \subsubsection{Beschreibung}
 In diesem Testszenario soll die Connectivity mittels ICMP ping Befehl getestet werden.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
-- ping
-- ip sla
+- Verbindung über SSH auf Cisco UI / Linux Shell\newline
+- ping\newline
+- IP SLA\newline
 
 \subsubsection{Devices}
-- Cisco Switch/Router
-- Linux OS
+- Cisco Switch/Router\newline
+- Linux OS \newline
 \subsubsection{Commands}
-Cisco: "ping <destinationIP> [parameter]"
-Linux: "ping -c 1 <destinationIP>"
-
-Cisco ip sla: 	"ip sla 1"
-			 	"icmp-echo <destinationIP>"
-			  	"request-data-size <0-16384>"
-			  	"ip sla schedule 1 start-time now life 0"
-			  	"sh ip sla statistics 1"
-
+\minisec{Cisco}
+ping <Dest-IP>\newline\newline
+oder mit IP SLA\newline
+ip sla 1
+icmp-echo <Dest-IP>"
+request-data-size <0-16384>"\newline
+ip sla schedule 1 start-time now life 0"\newline
+sh ip sla statistics 1"\newline
+\minisec{Linux}
+Linux: "ping -c 1 <Dest-IP>"
 \subsubsection{Parameter}
 - Zwingend Destination, Entry Number (ip sla), optional Source Interface
 \subsubsection{Ausgabe}
-Cisco ping: "Succes rate is x percent (x/5)"
-Linux ping: "x packets transmitted, x received, ..."
+\minisec{Cisco}
+Ping: \newline	 
+Success rate is x percent (x/5)\newline
+IP SLA:\newline
+Round Trip Time (RTT) for Index 1\newline
+Type of operation: dhcp\newline
+Latest operation start time: *04:07:33.884 UTC Mon Mar 1 1993\newline
+Latest operation return code: OK\newline
+Number of successes: 1\newline
+Number of failures: 0\newline
+Operation time to live: 0\newline
 
-Cisco ip sla: "IPSLA Operation id, Latest RTT, start time, return code, number of successes, number of failures,..."
+\minisec{Linux}
+--- 8.8.8.8 ping statistics ---\newline
+2 packets transmitted, 2 received, 0\% packet loss, time 999ms\newline
+rtt min/avg/max/mdev = 90.278/526.202/962.126/435.924 ms\newline
 
 \subsubsection{Bemerkungen}
+<<<<<<< HEAD
 Mit IP SLA könnte man das Ergebnis via XML erhalten
 "show ip sla statistics 1 | format"
+=======
+Keine
+>>>>>>> c8a81b572c385e15db6f47086e6ca7c3dc93b6f4
 
 \subsection{NTP-Response}
 \subsubsection{Beschreibung}
@@ -576,7 +669,8 @@ ntpq -p <ntp-server>
 ==============================================================================\newline
 -soho.solnet.ch  162.23.41.56     2 s  494  512  357    1.313   -0.367   0.233\newline
 -bryan.solnet.ch 192.36.143.151   2 s  196  512  377    1.263   -3.990   0.175\newline
- wernerstats.sol 212.101.4.252    2 s 792d   64    0    0.000    0.000   0.000\newline \subsubsection{Bemerkungen}
+-wernerstats.sol 212.101.4.252    2 s 792d   64    0    0.000    0.000   0.000\newline
+\subsubsection{Bemerkungen}
 Keine
 
 \subsection{Throughput}
@@ -628,14 +722,14 @@ Dieses Testszenario gibt zurück, ob ein Port erreichbar ist.
 \subsubsection{Devices}
 - Linux OS
 \subsubsection{Commands}
-nmap -p<port> <host>
-nmap -p<start-ende> <host>
-nmap -p<port1, port4> <host>
+nmap -p<port> <host>\newline
+nmap -p<start-ende> <host>\newline
+nmap -p<port1, port4> <host>\newline
 \subsubsection{Parameter}
-- port: Einzelner Port
-- start-ende: Portbereich
-- port1, port4: Mehrere Ports
-- IP-Adresse oder Hostname des NTP-Servers
+- port: Einzelner Port\newline
+- start-ende: Portbereich\newline
+- port1, port4: Mehrere Ports\newline
+- IP-Adresse oder Hostname des NTP-Servers\newline
 \subsubsection{Ausgabe}
 Starting Nmap 6.47 ( http://nmap.org ) at 2016-10-12 16:21 W. Europe Daylight Time\newline
 Nmap scan report for host057.lab.ins.hsr.ch (152.96.9.57)\newline
@@ -705,81 +799,254 @@ Keine
 \subsubsection{Beschreibung}
 In diesem Testszenario wird der DHCP-Dienst auf Funktionalität getestet.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
-- IP SLA
-- dhcpcheck
+- Verbindung über SSH auf Cisco UI / Linux Shell\newline
+- IP SLA\newline
+- dhcping\newline
 \subsubsection{Devices}
-- Cisco OS
-- Linux OS
+- Cisco OS\newline
+- Linux OS\newline
 \subsubsection{Commands}
-\paragraph{Cisco}
-ip sla 1
-dhcp <DHCP-Server>
-ip sla schedule 1 start-time now life 0
-sh ip sla stat 1
-no ip sla 1
-			
-\paragraph{Linux}
-%TODO
+\minisec{Cisco}
+ip sla 1\newline
+dhcp <DHCP-Server>\newline
+ip sla schedule 1 start-time now life 0\newline
+sh ip sla stat 1\newline
+no ip sla 1\newline
+\minisec{Linux}
+dhcping -s <DHCP-Server>
 \subsubsection{Parameter}
 - DHCP-Server: IP-Adresse oder Hostname des DHCP-Diestes
 \subsubsection{Ausgabe}
-\paragraph{Cisco}
-Round Trip Time (RTT) for       Index 1
-Type of operation: dhcp
-Latest operation start time: *04:07:33.884 UTC Mon Mar 1 1993
-Latest operation return code: OK
-Number of successes: 1
-Number of failures: 0
-Operation time to live: 0
-\paragraph{Linux}
-%TODO
+\minisec{Cisco}
+Round Trip Time (RTT) for Index 1\newline
+Type of operation: dhcp\newline
+Latest operation start time: *04:07:33.884 UTC Mon Mar 1 1993\newline
+Latest operation return code: OK\newline
+Number of successes: 1\newline
+Number of failures: 0\newline
+Operation time to live: 0\newline
+\minisec{Linux}
+Got answer from: 192.168.43.1
 \subsubsection{Bemerkungen}
 Keine
+<<<<<<< HEAD
 
+=======
+>>>>>>> c8a81b572c385e15db6f47086e6ca7c3dc93b6f4
 \subsection{DNS-Response}
 \subsubsection{Beschreibung}
 Mit diesem Test kann man einen DNS-Server testen, ob er erreichbar ist und korrekt funktioniert.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
-- IP SLA
-- nslookup
+- Verbindung über SSH auf Cisco UI / Linux Shell\newline
+- IP SLA\newline
+- nslookup\newline
 \subsubsection{Devices}
 - Linux OS
 \subsubsection{Commands}
-\paragraph{Cisco}
-ip sla 1
-dns <hostname> name-server <nameserver>
-tag DNS-Test
-ip sla schedule 1 start-time now
-sh ip sla stat 1
-no ip sla 1
-			
-\paragraph{Linux}
-nslookup <hostname> [type]
+\minisec{Cisco}\newline
+ip sla 1\newline
+dns <hostname> name-server <nameserver>\newline
+tag DNS-Test\newline
+ip sla schedule 1 start-time now\newline
+sh ip sla stat 1\newline
+no ip sla 1\newline
+\minisec{Linux}
+nslookup <hostname> [type=]
 \subsubsection{Parameter}
-- hostname: Ein Hostname den man auflösen möchte.
-- nameserver: Nameserver, welche die Abfrage erledigen soll.
-- type: Typ der Abfrage. Z. B. mx, ns, uws.
+- hostname: Ein Hostname den man auflösen möchte.\newline
+- nameserver: Nameserver, welche die Abfrage erledigen soll.\newline
+- type: Typ der Abfrage. Z. B. mx, ns, uws.\newline
 \subsubsection{Ausgabe}
-\paragraph{Cisco}
-Round Trip Time (RTT) for       Index 1
-Type of operation: dns
-Latest operation start time: *04:07:33.884 UTC Mon Mar 1 1993
-Latest operation return code: OK
-Number of successes: 1
-Number of failures: 0
-Operation time to live: 0
-\paragraph{Linux}
-%TODO
+\minisec{Cisco}
+Round Trip Time (RTT) for Index 1\newline
+Type of operation: dns\newline
+Latest operation start time: *04:07:33.884 UTC Mon Mar 1 1993\newline
+Latest operation return code: OK\newline
+Number of successes: 1\newline
+Number of failures: 0\newline
+Operation time to live: 0\newline
+\minisec{Linux}
+Server:         192.168.43.1\newline
+Address:        192.168.43.1#53\newline\newline
+Non-authoritative answer:\newline
+Name:   www.google.ch\newline
+Address: 216.58.211.35\newline
+Name:   www.google.ch\newline
+Address: 2a00:1450:4016:805::2003\newline
 \subsubsection{Bemerkungen}
 Keine
 
+<<<<<<< HEAD
+=======
+\section{API Beispiel - Arista}
+\subsection{Beschreibung}
+Viele der neuen Geräte besitzen bereits ein API, wie hier zum Beispiel die Arista Geräte. Diese können leicht über eine Webadresse abgefragt werden und so erhält man ohne grosse Mühe die gewünschten Informationen. So kann man auf die ganzen SSH Verbindungen verzichten und direkt auf das Gerät verbinden.
+\subsection{Beispielcode}
+Hier sieht man ein einfaches Beispiel wie man die API über Python ansprechen kann. Dazu benötigt man nur den URL 'https://admin:admin@172.16.130.16/command-api' und als Response schickt man den gewünschten Befehl, wie hier zum Beispiel: 'switch.runCmds( 1, [ \grqq show hostname \grqq ] )'\newline
+Hier sieht man ein Codebeispiel:\newline
+\begin{lstlisting}[language=python]
+#!/usr/bin/python from jsonrpclib import Server
+switch = Server("https://admin:admin@172.16.130.16/command-api")
+response = switch.runCmds( 1, ["show hostname"] ) 
+\end{lstlisting}
+\subsection{Rückgabewert}
+Die meisten APIs bieten mehrere Arten von Ruckgabetypen. Arista bietet RAW Text und json an. Hier sieht man nun ein json Beispiel:\newline
+\begin{lstlisting}[language=json,firstnumber=1]
+{
+   "jsonrpc": "2.0",
+   "result": [
+      {
+         "interfaceStatuses": {
+            "Ethernet8": {
+               "vlanInformation": {
+                  "interfaceMode": "bridged",
+                  "vlanId": 12,
+                  "interfaceForwardingModel": "bridged"
+               },
+               "bandwidth": 1000000000,
+               "interfaceType": "1000BASE-T",
+               "description": "",
+               "duplex": "duplexFull",
+               "autoNegotigateActive": true,
+               "linkStatus": "connected"
+            },
+            "Ethernet9": {
+               "vlanInformation": {
+                  "interfaceMode": "bridged",
+                  "vlanId": 13,
+                  "interfaceForwardingModel": "bridged"
+               },
+               "bandwidth": 1000000000,
+               "interfaceType": "1000BASE-T",
+               "description": "",
+               "duplex": "duplexFull",
+               "autoNegotigateActive": true,
+               "linkStatus": "connected"
+            },
+            }
+         ],
+   "id": "CapiExplorer-123"
+}
+\end{lstlisting}
+\newpage
+\section{Cisco Spec-Files}
+\subsection{Beschreibung}
+Cisco bietet auf ihren Geräten ein spezielles Format Spec-File an. Dieses hat die Dateiendung .odm. Durch diese Spec-Files kann man alle show Befehle formatieren und als XML ausgeben lassen. Dadurch ist das parsen um einiges einfacher als bei Plain Text. Im Standard hat Cisco heute noch nicht so viele show Befehle abgedeckt, daher müssen diese Spec-Files noch für all die show Befehle geschrieben werden.
+\subsection{Beispiel}
+Hier sieht man nun, wie der 'show arp' Befehl formatiert wird.\newline
+\begin{lstlisting}[language=xml]
+###
+show arp
+<?xml version="1.0" encoding="UTF-8"?>
+<ODMSpec>
+<SpecVersion>built-in</SpecVersion>
+<Command><Name>show arp</Name></Command>
+<DataModel>
+<Container name="ShowArp">
+<Table name="ARPtable">
+<Header name="Protocol" type="String" start="0" end="9"/>
+<Header name="Address" type="IpAddress" start="10" end="26"/>
+<Header name="Age (min)" type="String" start="27" end="37"/>
+<Header name="Hardware Addr" type="String" start="38" end="53"/>
+<Header name="Type" type="String" start="54" end="60"/>
+<Header name="Interface" type="String" start="61" end="-1"/>
+</Table>
+</Container>
+</DataModel>
+</ODMSpec>
+\end{lstlisting}
+Mit den \#\#\# trennt man die einzelnen Befehle ab.\newline\newline
+Dadurch wird aus der folgenden Plain Text ausgabe das unten gezeigte XML:\newline
+\begin{lstlisting}[language=xml]
+Protocol  Address   Age(min) Hardware Addr  Type Interface
+Internet  10.1.1.11   -      0014.a905.2c41 ARPA Vlan99
+\end{lstlisting}
+\begin{lstlisting}[language=xml]
+<?xml version="1.0" encoding="UTF-8"?>
+  <ShowArp xmlns="ODM://flash:/betaspec.odm//show_arp">
+    <SpecVersion>built-in</SpecVersion>
+    <ARPtable>
+      <entry>
+        <Protocol>Internet</Protocol>
+        <Address>10.1.1.11</Address>
+        <Agemin>-</Agemin>
+        <HardwareAddr>0014.a905.2c41</HardwareAddr>
+        <Type>ARPA</Type>
+        <Interface>Vlan99</Interface>
+      </entry>
+      </ARPtable>
+  </ShowArp>
+\end{lstlisting}
+
+Wie man sieht, gibt man im Spec-File die Header der Plain Text ausgabe an und beschreibt wo dieses starten und wo enden. Mehr ist nicht zu tun. Daher ist es sehr einfach die show Befehle in ein XML umzuwandeln.\newline
+Damit dies aber funktioniert, muss man die ODM Dateien noch auf das gewünschte Cisco Gerät kopieren und als Standard Spec-File konfigueren. Dies ist jedoch auch sehr einfach mit diesem Befehl zu erledigen:\newline
+\begin{lstlisting}[language=xml]
+#(config) #format global flash:/spec_file.odm
+#sh format flash:/spec_file.odm validate
+\end{lstlisting}
+>>>>>>> c8a81b572c385e15db6f47086e6ca7c3dc93b6f4
 \newpage
 \section{Ausgabeformate}
+Durch all die verschiedenen Geräte und Schnittstellen, werden und auch verschiedene Formate zurückgeschickt. Die drei häufigsten Formate sind: XML, JSON und normaler Text. In diesem Abschnitt wird auf jedes Format eingegangen und erklärt was dieses Format für und bedeutet. Hier stellen sich Fragen wie das Parsen oder die Lesbarkeit.
 \subsection{XML}
+\subsection{Beschreibung}
+Die Extensible Markup Language oder auch XML ist ein sehr verbreitetes Format. Es wird von vielen Geräten unterstützt und man kann leicht mit dem Format arbeiten.
+In vielen Programmiersprachen gibt es Methoden, welche das XML in Objekte umwandelt. Daher ist es leicht mit dem Format zu arbeiten.
+\subsection{Einsatzbereich}
+XML werden wir vorallem von den Ciscogeräten erhalten. Wie oben beschrieben kann man via Spec-Files die Show-Befehle in XML umwandeln und so zurück schicken.
+\subsection{Beispiel}
+Hier sieht man ein Beispiel XML:\newline
+\begin{lstlisting}[language=xml]
+<?xml version="1.0" encoding="UTF-8"?>
+  <ShowArp xmlns="ODM://flash:/betaspec.odm//show_arp">
+    <SpecVersion>built-in</SpecVersion>
+    <ARPtable>
+      <entry>
+        <Protocol>Internet</Protocol>
+        <Address>10.1.1.11</Address>
+        <Agemin>-</Agemin>
+        <HardwareAddr>0014.a905.2c41</HardwareAddr>
+        <Type>ARPA</Type>
+        <Interface>Vlan99</Interface>
+      </entry>
+      </ARPtable>
+  </ShowArp>
+\end{lstlisting}
 \subsection{JSON}
-\subsection{RAW}
+JavaScript Object Notation oder kurz JSON ist ein heute weit verbreitetes Format. Die meisten Webentwicklungen und Web-APIs setzen auf JSON. Daher gibt es auch viele Parser. Es ist sehr einfach aufgebaut und so auch leicht lesbar.
+\subsection{Einsatzbereich}
+JSON wird vorallem von modernen APIs angeboten. Durch REST Abfragen auf dem Webinterface erhält man als Response ein JSON. Ältere Systeme setzen aber eher auf XML.
+\subsection{Beispiel}
+\begin{lstlisting}[language=json,firstnumber=1]
+{
+	"interfaceStatuses": {
+            "Ethernet8": {
+               "vlanInformation": {
+                  "interfaceMode": "bridged",
+                  "vlanId": 12,
+                  "interfaceForwardingModel": "bridged"
+               },
+               "bandwidth": 1000000000,
+               "interfaceType": "1000BASE-T",
+               "description": "",
+               "duplex": "duplexFull",
+               "autoNegotigateActive": true,
+               "linkStatus": "connected"
+            },
+	}
+}
+\end{lstlisting}
+\subsection{Plain Text}
+\subsection{Beschreibung}
+Programme wie zum Beispiel ping oder tracepath unterstützen kein XML oder JSON Format. Diese geben ihre Ausgabe als normalen String aus. 
+\subsection{Einsatzbereich}
+Es gibt im Linuxbereich viele Tools ohne XML oder JSON Output. Die meisten Linux-Tools unterstützen kein Format oder es ist sehr aufwendig eines zu parsen. Daher muss man diese mit einem Regex untersuchen und in ein gutes Format bringen.
+\subsection{Bespiel}
+--- 8.8.8.8 ping statistics ---\newline
+3 packets transmitted, 3 received, 0\% packet loss, time 2003ms\newline
+rtt min/avg/max/mdev = 60.752/72.075/88.623/11.963 ms\newline
 
+\subsection{Unser Standardformat}
+Da es in der Zukunft immer mehr in Richtung APIs geht, werden wir uns auf das JSON Format festlegen. Die APIs unterstützen alle das JSON Format und daher haben wir einen immer kleineren Parser und Regex aufwand. Das heisst, dass alle Plain Text und XML Ausgaben in JSON umgewandelt werden.
 \end{document}
 
