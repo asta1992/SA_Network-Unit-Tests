@@ -107,20 +107,23 @@ Anforderungen.
 \subsection{Gültigkeitsbereich}
 Dieses Dokument ist über die gesamte Projektdauer gültig. Es wird in späteren Iterationen angepasst. Somit ist jeweils die neuste Version des Dokuments gültig und alte Versionen sind obsolet.
 \subsection{Referenzen}
+- Network Testing Analyse
+- Network Testing Detailed
 
 \newpage
 \section{Allgemeine Beschreibung}
-\subsection{Produkt Perspektive}
-
-\subsection{Produkt Funktionen}
-
+\subsection{Produktperspektive}
+Mit Network Unit Tests wird ein automatisches und wiederholbares Testing Framework für Netzwerkumgebungen bereitgestellt. Das Testing der Funktionalitäten im Netzwerk wird meist manuell ausgeführt. Oft werden wichtige Tests vergessen und dadurch Fehler produziert. Mittels automatischem Testen soll ein Werkzeug bereitgestellt werden, um diese Problematik einzudämmen.
+\subsection{Produkfunktionen}
+Das Programm soll den Anwendern erlauben, Testszenarien zu konfigurieren, auszuführen und auszuwerten. Diese Testszenarien sollen wiederholbar sein, damit sie nach wichtigen Änderungen im Netz einfach ausgeführt werden können.
 \subsection{Benutzer Charakteristik}
-
+Zielpersonen sind Netzwerk Engineers, System Administratoren und weitere Informatiker mit Tätigkeit im Netzwerkbereich. Es werden solide Grundkenntnisse in IP-Netzwerken sowie Kenntnisse der verwendeten Netzwerk Devices vorausgesetzt. Der Anwender muss das zu testende Netzwerk im Detail kennen. 
 \subsection{Einschränkungen}
-
+Die Software wird auf Linux Plattformen unterstützt. Vorerst werden nur Cisco Netzwerkdevices und Linux Server als zu testende Devices unterstützt.
 \newpage
 \section{Use Cases}
 \subsection{Use Cases Diagramm}
+\includegraphics[scale=0.52]{figures/UseCase_Diagram}
 \subsection{Aktoren}
 \subsection{Beschreibungen}
 
