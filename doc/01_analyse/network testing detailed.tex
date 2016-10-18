@@ -12,6 +12,8 @@
 \setstretch {1.3}
 \usepackage{float}
 \usepackage[bottom = 3.50cm]{geometry}
+\usepackage{listings} 
+
 
 %Titel Seite
 \usepackage{titling} %Wird benötigt damit \maketitle die Variabeln title, author und date nicht überschreibt
@@ -61,6 +63,56 @@
 \usepackage{lipsum}
 
 
+%json Formatter
+\usepackage{listings}
+\usepackage{xcolor}
+
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{black}
+
+\lstdefinelanguage{json}{
+    basicstyle=\normalfont,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
+
+%python formatter
+\lstdefinelanguage{python}{
+    basicstyle=\normalfont,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+}
+
+\lstdefinelanguage{xml}{
+    basicstyle=\normalfont,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+}
 
 \begin{document}
 
@@ -375,7 +427,27 @@ Keine
 
 
 
-
+\subsection{Check Interface Status}
+\subsubsection{Beschreibung}
+Mit diesem Test können die Statuswerte der Interfaces getestet werden.
+\subsubsection{Tools}
+- Verbindung über SSH auf Cisco UI
+\subsubsection{Devices}
+- Cisco Switch/Router
+\subsubsection{Commands}
+show interfaces status
+\subsubsection{Parameter}
+Keine
+\subsubsection{Ausgabe}
+Port      Name               Status       Vlan       Duplex  Speed Type
+Fa0/1                        notconnect   1            auto   auto 10/100BaseTX
+Fa0/2                        notconnect   1            auto   auto 10/100BaseTX
+Fa0/3                        notconnect   20           auto   auto 10/100BaseTX
+Fa0/4                        notconnect   20           auto   auto 10/100BaseTX
+Fa0/5                        notconnect   20           auto   auto 10/100BaseTX
+....
+\subsubsection{Bemerkungen}
+Keine
 
 
 
@@ -580,14 +652,174 @@ Operation time to live: 0
 \subsubsection{Bemerkungen}
 Keine
 
+\section{API Beispiel - Arista}
+\subsection{Beschreibung}
+Viele der neuen Geräte besitzen bereits ein API, wie hier zum Beispiel die Arista Geräte. Diese können leicht über eine Webadresse abgefragt werden und so erhält man ohne grosse Mühe die gewünschten Informationen. So kann man auf die ganzen SSH Verbindungen verzichten und direkt auf das Gerät verbinden.
+\subsection{Beispielcode}
+Hier sieht man ein einfaches Beispiel wie man die API über Python ansprechen kann. Dazu benötigt man nur den URL 'https://admin:admin@172.16.130.16/command-api' und als Response schickt man den gewünschten Befehl, wie hier zum Beispiel: 'switch.runCmds( 1, [ \grqq show hostname \grqq ] )'\newline
+Hier sieht man ein Codebeispiel:\newline
+\begin{lstlisting}[language=python]
+#!/usr/bin/python from jsonrpclib import Server
+switch = Server("https://admin:admin@172.16.130.16/command-api")
+response = switch.runCmds( 1, ["show hostname"] ) 
+\end{lstlisting}
+\subsection{Rückgabewert}
+Die meisten APIs bieten mehrere Arten von Ruckgabetypen. Arista bietet RAW Text und json an. Hier sieht man nun ein json Beispiel:\newline
+\begin{lstlisting}[language=json,firstnumber=1]
+{
+   "jsonrpc": "2.0",
+   "result": [
+      {
+         "interfaceStatuses": {
+            "Ethernet8": {
+               "vlanInformation": {
+                  "interfaceMode": "bridged",
+                  "vlanId": 12,
+                  "interfaceForwardingModel": "bridged"
+               },
+               "bandwidth": 1000000000,
+               "interfaceType": "1000BASE-T",
+               "description": "",
+               "duplex": "duplexFull",
+               "autoNegotigateActive": true,
+               "linkStatus": "connected"
+            },
+            "Ethernet9": {
+               "vlanInformation": {
+                  "interfaceMode": "bridged",
+                  "vlanId": 13,
+                  "interfaceForwardingModel": "bridged"
+               },
+               "bandwidth": 1000000000,
+               "interfaceType": "1000BASE-T",
+               "description": "",
+               "duplex": "duplexFull",
+               "autoNegotigateActive": true,
+               "linkStatus": "connected"
+            },
+            }
+         ],
+   "id": "CapiExplorer-123"
+}
+\end{lstlisting}
+\newpage
+\section{Cisco Spec-Files}
+\subsection{Beschreibung}
+Cisco bietet auf ihren Geräten ein spezielles Format Spec-File an. Dieses hat die Dateiendung .odm. Durch diese Spec-Files kann man alle show Befehle formatieren und als XML ausgeben lassen. Dadurch ist das parsen um einiges einfacher als bei Plain Text. Im Standard hat Cisco heute noch nicht so viele show Befehle abgedeckt, daher müssen diese Spec-Files noch für all die show Befehle geschrieben werden.
+\subsection{Beispiel}
+Hier sieht man nun, wie der 'show arp' Befehl formatiert wird.\newline
+\begin{lstlisting}[language=xml]
+###
+show arp
+<?xml version="1.0" encoding="UTF-8"?>
+<ODMSpec>
+<SpecVersion>built-in</SpecVersion>
+<Command><Name>show arp</Name></Command>
+<DataModel>
+<Container name="ShowArp">
+<Table name="ARPtable">
+<Header name="Protocol" type="String" start="0" end="9"/>
+<Header name="Address" type="IpAddress" start="10" end="26"/>
+<Header name="Age (min)" type="String" start="27" end="37"/>
+<Header name="Hardware Addr" type="String" start="38" end="53"/>
+<Header name="Type" type="String" start="54" end="60"/>
+<Header name="Interface" type="String" start="61" end="-1"/>
+</Table>
+</Container>
+</DataModel>
+</ODMSpec>
+\end{lstlisting}
+Mit den \#\#\# trennt man die einzelnen Befehle ab.\newline\newline
+Dadurch wird aus der folgenden Plain Text ausgabe das unten gezeigte XML:\newline
+\begin{lstlisting}[language=xml]
+Protocol  Address   Age(min) Hardware Addr  Type Interface
+Internet  10.1.1.11   -      0014.a905.2c41 ARPA Vlan99
+\end{lstlisting}
+\begin{lstlisting}[language=xml]
+<?xml version="1.0" encoding="UTF-8"?>
+  <ShowArp xmlns="ODM://flash:/betaspec.odm//show_arp">
+    <SpecVersion>built-in</SpecVersion>
+    <ARPtable>
+      <entry>
+        <Protocol>Internet</Protocol>
+        <Address>10.1.1.11</Address>
+        <Agemin>-</Agemin>
+        <HardwareAddr>0014.a905.2c41</HardwareAddr>
+        <Type>ARPA</Type>
+        <Interface>Vlan99</Interface>
+      </entry>
+      </ARPtable>
+  </ShowArp>
+\end{lstlisting}
 
-
-
+Wie man sieht, gibt man im Spec-File die Header der Plain Text ausgabe an und beschreibt wo dieses starten und wo enden. Mehr ist nicht zu tun. Daher ist es sehr einfach die show Befehle in ein XML umzuwandeln.\newline
+Damit dies aber funktioniert, muss man die ODM Dateien noch auf das gewünschte Cisco Gerät kopieren und als Standard Spec-File konfigueren. Dies ist jedoch auch sehr einfach mit diesem Befehl zu erledigen:\newline
+\begin{lstlisting}[language=xml]
+#(config) #format global flash:/spec_file.odm
+#sh format flash:/spec_file.odm validate
+\end{lstlisting}
 \newpage
 \section{Ausgabeformate}
+Durch all die verschiedenen Geräte und Schnittstellen, werden und auch verschiedene Formate zurückgeschickt. Die drei häufigsten Formate sind: XML, JSON und normaler Text. In diesem Abschnitt wird auf jedes Format eingegangen und erklärt was dieses Format für und bedeutet. Hier stellen sich Fragen wie das Parsen oder die Lesbarkeit.
 \subsection{XML}
+\subsection{Beschreibung}
+Die Extensible Markup Language oder auch XML ist ein sehr verbreitetes Format. Es wird von vielen Geräten unterstützt und man kann leicht mit dem Format arbeiten.
+In vielen Programmiersprachen gibt es Methoden, welche das XML in Objekte umwandelt. Daher ist es leicht mit dem Format zu arbeiten.
+\subsection{Einsatzbereich}
+XML werden wir vorallem von den Ciscogeräten erhalten. Wie oben beschrieben kann man via Spec-Files die Show-Befehle in XML umwandeln und so zurück schicken.
+\subsection{Beispiel}
+Hier sieht man ein Beispiel XML:\newline
+\begin{lstlisting}[language=xml]
+<?xml version="1.0" encoding="UTF-8"?>
+  <ShowArp xmlns="ODM://flash:/betaspec.odm//show_arp">
+    <SpecVersion>built-in</SpecVersion>
+    <ARPtable>
+      <entry>
+        <Protocol>Internet</Protocol>
+        <Address>10.1.1.11</Address>
+        <Agemin>-</Agemin>
+        <HardwareAddr>0014.a905.2c41</HardwareAddr>
+        <Type>ARPA</Type>
+        <Interface>Vlan99</Interface>
+      </entry>
+      </ARPtable>
+  </ShowArp>
+\end{lstlisting}
 \subsection{JSON}
-\subsection{RAW}
+JavaScript Object Notation oder kurz JSON ist ein heute weit verbreitetes Format. Die meisten Webentwicklungen und Web-APIs setzen auf JSON. Daher gibt es auch viele Parser. Es ist sehr einfach aufgebaut und so auch leicht lesbar.
+\subsection{Einsatzbereich}
+JSON wird vorallem von modernen APIs angeboten. Durch REST Abfragen auf dem Webinterface erhält man als Response ein JSON. Ältere Systeme setzen aber eher auf XML.
+\subsection{Beispiel}
+\begin{lstlisting}[language=json,firstnumber=1]
+{
+	"interfaceStatuses": {
+            "Ethernet8": {
+               "vlanInformation": {
+                  "interfaceMode": "bridged",
+                  "vlanId": 12,
+                  "interfaceForwardingModel": "bridged"
+               },
+               "bandwidth": 1000000000,
+               "interfaceType": "1000BASE-T",
+               "description": "",
+               "duplex": "duplexFull",
+               "autoNegotigateActive": true,
+               "linkStatus": "connected"
+            },
+	}
+}
+\end{lstlisting}
+\subsection{Plain Text}
+\subsection{Beschreibung}
+Programme wie zum Beispiel ping oder tracepath unterstützen kein XML oder JSON Format. Diese geben ihre Ausgabe als normalen String aus. 
+\subsection{Einsatzbereich}
+Es gibt im Linuxbereich viele Tools ohne XML oder JSON Output. Die meisten Linux-Tools unterstützen kein Format oder es ist sehr aufwendig eines zu parsen. Daher muss man diese mit einem Regex untersuchen und in ein gutes Format bringen.
+\subsection{Bespiel}
+--- 8.8.8.8 ping statistics ---\newline
+3 packets transmitted, 3 received, 0\% packet loss, time 2003ms\newline
+rtt min/avg/max/mdev = 60.752/72.075/88.623/11.963 ms\newline
 
+\subsection{Unser Standardformat}
+Da es in der Zukunft immer mehr in Richtung APIs geht, werden wir uns auf das JSON Format festlegen. Die APIs unterstützen alle das JSON Format und daher haben wir einen immer kleineren Parser und Regex aufwand. Das heisst, dass alle Plain Text und XML Ausgaben in JSON umgewandelt werden.
 \end{document}
 
