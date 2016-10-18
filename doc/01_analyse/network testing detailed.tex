@@ -173,7 +173,7 @@ nmap
 IP SLA
 show (cisco)
 ssh
-dhcpcheck
+dhcping
 ntpq
 iperf
 tracepath
@@ -184,7 +184,7 @@ tracepath
 \subsubsection{Beschreibung}
 Mit diesem Test kann man überprüfen, ob alle benötigten Benutzer vorhanden sind.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
+- Verbindung über SSH auf Cisco UI 
 \subsubsection{Devices}
 - Cisco Switch/Router
 \subsubsection{Commands}
@@ -200,7 +200,7 @@ Keine
 \subsubsection{Beschreibung}
 Durch diesen Test kann man den Versionstand von Switches und Router Testen.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
+- Verbindung über SSH auf Cisco UI
 \subsubsection{Devices}
 - Cisco Switch/Router
 \subsubsection{Commands}
@@ -212,7 +212,7 @@ Keine
 ...\newline
 Switch Ports Model              SW Version            SW Image\newline
 ------ ----- -----              ----------            ----------\newline
-*    1 26    WS-C2960-24TC-L    15.0(2)SE8            C2960-LANBASEK9-M
+*    1 26    WS-C2960-24TC-L    15.0(2)SE8            C2960-LANBASEK9-M\newline
 \subsubsection{Bemerkungen}
 Keine
 
@@ -223,7 +223,7 @@ Keine
 \subsubsection{Beschreibung}
 State eines Interfaces auf jedem VLAN.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
+- Verbindung über SSH auf Cisco UI 
 \subsubsection{Devices}
 - Cisco Switch/Router
 \subsubsection{Commands}
@@ -239,7 +239,7 @@ Keine
 \subsubsection{Beschreibung}
 Ist MST aktiviert oder nicht?
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
+- Verbindung über SSH auf Cisco UI
 \subsubsection{Devices}
 - Cisco Switch/Router
 \subsubsection{Commands}
@@ -257,7 +257,7 @@ Keine
 \subsubsection{Beschreibung}
 Testet, ob die richtigen Interface geblockt sind.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
+- Verbindung über SSH auf Cisco UI 
 \subsubsection{Devices}
 - Cisco Switch/Router
 \subsubsection{Commands}
@@ -276,7 +276,7 @@ Keine
 \subsubsection{Beschreibung}
 Ist UplinkFast aktiviert oder nicht?
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
+- Verbindung über SSH auf Cisco UI 
 \subsubsection{Devices}
 - Cisco Switch/Router
 \subsubsection{Commands}
@@ -293,7 +293,7 @@ Keine
 \subsubsection{Beschreibung}
 In diesem Test kann jedes Interface auf Portfast getestet werden.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
+- Verbindung über SSH auf Cisco UI 
 \subsubsection{Devices}
 - Cisco Switch/Router
 \subsubsection{Commands}
@@ -310,7 +310,7 @@ Keine
 \subsubsection{Beschreibung}
 In diesem Testszenario testet man alle VLAN-Einstellungen eines Interfaces.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
+- Verbindung über SSH auf Cisco UI
 \subsubsection{Devices}
 - Cisco Switch/Router
 \subsubsection{Commands}
@@ -321,7 +321,6 @@ Interface: Interface auf dem Switch/Router
 Vlan                Role Sts Cost      Prio.Nbr Type\newline
 ------------------- ---- --- --------- -------- --------------------------------\newline
 VLAN0020            Desg FWD 19        128.21   P2p Edge\newline
-
 Vlan                Role Sts Cost      Prio.Nbr Type\newline
 ------------------- ---- --- --------- -------- --------------------------------\newline
 VLAN0001            Root FWD 19        128.5    P2p\newline
@@ -386,7 +385,6 @@ Keine
 Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge\newline
                   S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone,\newline
                   D - Remote, C - CVTA, M - Two-port Mac Relay\newline
-
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID\newline
 HQ_AS7           Fas 0/14          161             R S I  WS-C2960- Fas 0/21\newline
 HQ_AS8           Fas 0/15          172              S I   WS-C2960- Fas 0/20\newline
@@ -412,17 +410,11 @@ Keine
 Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge\newline
                   S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone,\newline
                   D - Remote, C - CVTA, M - Two-port Mac Relay\newline
-
 Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID\newline
 HQ_AS7           Fas 0/14          161             R S I  WS-C2960- Fas 0/21\newline
 HQ_AS8           Fas 0/15          172              S I   WS-C2960- Fas 0/20\newline
 \subsubsection{Bemerkungen}
 Keine
-
-
-
-
-
 
 
 
@@ -439,36 +431,15 @@ show interfaces status
 \subsubsection{Parameter}
 Keine
 \subsubsection{Ausgabe}
-Port      Name               Status       Vlan       Duplex  Speed Type
-Fa0/1                        notconnect   1            auto   auto 10/100BaseTX
-Fa0/2                        notconnect   1            auto   auto 10/100BaseTX
-Fa0/3                        notconnect   20           auto   auto 10/100BaseTX
-Fa0/4                        notconnect   20           auto   auto 10/100BaseTX
-Fa0/5                        notconnect   20           auto   auto 10/100BaseTX
-....
+Port      Name               Status       Vlan       Duplex  Speed Type\newline
+Fa0/1                        notconnect   1            auto   auto 10/100BaseTX\newline
+Fa0/2                        notconnect   1            auto   auto 10/100BaseTX\newline
+Fa0/3                        notconnect   20           auto   auto 10/100BaseTX\newline
+Fa0/4                        notconnect   20           auto   auto 10/100BaseTX\newline
+Fa0/5                        notconnect   20           auto   auto 10/100BaseTX\newline
+....\newline
 \subsubsection{Bemerkungen}
 Keine
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -479,35 +450,46 @@ Keine
 \subsubsection{Beschreibung}
 In diesem Testszenario soll die Connectivity mittels ICMP ping Befehl getestet werden.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
-- ping
-- ip sla
+- Verbindung über SSH auf Cisco UI / Linux Shell\newline
+- ping\newline
+- IP SLA\newline
 
 \subsubsection{Devices}
-- Cisco Switch/Router
-- Linux OS
+- Cisco Switch/Router\newline
+- Linux OS \newline
 \subsubsection{Commands}
-Cisco: "ping <destinationIP> [parameter]"
-Linux: "ping -c 1 <destinationIP>"
-
-Cisco ip sla: 	"ip sla 1"
-			 	"icmp-echo <destinationIP>"
-			  	"request-data-size <0-16384>"
-			  	"ip sla schedule 1 start-time now life 0"
-			  	"sh ip sla statistics 1"
-
+\minisec{Cisco}
+ping <Dest-IP>\newline\newline
+oder mit IP SLA\newline
+ip sla 1
+icmp-echo <Dest-IP>"
+request-data-size <0-16384>"\newline
+ip sla schedule 1 start-time now life 0"\newline
+sh ip sla statistics 1"\newline
+\minisec{Linux}
+Linux: "ping -c 1 <Dest-IP>"
 \subsubsection{Parameter}
 - Zwingend Destination, Entry Number (ip sla), optional Source Interface
 \subsubsection{Ausgabe}
-Cisco ping: "Succes rate is x percent (x/5)"
-Linux ping: "x packets transmitted, x received, ..."
+\minisec{Cisco}
+Ping: \newline	 
+Success rate is x percent (x/5)\newline
+IP SLA:\newline
+Round Trip Time (RTT) for Index 1\newline
+Type of operation: dhcp\newline
+Latest operation start time: *04:07:33.884 UTC Mon Mar 1 1993\newline
+Latest operation return code: OK\newline
+Number of successes: 1\newline
+Number of failures: 0\newline
+Operation time to live: 0\newline
 
-Cisco ip sla: "IPSLA Operation id, Latest RTT, start time, return code, number of successes, number of failures,..."
+\minisec{Linux}
+--- 8.8.8.8 ping statistics ---\newline
+2 packets transmitted, 2 received, 0\% packet loss, time 999ms\newline
+rtt min/avg/max/mdev = 90.278/526.202/962.126/435.924 ms\newline
 
 \subsubsection{Bemerkungen}
-Mit IP SLA könnte man das Ergebnis via XML erhalten
-"show ip sla statistics 1 | format"
-
+Keine
 
 \subsection{NTP-Response}
 \subsubsection{Beschreibung}
@@ -525,7 +507,8 @@ ntpq -p <ntp-server>
 ==============================================================================\newline
 -soho.solnet.ch  162.23.41.56     2 s  494  512  357    1.313   -0.367   0.233\newline
 -bryan.solnet.ch 192.36.143.151   2 s  196  512  377    1.263   -3.990   0.175\newline
- wernerstats.sol 212.101.4.252    2 s 792d   64    0    0.000    0.000   0.000\newline \subsubsection{Bemerkungen}
+-wernerstats.sol 212.101.4.252    2 s 792d   64    0    0.000    0.000   0.000\newline
+\subsubsection{Bemerkungen}
 Keine
 
 
@@ -553,14 +536,14 @@ Dieses Testszenario gibt zurück, ob ein Port erreichbar ist.
 \subsubsection{Devices}
 - Linux OS
 \subsubsection{Commands}
-nmap -p<port> <host>
-nmap -p<start-ende> <host>
-nmap -p<port1, port4> <host>
+nmap -p<port> <host>\newline
+nmap -p<start-ende> <host>\newline
+nmap -p<port1, port4> <host>\newline
 \subsubsection{Parameter}
-- port: Einzelner Port
-- start-ende: Portbereich
-- port1, port4: Mehrere Ports
-- IP-Adresse oder Hostname des NTP-Servers
+- port: Einzelner Port\newline
+- start-ende: Portbereich\newline
+- port1, port4: Mehrere Ports\newline
+- IP-Adresse oder Hostname des NTP-Servers\newline
 \subsubsection{Ausgabe}
 Starting Nmap 6.47 ( http://nmap.org ) at 2016-10-12 16:21 W. Europe Daylight Time\newline
 Nmap scan report for host057.lab.ins.hsr.ch (152.96.9.57)\newline
@@ -581,74 +564,76 @@ Bei Firewalls sollte man vorsichtig sein, denn gewisse Firewalls erkennen Portsc
 \subsubsection{Beschreibung}
 In diesem Testszenario wird der DHCP-Dienst auf Funktionalität getestet.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
-- IP SLA
-- dhcpcheck
+- Verbindung über SSH auf Cisco UI / Linux Shell\newline
+- IP SLA\newline
+- dhcping\newline
 \subsubsection{Devices}
-- Cisco OS
-- Linux OS
+- Cisco OS\newline
+- Linux OS\newline
 \subsubsection{Commands}
-\paragraph{Cisco}
-ip sla 1
-dhcp <DHCP-Server>
-ip sla schedule 1 start-time now life 0
-sh ip sla stat 1
-no ip sla 1
-			
-\paragraph{Linux}
-%TODO
+\minisec{Cisco}
+ip sla 1\newline
+dhcp <DHCP-Server>\newline
+ip sla schedule 1 start-time now life 0\newline
+sh ip sla stat 1\newline
+no ip sla 1\newline
+\minisec{Linux}
+dhcping -s <DHCP-Server>
 \subsubsection{Parameter}
 - DHCP-Server: IP-Adresse oder Hostname des DHCP-Diestes
 \subsubsection{Ausgabe}
-\paragraph{Cisco}
-Round Trip Time (RTT) for       Index 1
-Type of operation: dhcp
-Latest operation start time: *04:07:33.884 UTC Mon Mar 1 1993
-Latest operation return code: OK
-Number of successes: 1
-Number of failures: 0
-Operation time to live: 0
-\paragraph{Linux}
-%TODO
+\minisec{Cisco}
+Round Trip Time (RTT) for Index 1\newline
+Type of operation: dhcp\newline
+Latest operation start time: *04:07:33.884 UTC Mon Mar 1 1993\newline
+Latest operation return code: OK\newline
+Number of successes: 1\newline
+Number of failures: 0\newline
+Operation time to live: 0\newline
+\minisec{Linux}
+Got answer from: 192.168.43.1
 \subsubsection{Bemerkungen}
 Keine
-
-
 \subsection{DNS-Response}
 \subsubsection{Beschreibung}
 Mit diesem Test kann man einen DNS-Server testen, ob er erreichbar ist und korrekt funktioniert.
 \subsubsection{Tools}
-- Verbindung über SSH auf Cisco UI / Linux Shell
-- IP SLA
-- nslookup
+- Verbindung über SSH auf Cisco UI / Linux Shell\newline
+- IP SLA\newline
+- nslookup\newline
 \subsubsection{Devices}
 - Linux OS
 \subsubsection{Commands}
-\paragraph{Cisco}
-ip sla 1
-dns <hostname> name-server <nameserver>
-tag DNS-Test
-ip sla schedule 1 start-time now
-sh ip sla stat 1
-no ip sla 1
-			
-\paragraph{Linux}
-nslookup <hostname> [type]
+\minisec{Cisco}\newline
+ip sla 1\newline
+dns <hostname> name-server <nameserver>\newline
+tag DNS-Test\newline
+ip sla schedule 1 start-time now\newline
+sh ip sla stat 1\newline
+no ip sla 1\newline
+\minisec{Linux}
+nslookup <hostname> [type=]
 \subsubsection{Parameter}
-- hostname: Ein Hostname den man auflösen möchte.
-- nameserver: Nameserver, welche die Abfrage erledigen soll.
-- type: Typ der Abfrage. Z. B. mx, ns, uws.
+- hostname: Ein Hostname den man auflösen möchte.\newline
+- nameserver: Nameserver, welche die Abfrage erledigen soll.\newline
+- type: Typ der Abfrage. Z. B. mx, ns, uws.\newline
 \subsubsection{Ausgabe}
-\paragraph{Cisco}
-Round Trip Time (RTT) for       Index 1
-Type of operation: dns
-Latest operation start time: *04:07:33.884 UTC Mon Mar 1 1993
-Latest operation return code: OK
-Number of successes: 1
-Number of failures: 0
-Operation time to live: 0
-\paragraph{Linux}
-%TODO
+\minisec{Cisco}
+Round Trip Time (RTT) for Index 1\newline
+Type of operation: dns\newline
+Latest operation start time: *04:07:33.884 UTC Mon Mar 1 1993\newline
+Latest operation return code: OK\newline
+Number of successes: 1\newline
+Number of failures: 0\newline
+Operation time to live: 0\newline
+\minisec{Linux}
+Server:         192.168.43.1\newline
+Address:        192.168.43.1#53\newline\newline
+Non-authoritative answer:\newline
+Name:   www.google.ch\newline
+Address: 216.58.211.35\newline
+Name:   www.google.ch\newline
+Address: 2a00:1450:4016:805::2003\newline
 \subsubsection{Bemerkungen}
 Keine
 
