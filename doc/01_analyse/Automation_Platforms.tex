@@ -1,0 +1,173 @@
+\documentclass[a4,12pt]{scrartcl}
+
+%Basic 
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+%Schrift 
+%\usepackage{fontspec} 
+%\setmainfont{Arial} 
+%Zeilenabstand
+\usepackage{setspace}
+\setstretch {1.3}
+\usepackage{float}
+\usepackage[bottom = 3.50cm]{geometry}
+
+%Titel Seite
+\usepackage{titling} %Wird benötigt damit \maketitle die Variabeln title, author und date nicht überschreibt
+\title{Test Cases}
+%\subtitle{Projekt: software name}
+\author{David Meister \and Andreas Stalder}		
+ %mit /and können Personen hinzugefügt werden
+\date{\today}
+
+
+%Kopf, Fusszeile
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{Automation Platforms}
+\lfoot{\thetitle \: v1.0 }
+\cfoot{\today}
+\rfoot{Seite \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+%Bilder
+\usepackage{graphicx}
+
+%Zeichnen
+\usepackage{tikz}
+
+%Tabellen
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%Codesnippets
+\usepackage{listings}
+\lstset{language=java,basicstyle=\footnotesize,frame=single} %backgroundcolor=\color{lightgray}
+
+%Querformat für eine Seite
+\usepackage{lscape}
+\usepackage{rotating}
+\usepackage{pdflscape}
+
+%URL 
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref}
+\urlstyle{same} 
+
+
+%Loremimpsum
+\usepackage{lipsum}
+
+
+
+\begin{document}
+
+%\clearpage\maketitle
+\begin{titlepage}
+	\centering
+	\vspace{5cm}
+	\begin{center}
+%	\includegraphics[width=0.50\textwidth]{}
+	\end{center}
+%	{\huge\bfseries software name\par}
+	\vspace{8cm}
+	\raggedright
+	{\bfseries HSR Studienarbeit Network Unit Testing\par}
+	{\huge\bfseries Automation Platforms \par}
+	\vspace{1cm}
+	{\theauthor \par}
+	{\today\par}
+
+\end{titlepage}
+
+\section{Änderungsgeschichte}
+
+\begin{table}[htb]
+\centering
+    \begin{tabular}{@{} l l l l@{}}\toprule    
+    {Datum} & {Version} & {Änderung} & {Autor}\\ \midrule
+    1.11.16 & 1.0 & Erstellung erster Version & dm/as\\ \addlinespace
+    \end{tabular}
+\caption{\textbf{Änderungsgeschichte}}
+\end{table}
+
+\newpage
+
+%\thispagestyle{empty}
+\tableofcontents
+\newpage
+
+
+\section{Einführung}
+\subsection{Zweck}
+Dieses Dokument dient als Entscheidungsgrundlage zur Auswahl der verwendeten Automation Platform.
+\subsection{Gültigkeitsbereich}
+Dieses Dokument ist über die gesamte Projektdauer gültig. Es wird in späteren Iterationen angepasst. Somit ist jeweils die neuste Version des Dokuments gültig und alte Versionen sind obsolet.
+\subsection{Referenzen}
+\begin{description}
+\item[Enterprise Network Testing] \hfill \\
+\isbn{A. Sholomon, T. Kunath} \newline
+\isbn{ISBN-13: 978-1-58714-127-0}
+\end{description}
+\newpage
+\section{Einleitung}
+Die zu entwickelnde Software nimmt vom User erstellte Unit Tests entgegen. Diese Unit Tests kommen in einer strukturierten Textform im YAML Format an. Nun wird eine Plattform benötigt, damit die gewünschten Tests ausgeführt werden können. Dazu müssen Devices und Credentials verwaltet-, Tests entwickelt-, Tasks ausgeführt- und Outputs formatiert werden können. 
+\newpage
+
+\section{Anforderungen}
+
+- Agentless \\
+\noindent - Möglichkeit zur Verbindung via ssh auf Remote Devices (Linux \& Cisco)\\
+\noindent - Möglichkeit zur Absetzung von Device spezifischen Kommandos über ssh \\
+\noindent - Möglichkeit zur Weiterverarbeitung der Outputs nach abgesetzten Kommandos \\
+\noindent - Asynchrones senden von Kommandos \\
+\noindent - Verwaltung von Credentials \\
+\noindent - Möglichkeit zum Setzen von Timeouts \\
+\noindent - API für Entwicklung eigener Testmodule \\
+
+\newpage
+\section{Tools}
+Als agentenlose Automation Platforms kamen die Tools Ansible und SaltStack in Frage. Beide Tools scheinen die gewünschten Anforderungen abzudecken. 
+\subsection{Ansible}
+Ansible ist eine Open Source Software, mit welcher man Devices konfigurieren und administrieren kann. Die zu verwaltenden Devices werden über SSH angesprochen und erfordern keinerlei zusätzliche Software. Ansible kann Software verteilen, Konfigurationen ändern, aber auch Abfragen auf Devices ausführen. Sogenannte Playbooks werden im YAML Format erfasst. Playbooks können Verbindungen, Devices und Kommandos enthalten. Dadurch könnte es potenziell für Unit Tests verwendet werden.
+\subsubsection{SSH Verbindungsaufbau}
+SSH Verbindungen können in Ansible auf verschiedene Wege aufgebaut werden. Sogenannte Module stehen standardmässig zur Verfügung. Es existieren auch spezielle Module für unterschiedliche Hersteller wie Cisco oder Juniper. Dadurch können Verbindungen einfach aufgebaut werden.
+\subsubsection{Absetzen von Commands}
+Durch die Standardmodule ist das Absetzen von Kommandos sehr einfach. Es muss nur das jeweils richtige Modul für das Device verwendet werden, dann können Kommandos abgesetzt werden, als wäre man direkt am Device verbunden. 
+\subsubsection{Output Formatierung}
+Outputs, welche vom Device zurückgegeben werden, werden im JSON Format dargestellt. Die Outputs werden Zeile-für-Zeile in ein JSON Objekt geschrieben. Für die Weiterverarbeitung müssten die benötigten Werte geparst werden.
+\subsubsection{Timeouts}
+Für Tasks in Ansible könnten Timeouts und Retries festgesetzt werden.
+\subsubsection{API und eigene Module}
+Für die Entwicklung eigener Module für Unit Tests bietet Ansible eine API. Andere Module können dabei nicht angesprochen werden. Grundsätzlich gestaltet sich die Entwicklung eigener Module schwierig und ist wenig intuitiv und die Dokumentation im Internet ist dürftig. Beispielsweise ist ein Verbindungsaufbau über SSH in einem eigenen Modul schwierig zu implementieren und würde eine grosse Einarbeitungszeit bedeuten.
+\subsubsection{Device und Credential Verwaltung}
+Devices, Verbindungsinformationen und Credentials können in Ansible in sogenannten Inventory Files abgelegt werden. 
+\subsubsection{Asynchrones Senden von Commands}
+Sämtliche Kommandos können asynchron abgesetzt werden.
+\newpage
+\subsection{SaltStack}
+Ähnlich wie Ansible ist auch SaltStack eine Open Source Software für Konfigurationsmanagement und Administration von Devices. Anders als bei Ansible kann mit SaltStack ein Client-Server Ansatz verfolgt werden. Dafür gibt es in Salt sogenannte Master und Minions. Wie in Ansible ist aber auch eine agentenlose Verbindung über SSH möglich. Der Funktionsumfang und die abgedeckten Use Cases sind ähnlich wie bei Ansible, deshalb könnte es potenziell für Unit Tests verwendet werden.
+\subsubsection{SSH Verbindungsaufbau}
+Mittels salt-ssh kann einfach eine Verbindung zu einem Remote Device aufgebaut werden. Anders als bei Ansible existieren keine vorgefertigten Module um Unterschiedliche Typen von Devices anzusprechen. 
+\subsubsection{Absetzen von Commands}
+Das Absetzen von Kommandos über SSH geschieht rudimentär, d.h. es müssen sämtliche benötigten ssh Kommandos selbst abgesetzt werden. Dadurch müsste man z.B. auf einem Cisco Device vorgängig "enable" mitgeschickt werden, bevor Abfragen gemacht werden können.
+\subsubsection{Output Formatierung}
+Standardmässig wird der Output unformatiert zurückgegeben. Man müsste den Output von Hand in strukturierte Form (JSON/XML) bringen oder die benötigten Infos mittels regulären Ausdrücken selbst parsen.
+\subsubsection{Timeouts}
+Für Tasks in SaltStack können Timeouts festgelegt werden.
+\subsubsection{API und eigene Module}
+Für die Entwicklung eigener Module für Unit Tests beitet SaltStack eine API. Verglichen mit Ansible können eigene Module viel einfacher und intuitiver entwickelt werden. SSH Verbindungen oder HTTP Get Anfragen können sehr einfach formuliert werden.
+\subsubsection{Device und Credential Verwaltung}
+Devices, Verbindungsinformationen und Credentials können in Ansible in sogenannten Roster Files abgelegt werden. 
+\subsubsection{Asynchrones Senden von Commands}
+Sämtliche Kommandos können asynchron abgesetzt werden.
+\newpage
+\section{Auswahl}
+Die Auswahl des zu verwendenden Tools hat für die Entwicklung eine grosse Tragweite. Die Software interagiert direkt mit dem verwendeten Tool. Die unterstützten Tests werden selbst im Tool in einem eigenen Modul formuliert. \\
+
+\noindent Beide Tools decken grundsätzlich die gewünschten Anforderungen ab. Ansible punktet mit vorgefertigten Modulen und JSON Output Formatierung, SaltStack punktet mit der einfachen Entwicklung von Modulen. Da auch mit Ansible die erhalteten JSON Objekte geparst werden müssen fällt dieser Vorteil nicht ins Gewicht. Bei eigenen Modulen können andere Module wie Beispielsweise IOS nicht verwendet werden. Deshalb haben wir uns für SaltStack entschieden, da ein neues Modul für Unit Tests einfach, schnell und intuitiv entwickelt werden kann.
+
+\end{document}
+
