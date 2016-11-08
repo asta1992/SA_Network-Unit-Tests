@@ -1,0 +1,23 @@
+name: Test 1
+number: 1
+command: connectivity
+nodes:
+    - name: arch
+      ssh: False
+      os: Linux
+parameter: 8.8.8.8
+expected: 0
+timeout: 10
+
+---
+
+name: Test 2
+number: 2
+command: connectivity
+nodes:
+    - name: arch
+      ssh: False
+      os: Linux
+parameter: 192.168.1.1
+expected: 0
+timeout: 10
