@@ -107,17 +107,61 @@ Todo Architektur Zweck
 Dieses Dokument ist über die gesamte Projektdauer gültig. Es wird in späteren Iterationen angepasst. Somit ist jeweils die neuste Version des Dokuments gültig und alte Versionen sind obsolet.
 \subsection{Referenzen}
 \begin{description}
-Todo Ref zu Automation Platform und anderen Dokumenten
+Todo Ref zu Automation Plattform und anderen Dokumenten
 \end{description}
 \newpage
 \section{Systemübersicht}
 \newpage
-\section{Tools}
+\section{Klassenstruktur}
 \newpage
 \section{Logische Architektur}
+\begin{figure} [H]
+	\begin{center}
+	\includegraphics[width=0.90\textwidth]{./pictures/architektur.png}
+	\label{Bild Referenz}
+	\end{center}
+\end{figure}
+\begin{figure} [H]
+	\begin{center}
+	\includegraphics[width=0.90\textwidth]{./pictures/dependence_diagram.png}
+	\label{Bild Referenz}
+	\end{center}
+\end{figure}
+
+
+\subsection{Application-Layer}
+wef
+\subsubsection{Klassenstruktur}
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{11cm} @{}}\toprule    
+    {Klassenname} & {Beschreibung}\\ \midrule
+    ValidatorController & Der ValidatorController beinhaltet  \\       
+    TestController & Das MainGUI ist die Hauptoberfläche. Von dieser aus wird alles gestartet und eingestellt. Diese Oberfläche führt auch zum InterfaceGUI. \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+\subsubsection{Schnittstellen}
+Der Presentation-Layer hat eine Schnittstelle zum Application-Layer, sowie zum Service-Layer. 
+Das Mai hat eine Schnittstelle zum AudioPlayer, um diesen mittels GUI-Button zu starten und zu stoppen.
+Zusätzlich besteht noch eine Schnittstelle zum SessionHandler, um die Session zu verwalten.
+Eine weitere Schnittstelle besteht zum PacketScanner, damit dieser gesteuert werden kann.
+
+
+
+
+
+
+
 \newpage
-\section{Kommunikation}
-\newpage
+\section{Datensicherung}
+Nuts speichert nur sehr wenige Daten. Dazu gehört ein Result-Log pro Ausführung und ein Error-Log für die Fehler.
+\subsection{Testdateien}
+Die erstellten Testdateien müssen von jedem Benutzer selber abgespeichert und verwaltet werden. Nuts speichert diese selber nicht ab.
+\subsection{Auswertungen}
+Jeder ausgeführte Test ergibt eine Log-Datei. Dieser Testlog wird unter /var/log/nuts/ gespeichert. Die Datei beinhaltet die Testergebnisse und weitere Details, falls der Test nicht bestanden ist.
+\subsection{Error-Log}
+Falls es beim ausführen des Programms zu einem Fehler kommt, wird dieser Fehler im Error-Log erfasst. Der Error-Log wird unter /var/log/nuts/error.log abgespeichert.
 
 \end{document}
 
