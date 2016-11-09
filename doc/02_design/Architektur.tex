@@ -130,22 +130,60 @@ Todo Ref zu Automation Plattform und anderen Dokumenten
 
 
 \subsection{Application-Layer}
-wef
+Im Application-Layer befinden sich alle Abläufe, um durch das Programm zu führen. Das heisst, dass jeder Parameter seine eigene Controller-Klasse erhalten wird. Da momentan nur zwei Parameter (-i und -v) vorhanden sind, gibt es auch nur zwei Controller.
 \subsubsection{Klassenstruktur}
 \begin{table}[H]
 \centering
     \begin{tabular}{@{}l p{11cm} @{}}\toprule    
     {Klassenname} & {Beschreibung}\\ \midrule
-    ValidatorController & Der ValidatorController beinhaltet  \\       
-    TestController & Das MainGUI ist die Hauptoberfläche. Von dieser aus wird alles gestartet und eingestellt. Diese Oberfläche führt auch zum InterfaceGUI. \\
+    ValidatorController & Der ValidatorController beinhaltet die Logik und Ausgaben, um durch die Validierung einer Datei zu führen.\\       
+    TestController & Der TestController beinhaltet die gesamte Logik um Tests zu erstellen, auszuführen und zu testen. Dazu verwendet er Teile aus dem Service-Layer. \\
     \bottomrule
     \end{tabular}
 \end{table}
 \subsubsection{Schnittstellen}
-Der Presentation-Layer hat eine Schnittstelle zum Application-Layer, sowie zum Service-Layer. 
-Das Mai hat eine Schnittstelle zum AudioPlayer, um diesen mittels GUI-Button zu starten und zu stoppen.
-Zusätzlich besteht noch eine Schnittstelle zum SessionHandler, um die Session zu verwalten.
-Eine weitere Schnittstelle besteht zum PacketScanner, damit dieser gesteuert werden kann.
+Der Application-Layer hat momentan nur eine Schnittstelle in den Service-Layer. So kann er die verschiedenen Aufgaben an die untere schickt weiterleiten.
+
+
+
+\subsection{Service-Layer}
+Der Service-Layer beinhaltete die gesamte Programmlogik. Das heisst es gibt vier verschiedene Klassen, - Runner, FileHandler, Evaluator, FileValidator - welche jeweils ein Teil der gesamten Aufgabe übernehmen.
+\subsubsection{Klassenstruktur}
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{11cm} @{}}\toprule    
+    {Klassenname} & {Beschreibung}\\ \midrule
+    
+    Runner & Alle erfassten Tests werden durch den Runner von der TestSuite geholt und es wird ein CMD für Salt zusammengestellt. Dieses wird dann ausgeführt und die Testresultate werden der TestSuite zurückgegeben.  \\       
+    Evaluator & Der Evaluator vergleicht die erwarteten Werte aus der TestSuite mit den tatsächlichen Resultaten. \\
+    FileHandler & Mit dem FileHandler werden die Testfiles und die Inventoryfiles eingelesen und in Objekte umgewandelt.\\
+    FileValidator & Der FileValidator überprüft ein Testfile und gibt zurück, ob dieses korrekt formatiert ist und ob die eingegebenen Parameter gültig sind. \\
+
+    \bottomrule
+    \end{tabular}
+\end{table}
+\subsubsection{Schnittstellen}
+Der Service-Layer hat eine Schnittstelle zum Data-Layer. Durch den Service-Layer werden die Datenobjekte erstellt, bearbeitet und ausgewertet. Obere schickten müssen so immer über den Service-Layer, um eine saubere Abtrennung der Schichten zu gewährleisten.
+
+
+
+\subsection{Data-Layer}
+Der Data-Layer beinhaltet alle Datenobjekte, welche vom laufenden Programm benötigt werden.
+\subsubsection{Klassenstruktur}
+\begin{table}[H]
+\centering
+    \begin{tabular}{@{}l p{11cm} @{}}\toprule    
+    {Klassenname} & {Beschreibung}\\ \midrule
+    
+    Testsuite & Die Testsuite beinhaltet die Logik, um neue Testcases und Devices anzulegen und abfragen auf die Daten zu machen.\\     
+    TestCase & In der Klasse TestCase, werden alle Daten zu einem TestCase gespeichert. Diese kommen vom Testfile, welches der User vorgängig erfasst hat.\\         
+    Devices & Alle Daten zu den einzelnen Devices aus dem Inventoryfile, werden hier als Objekt abgespeichert.\\
+  
+    \bottomrule
+    \end{tabular}
+\end{table}
+\subsubsection{Schnittstellen}
+Da der Data-Layer der unterste Layer ist, gibt es hier keine weiteren Schnittstellen.
 
 
 
