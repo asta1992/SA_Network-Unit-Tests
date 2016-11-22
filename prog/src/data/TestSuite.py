@@ -3,7 +3,7 @@ from .TestCase import TestCase
 
 class TestSuite:
     name = ""
-    testcases = []
+    testCases = []
     devices = []
 
     def __init__(self, name):
@@ -11,7 +11,7 @@ class TestSuite:
 
     def createTest(self, name, command, devices, parameter, expectedResult):
         test = TestCase(name, command, devices, parameter, expectedResult)
-        TestSuite.testcases.append(test)
+        TestSuite.testCases.append(test)
 
 
     def createDevice(self, name, os, ipAddress, username, password):
@@ -24,18 +24,23 @@ class TestSuite:
                 return dev.os
 
     def setActualResult(self, testCase, actualResult):
-        for test in TestSuite.testcases:
+        for test in TestSuite.testCases:
             if test.name == testCase.name:
                 test.setActualResult(actualResult)
 
     def getActualResult(self):
-        for test in TestSuite.testcases:
+        for test in TestSuite.testCases:
             print(test.getActualResult())
 
     def printAllTestCases(self):
-        for test in TestSuite.testcases:
+        for test in TestSuite.testCases:
             test.displayTestCase()
 
     def printAllDevices(self):
         for dev in TestSuite.devices:
             dev.displayDevice()
+
+    def getTestByName(name):
+        for test in TestSuite.testCases:
+            if(test.name) == name:
+                return test
