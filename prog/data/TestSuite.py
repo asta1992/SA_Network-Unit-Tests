@@ -18,15 +18,19 @@ class TestSuite:
         dev = Device(name, os, ipAddress, username, password)
         TestSuite.devices.append(dev)
 
-    def getExecutionCommand(self, testName):
-        for test in TestSuite.testcases:
-            if test.name == testName:
-                return test.command
+    def getDeviceOS(self, testCase):
+        for dev in TestSuite.devices:
+            if testCase.devices == dev.name:
+                return dev.os
 
-    def setActualResult(self, testName, actualResult):
+    def setActualResult(self, testCase, actualResult):
         for test in TestSuite.testcases:
-            if test.name == testName:
+            if test.name == testCase.name:
                 test.setActualResult(actualResult)
+
+    def getActualResult(self):
+        for test in TestSuite.testcases:
+            print(test.getActualResult())
 
     def printAllTestCases(self):
         for test in TestSuite.testcases:

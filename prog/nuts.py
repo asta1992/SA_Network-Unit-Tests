@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import sys
+import os
 import getopt
 from application.ValidationController import ValidationController
 from application.TestController import TestController
@@ -20,7 +21,7 @@ def main(argv):
             validater = ValidationController(arg)
             #Todo
         elif opt in ("-i", "--input"):
-            tester = TestController(arg)
+            tester = TestController(os.getcwd() + "/" + arg, os.getcwd() + "/" + args[0])
             tester.logic()
 
 

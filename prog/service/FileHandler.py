@@ -18,7 +18,13 @@ class FileHandler:
         for val in values:
             testSuite.createTest(val["name"], val["command"], val["devices"], val["parameter"], val["expected"])
 
-    def readFile(self, file):
+    @staticmethod
+    def addDevices(data, testSuite):
+        values = yaml.safe_load_all(data)
+        for val in values:
+            testSuite.createDevice(val["name"], val["os"], val["ipAddress"], val["username"], val["password"])
+
+    def readFile(self, file, type):
         try:
             from yaml import CLoader as Loader, CDumper as Dumper
         except ImportError:
@@ -26,10 +32,11 @@ class FileHandler:
 
         with open(file, 'r') as stream:
             try:
-                self.addTests(stream, self.testSuite)
+                if(type=="tests"):
+                    self.addTests(stream, self.testSuite)
+                else:
+                    self.addDevices(stream, self.testSuite)
             except yaml.YAMLError as exc:
                 print(exc)
 
-    def addDevices(self):
-        print("Todo")
 
