@@ -2,12 +2,12 @@
   command: linuxping
   devices: arch
   parameter: 8.8.8.8
-  expected: '=0'
+  expected: '0'
 
 
 #Test bla bla
 - name: Test 2
   command: linuxping
   devices: arch
-  parameter: 8.8.8.8
-  expected: '=0'
+  parameter: 192.168.0.10
+  expected: '0'

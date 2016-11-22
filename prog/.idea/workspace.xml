@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="054a76a9-def7-4ca5-a4d7-95902e5c0cb3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/service/deviceSchema.yaml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/service/testSchema.yaml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/_modules/checkResult.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/device.yml" afterPath="$PROJECT_DIR$/device.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firsttry.yml" afterPath="$PROJECT_DIR$/firsttry.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nuts.py" afterPath="$PROJECT_DIR$/nuts.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/application/TestController.py" afterPath="$PROJECT_DIR$/src/application/TestController.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/application/ValidationController.py" afterPath="$PROJECT_DIR$/src/application/ValidationController.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/TestSuite.py" afterPath="$PROJECT_DIR$/src/data/TestSuite.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/Evaluator.py" afterPath="$PROJECT_DIR$/src/service/Evaluator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/FileHandler.py" afterPath="$PROJECT_DIR$/src/service/FileHandler.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/FileValidator.py" afterPath="$PROJECT_DIR$/src/service/FileValidator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/Runner.py" afterPath="$PROJECT_DIR$/src/service/Runner.py" />
     </list>
     <ignored path="prog.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,8 +26,8 @@
       <file leaf-file-name="nuts.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nuts.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+            <state relative-caret-position="255">
+              <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
               <folding>
                 <element signature="e#22#32#0" expanded="true" />
               </folding>
@@ -67,7 +55,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestController.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TestController.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/application/TestController.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="390">
@@ -75,6 +63,16 @@
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="firsttry.yml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/firsttry.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -123,20 +121,19 @@
         <option value="$PROJECT_DIR$/src/service/testSchema.yaml" />
         <option value="$PROJECT_DIR$/device.yml" />
         <option value="$PROJECT_DIR$/src/service/FileValidator.py" />
-        <option value="$PROJECT_DIR$/firsttry.yml" />
         <option value="$PROJECT_DIR$/src/service/FileHandler.py" />
         <option value="$PROJECT_DIR$/src/data/TestSuite.py" />
         <option value="$PROJECT_DIR$/src/service/Runner.py" />
         <option value="$PROJECT_DIR$/src/service/Evaluator.py" />
         <option value="$PROJECT_DIR$/src/application/TestController.py" />
+        <option value="$PROJECT_DIR$/firsttry.yml" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2559" />
-    <option name="y" value="96" />
+    <option name="x" value="-1" />
     <option name="width" value="1682" />
-    <option name="height" value="1051" />
+    <option name="height" value="1025" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -163,8 +160,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -431,7 +428,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2559" y="96" width="1682" height="1051" extended-state="6" />
+    <frame x="-1" y="0" width="1682" height="1025" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1827381" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -535,7 +532,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="38" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -543,7 +539,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -551,15 +546,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/firsttry.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -567,7 +553,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="13" column="21" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -575,9 +560,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -585,7 +567,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -593,14 +574,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/nuts.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+        <state relative-caret-position="255">
+          <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
           <folding>
             <element signature="e#22#32#0" expanded="true" />
           </folding>
@@ -611,7 +591,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -619,7 +598,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -631,14 +609,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/_modules/checkResult.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="16" selection-end-column="115" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/_modules/checkResult.py" />
     <entry file="file://$PROJECT_DIR$/src/service/Runner.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -654,6 +625,14 @@
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/firsttry.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
