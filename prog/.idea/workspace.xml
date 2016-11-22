@@ -2,15 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="054a76a9-def7-4ca5-a4d7-95902e5c0cb3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/device.yml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_modules/nuts.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_modules/tasklist.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/TestController.py" afterPath="$PROJECT_DIR$/application/TestController.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/TestSuite.py" afterPath="$PROJECT_DIR$/data/TestSuite.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firsttry.yml" afterPath="$PROJECT_DIR$/firsttry.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nuts.py" afterPath="$PROJECT_DIR$/nuts.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service/FileHandler.py" afterPath="$PROJECT_DIR$/service/FileHandler.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/service/Runner.py" afterPath="$PROJECT_DIR$/service/Runner.py" />
     </list>
     <ignored path="prog.iws" />
@@ -34,7 +25,7 @@
       <file leaf-file-name="nuts.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nuts.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
+            <state relative-caret-position="180">
               <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
               <folding>
                 <element signature="e#22#32#0" expanded="true" />
@@ -78,8 +69,8 @@
       <file leaf-file-name="Runner.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/service/Runner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="61" selection-start-line="8" selection-start-column="61" selection-end-line="8" selection-end-column="61" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -88,7 +79,7 @@
       <file leaf-file-name="TestSuite.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/TestSuite.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
+            <state relative-caret-position="435">
               <caret line="30" column="23" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="23" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
@@ -130,7 +121,7 @@
       <file leaf-file-name="TestController.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/TestController.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
+            <state relative-caret-position="345">
               <caret line="26" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
@@ -210,6 +201,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -286,8 +279,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -481,7 +472,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1682" height="1025" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12619048" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -718,13 +709,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///srv/salt/_modules/nettest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="26" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file:///srv/salt/_modules/nettest.py" />
     <entry file="file://$PROJECT_DIR$/_modules/tasklist.py" />
     <entry file="file://$PROJECT_DIR$/_modules/nuts.py" />
     <entry file="file://$PROJECT_DIR$/_modules/checkResult.py">
@@ -785,7 +770,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/nuts.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
+        <state relative-caret-position="180">
           <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
           <folding>
             <element signature="e#22#32#0" expanded="true" />
@@ -803,7 +788,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/data/TestSuite.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
+        <state relative-caret-position="435">
           <caret line="30" column="23" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="23" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
@@ -813,7 +798,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/TestController.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
+        <state relative-caret-position="345">
           <caret line="26" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
@@ -823,8 +808,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/service/Runner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="61" selection-start-line="8" selection-start-column="61" selection-end-line="8" selection-end-column="61" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding />
         </state>
       </provider>
