@@ -19,5 +19,6 @@ class TestTestSuite:
         cls.testSuite.createTest("testPingFromAToB", "ping", device1, "", "0")
         cls.testSuite.createTest("showNeighborsByArp", "arp", device2, "", "0")
 
+
     def test_getDeviceByName(self):
         assert self.testSuite.getDeviceByName("Server01").name == "Server01"
