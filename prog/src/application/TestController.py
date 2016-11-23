@@ -22,4 +22,4 @@ class TestController:
         TestController.testSuite.printAllDevices()
 
         self.runner.runAll()
-        self.evaluator.compareAll()
+        self.evaluator.printAllResults()

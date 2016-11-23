@@ -27,6 +27,7 @@ class Runner:
         result = proc.communicate()
         self.testSuite.setActualResult(testCase, result[0].split( )[1].decode('utf-8'))
 
+
     def runAll(self):
         for test in self.testSuite.testCases:
             print("Start Test " + test.name)
