@@ -21,7 +21,5 @@ class TestController:
         TestController.testSuite.printAllTestCases()
         TestController.testSuite.printAllDevices()
 
-        print("\n\n Start.........")
-
         self.runner.runAll()
         self.evaluator.compareAll()

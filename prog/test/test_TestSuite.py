@@ -1,6 +1,6 @@
 import pytest
-from prog.src.data import Device
-from prog.src.data import TestSuite
+from src.data.Device import Device
+from src.data.TestSuite import TestSuite
 
 class TestTestSuite:
 
