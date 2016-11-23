@@ -14,13 +14,13 @@ class FileHandler:
 
     @staticmethod
     def addTests(data, testSuite):
-        values = yaml.safe_load_all(data)
+        values = yaml.safe_load(data)
         for val in values:
             testSuite.createTest(val["name"], val["command"], val["devices"], val["parameter"], val["expected"])
 
     @staticmethod
     def addDevices(data, testSuite):
-        values = yaml.safe_load_all(data)
+        values = yaml.safe_load(data)
         for val in values:
             testSuite.createDevice(val["name"], val["os"], val["ipAddress"], val["username"], val["password"])
 

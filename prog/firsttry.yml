@@ -1,13 +1,13 @@
-name: Test 1
-command: linuxping
-devices: arch
-parameter: 8.8.8.8
-expected: 0
+- name: Test 1
+  command: linuxping
+  devices: arch
+  parameter: 8.8.8.8
+  expected: '0'
 
----
 
-name: Test 2
-command: linuxping
-devices: arch
-parameter: 192.168.1.1
-expected: 0
+#Test bla bla
+- name: Test 2
+  command: linuxping
+  devices: arch
+  parameter: 192.168.0.10
+  expected: '0'

@@ -19,17 +19,26 @@ class TestSuite:
         TestSuite.devices.append(dev)
 
     def getDeviceOS(self, testCase):
-        return self.getDeviceByName(testCase.devices)
+        return self.getDeviceByName(testCase.devices).os
 
 
     def setActualResult(self, testCase, actualResult):
-        test = self.getTestByName(testCase.name)
-        test.setActualResult(actualResult)
+       self.getTestByName(testCase.name).setActualResult(actualResult)
+
+    def getActualResult(self, testCase):
+        return self.getTestByName(testCase.name).getActualResult()
 
 
-    def getActualResult(self):
+    def getTestByName(self,name):
         for test in TestSuite.testCases:
-            print(test.getActualResult())
+            if test.name == name:
+                return test
+
+
+    def getDeviceByName(self,name):
+        for dev in TestSuite.devices:
+            if dev.name == name:
+                return dev
 
 
     def printAllTestCases(self):
@@ -40,15 +49,3 @@ class TestSuite:
     def printAllDevices(self):
         for dev in TestSuite.devices:
             dev.displayDevice()
-
-
-    def getTestByName(name):
-        for test in TestSuite.testCases:
-            if test.name == name:
-                return test
-
-
-    def getDeviceByName(name):
-        for dev in TestSuite.devices:
-            if dev.name == name:
-                return dev

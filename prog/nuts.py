@@ -2,8 +2,8 @@
 import sys
 import os
 import getopt
-from application.ValidationController import ValidationController
-from application.TestController import TestController
+from src.application.ValidationController import ValidationController
+from src.application.TestController import TestController
 
 
 
@@ -18,8 +18,8 @@ def main(argv):
             printUsage()
             sys.exit()
         elif opt in ("-v", "--validate"):
-            validater = ValidationController(arg)
-            #Todo
+            validater = ValidationController(os.getcwd() + "/" + arg, os.getcwd() + "/" + args[0])
+            validater.logic()
         elif opt in ("-i", "--input"):
             tester = TestController(os.getcwd() + "/" + arg, os.getcwd() + "/" + args[0])
             tester.logic()

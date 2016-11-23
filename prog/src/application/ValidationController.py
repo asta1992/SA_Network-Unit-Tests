@@ -1,12 +1,13 @@
-from data.TestSuite import TestSuite
-from service.FileHandler import FileHandler
+from src.service.FileValidator import FileValidator
 
 class ValidationController:
 
-    testSuite = TestSuite("ValidationSuite")
     fileHandler = None
 
-    def __init__(self, arg):
-        self.testFile = arg[1]
-        self.devFile = arg[2]
-        ValidationController.fileHandler = FileHandler(ValidationController.testSuite, self.testFile, self.devFile)
+    def __init__(self, testFile, deviceFile):
+        self.testFile = testFile
+        self.devFile = deviceFile
+        self.fileValidator = FileValidator(self.testFile, self.devFile)
+
+    def logic(self):
+        self.fileValidator.validate()
