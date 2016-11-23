@@ -24,4 +24,4 @@ class TestController:
         print("\n\n Start.........")
 
         self.runner.runAll()
-        self.evaluator.compareAll()
+        self.evaluator.printAllResults()

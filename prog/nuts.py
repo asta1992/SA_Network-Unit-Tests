@@ -18,8 +18,14 @@ def main(argv):
             printUsage()
             sys.exit()
         elif opt in ("-v", "--validate"):
-            validater = ValidationController(os.getcwd() + "/" + arg, os.getcwd() + "/" + args[0])
-            validater.logic()
+            validator = ValidationController(os.getcwd() + "/" + arg, os.getcwd() + "/" + args[0], "both")
+            validator.logic()
+        elif opt in ("-v -t", "--validate -t"):
+            validator = ValidationController(os.getcwd() + "/" + arg, "tests")
+            validator.logic()
+        elif opt in ("-v -d", "--validate -d"):
+            validator = ValidationController(os.getcwd() + "/" + arg, "devices")
+            validator.logic()
         elif opt in ("-i", "--input"):
             tester = TestController(os.getcwd() + "/" + arg, os.getcwd() + "/" + args[0])
             tester.logic()
