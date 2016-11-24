@@ -9,8 +9,8 @@ class TestSuite:
     def __init__(self, name):
         TestSuite.name = name
 
-    def createTest(self, name, command, devices, parameter, expectedResult):
-        test = TestCase(name, command, devices, parameter, expectedResult)
+    def createTest(self, name, command, devices, parameter, operator, expectedResult):
+        test = TestCase(name, command, devices, parameter,operator, expectedResult)
         TestSuite.testCases.append(test)
 
 
@@ -42,10 +42,12 @@ class TestSuite:
 
 
     def printAllTestCases(self):
+        print("\nTestCases:")
         for test in TestSuite.testCases:
             test.displayTestCase()
 
 
     def printAllDevices(self):
+        print("\nDevices:")
         for dev in TestSuite.devices:
             dev.displayDevice()

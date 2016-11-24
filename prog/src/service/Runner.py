@@ -29,6 +29,7 @@ class Runner:
 
 
     def runAll(self):
+        print("\n")
         for test in self.testSuite.testCases:
             print("Start Test " + test.name)
             self.run(test)

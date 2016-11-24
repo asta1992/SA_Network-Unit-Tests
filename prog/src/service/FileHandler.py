@@ -16,7 +16,7 @@ class FileHandler:
     def addTests(data, testSuite):
         values = yaml.safe_load(data)
         for val in values:
-            testSuite.createTest(val["name"], val["command"], val["devices"], val["parameter"], val["expected"])
+            testSuite.createTest(val["name"], val["command"], val["devices"], val["parameter"], val["operator"], val["expected"])
 
     @staticmethod
     def addDevices(data, testSuite):

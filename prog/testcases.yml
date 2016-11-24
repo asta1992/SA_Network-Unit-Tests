@@ -1,13 +1,25 @@
+# Ping Test Linux
 - name: Test 1
   command: linuxping
   devices: arch
   parameter: 8.8.8.8
+  operator: '='
   expected: '0'
 
 
-#Test bla bla
+# Bandwidth Test Linux
 - name: Test 2
   command: bandwidth
   devices: arch
   parameter: arch
-  expected: '0'
+  operator: '>'
+  expected: '50000000'
+
+
+# Bandwidth Test Linux
+- name: Test 3
+  command: bandwidth
+  devices: arch
+  parameter: arch
+  operator: '<'
+  expected: '50000000'
