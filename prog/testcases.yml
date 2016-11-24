@@ -7,7 +7,7 @@
 
 #Test bla bla
 - name: Test 2
-  command: linuxping
+  command: bandwidth
   devices: arch
-  parameter: 192.168.0.10
+  parameter: arch
   expected: '0'

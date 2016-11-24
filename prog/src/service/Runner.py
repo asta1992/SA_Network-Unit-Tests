@@ -20,7 +20,7 @@ class Runner:
                 break
             else:
                 if i == 99:
-                    while(proc.poll() != 0):
+                    if proc.poll() != 0:
                         sleep(0.2)
                 sleep(0.1)
                 bar.update(i)
