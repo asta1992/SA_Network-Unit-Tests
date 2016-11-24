@@ -26,11 +26,16 @@ def linuxping(src, dest, os):
     elif os == "ios":
         return True
 
-def showarp(dev):
-    #value=client.cmd(dev, '-r "sh afrp"', 'roster-file: /etc/salt/roster, -i')
-    #return value
-    return 1
-
-
+def bandwidth(server, host, os):
+    if os == "linux":
+        local.cmd(server, 'cmd.run', ['iperf3 -s -D -1'])
+        result = local.cmd(host, 'cmd.run', ['iperf3 -c ' + server])
+        text = bytes(result).decode(encoding="utf-8", errors='ignore')
+        regex = "([0-9.]{4})(\sGbits\/sec)([\s]*receiver)"
+        r = re.compile(regex)
+        m = r.search(text)
+        print(float(m.group(1)))
+        print(float(m.group(1)) * 1000.0 * 1000.0)
+        return float(m.group(1)) *1000.0 *1000.0
 
 
