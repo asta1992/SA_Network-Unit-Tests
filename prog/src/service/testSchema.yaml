@@ -16,6 +16,7 @@ sequence:
         type: str
         required: yes
       "operator":
+        type: str
         required: yes
       "expected":
         type: str

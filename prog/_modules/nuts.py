@@ -9,12 +9,6 @@ __virtualname__ = 'nuts'
 def __virtual__():
     return __virtualname__
 
-def hello(*args, **kwargs):
-    return "hello world"
-
-def ifconfig():
-    return 0
-
 def linuxping(src, dest, os):
     if os == "linux":
         result = local.cmd(src, 'cmd.run', ['ping -c 3 ' + dest])
@@ -34,8 +28,16 @@ def bandwidth(server, host, os):
         regex = "([0-9.]{4})(\sGbits\/sec)([\s]*receiver)"
         r = re.compile(regex)
         m = r.search(text)
-        print(float(m.group(1)))
-        print(float(m.group(1)) * 1000.0 * 1000.0)
         return float(m.group(1)) *1000.0 *1000.0
 
+def dnscheck(src, dst, os):
+    if os == "linux":
+        result = local.cmd(src, 'cmd.run', ['nslookup ' + dst])
+        text = bytes(result).decode(encoding="utf-8", errors='ignore')
+        regex = "(Name:[\s]*[a-z0-9.]*)"
+        r = re.compile(regex)
+        if(r.search(text)):
+           return True
+        else:
+            return False
 
