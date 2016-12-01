@@ -1,10 +1,10 @@
 # Ping Test Linux
 - name: Test 1
-  command: linuxping
+  command: connectivity
   devices: arch
   parameter: 8.8.8.8
   operator: '='
-  expected: '0'
+  expected: 'True'
 
 
 # Bandwidth Test Linux

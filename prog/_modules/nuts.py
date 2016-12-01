@@ -9,14 +9,16 @@ __virtualname__ = 'nuts'
 def __virtual__():
     return __virtualname__
 
-def linuxping(src, dest, os):
+def connectivity(src, dest, os):
     if os == "linux":
         result = local.cmd(src, 'cmd.run', ['ping -c 3 ' + dest])
         text = bytes(result).decode(encoding="utf-8", errors='ignore')
         regex = "([0-9]*)% packet loss"
         r = re.compile(regex)
-        m = r.search(text)
-        return m.group(1)
+        if(r.search(text)):
+           return True
+        else:
+            return False
     elif os == "ios":
         return True
 
