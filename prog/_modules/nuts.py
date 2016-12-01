@@ -15,7 +15,8 @@ def connectivity(src, dest, os):
         text = bytes(result).decode(encoding="utf-8", errors='ignore')
         regex = "([0-9]*)% packet loss"
         r = re.compile(regex)
-        if(r.search(text)):
+        m = r.search(text)
+        if(int(float(m.group(1))) < 100):
            return True
         else:
             return False
@@ -40,6 +41,39 @@ def dnscheck(src, dst, os):
         r = re.compile(regex)
         if(r.search(text)):
            return True
+        else:
+            return False
+
+def dhcpcheck(src, dst, os):
+    if os == "linux":
+        result = local.cmd(src, 'cmd.run', ['dhcping -s ' + dst])
+        text = bytes(result).decode(encoding="utf-8", errors='ignore')
+        regex = "(Got answer)"
+        r = re.compile(regex)
+        if(r.search(text)):
+           return True
+        else:
+            return False
+
+def webresponse(src, dst, os):
+    if os == "linux":
+        result = local.cmd(src, 'cmd.run', ['curl -Is '+ dst + ' | head -n 1'])
+        text = bytes(result).decode(encoding="utf-8", errors='ignore')
+        regex = "(HTTP\/1.1 200 OK)"
+        r = re.compile(regex)
+        if(r.search(text)):
+           return True
+        else:
+            return False
+
+def portresponse(src, port, dst, os):
+    if os == "linux":
+        result = local.cmd(src, 'cmd.run', ['nmap -p '+ str(port) + ' ' + dst])
+        text = bytes(result).decode(encoding="utf-8", errors='ignore')
+        regex = "[0-9]*\/[a-z]* (open)"
+        r = re.compile(regex)
+        if(r.search(text)):
+            return True
         else:
             return False
 
