@@ -1,28 +1,79 @@
 from salt.client.ssh.client import SSHClient
 client = SSHClient()
-import salt
 import salt.client
 local = salt.client.LocalClient()
+import re
 
-__virtualname__ = 'nettest'
+__virtualname__ = 'nuts'
 
 def __virtual__():
     return __virtualname__
 
-def hello(*args, **kwargs):
-    return "hello world"
+def connectivity(src, dest, os):
+    if os == "linux":
+        result = local.cmd(src, 'cmd.run', ['ping -c 3 ' + dest])
+        text = bytes(result).decode(encoding="utf-8", errors='ignore')
+        regex = "([0-9]*)% packet loss"
+        r = re.compile(regex)
+        m = r.search(text)
+        if(int(float(m.group(1))) < 100):
+           return True
+        else:
+            return False
+    elif os == "ios":
+        return True
 
-def ifconfig():
-    return __salt__['cmd.run']('ifconfig')
+def bandwidth(server, host, os):
+    if os == "linux":
+        local.cmd(server, 'cmd.run', ['iperf3 -s -D -1'])
+        result = local.cmd(host, 'cmd.run', ['iperf3 -c ' + server])
+        text = bytes(result).decode(encoding="utf-8", errors='ignore')
+        regex = "([0-9.]{4})(\sGbits\/sec)([\s]*receiver)"
+        r = re.compile(regex)
+        m = r.search(text)
+        return float(m.group(1)) *1000.0 *1000.0
 
-def linuxping(src, dest):
-    return local.cmd(src, 'cmd.run', ['ping -c 3 ' + dest])
+def dnscheck(src, dst, os):
+    if os == "linux":
+        result = local.cmd(src, 'cmd.run', ['nslookup ' + dst])
+        text = bytes(result).decode(encoding="utf-8", errors='ignore')
+        regex = "(Name:[\s]*[a-z0-9.]*)"
+        r = re.compile(regex)
+        if(r.search(text)):
+           return True
+        else:
+            return False
 
-def showarp(dev):
-    #value=client.cmd(dev, '-r "sh afrp"', 'roster-file: /etc/salt/roster, -i')
-    #return value
-    return 1
+def dhcpcheck(src, dst, os):
+    if os == "linux":
+        result = local.cmd(src, 'cmd.run', ['dhcping -s ' + dst])
+        text = bytes(result).decode(encoding="utf-8", errors='ignore')
+        regex = "(Got answer)"
+        r = re.compile(regex)
+        if(r.search(text)):
+           return True
+        else:
+            return False
 
+def webresponse(src, dst, os):
+    if os == "linux":
+        result = local.cmd(src, 'cmd.run', ['curl -Is '+ dst + ' | head -n 1'])
+        text = bytes(result).decode(encoding="utf-8", errors='ignore')
+        regex = "(HTTP\/1.1 200 OK)"
+        r = re.compile(regex)
+        if(r.search(text)):
+           return True
+        else:
+            return False
 
-
+def portresponse(src, port, dst, os):
+    if os == "linux":
+        result = local.cmd(src, 'cmd.run', ['nmap -p '+ str(port) + ' ' + dst])
+        text = bytes(result).decode(encoding="utf-8", errors='ignore')
+        regex = "[0-9]*\/[a-z]* (open)"
+        r = re.compile(regex)
+        if(r.search(text)):
+            return True
+        else:
+            return False
 

@@ -1,0 +1,11 @@
+- name: arch
+  os: linux
+  ipAddress: 127.0.0.1
+  username: arch
+  password: 1234a
+
+- name: switch1
+  os: ios
+  ipAddress: 152.96.9.1
+  username: cisco
+  password: cisco
