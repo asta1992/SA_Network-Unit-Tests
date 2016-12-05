@@ -1,0 +1,19 @@
+###
+show arp
+<?xml version="1.0" encoding="UTF-8"?>
+<ODMSpec>
+<SpecVersion>built-in</SpecVersion>
+<Command><Name>show arp</Name></Command>
+<DataModel>
+<Container name="ShowArp">
+<Table name="ARPtable">
+<Header name="Protocol" type="String" start="0" end="9"/>
+<Header name="Address" type="IpAddress" start="10" end="26"/>
+<Header name="Age (min)" type="String" start="27" end="37"/>
+<Header name="Hardware Addr" type="String" start="38" end="53"/>
+<Header name="Type" type="String" start="54" end="60"/>
+<Header name="Interface" type="String" start="61" end="-1"/>
+</Table>
+</Container>
+</DataModel>
+</ODMSpec>
