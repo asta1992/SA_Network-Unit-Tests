@@ -14,13 +14,24 @@ class TestSuite:
         TestSuite.testCases.append(test)
 
 
-    def createDevice(self, name, os, ipAddress, username, password):
-        dev = Device(name, os, ipAddress, username, password)
+    def createDevice(self, name, os, destination, loginRequired, username, password):
+        dev = Device(name, os, destination, loginRequired, username, password)
         TestSuite.devices.append(dev)
 
     def getDeviceOS(self, testCase):
         return self.getDeviceByName(testCase.devices).os
 
+    def getLoginRequired(self, testCase):
+        return self.getDeviceByName(testCase.devices).loginRequired
+
+    def getUsername(self, testCase):
+        return self.getDeviceByName(testCase.devices).username
+
+    def getPassword(self, testCase):
+        return self.getDeviceByName(testCase.devices).password
+
+    def getDeviceDestination(self, testCase):
+        return self.getDeviceByName(testCase.devices).destination
 
     def setActualResult(self, testCase, actualResult):
        self.getTestByName(testCase.name).setActualResult(actualResult)

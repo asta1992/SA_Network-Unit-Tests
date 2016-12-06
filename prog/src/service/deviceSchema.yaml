@@ -6,8 +6,11 @@ sequence:
       "os":
         type: str
         required: yes
-      "ipAddress":
+      "destination":
         type: str
+        required: yes
+      "loginRequired":
+        type: bool
         required: yes
       "username":
         type: str

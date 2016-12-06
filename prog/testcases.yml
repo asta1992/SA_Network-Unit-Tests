@@ -2,47 +2,63 @@
 - name: Test 1
   command: connectivity
   devices: arch
-  parameter: 8.8.8.8
+  parameter: [8.8.8.8]
   operator: '='
-  expected: 'True'
+  expected: True
 
 
 # Bandwidth Test Linux
-#- name: Test 2
-#  command: bandwidth
-#  devices: arch
-#  parameter: arch
-#  operator: '>'
-#  expected: '50000000'
+- name: Test 2
+  command: bandwidth
+  devices: arch
+  parameter: [arch]
+  operator: '>'
+  expected: 50000000
 
 # Dns Check Test Linux
-#- name: Test 3
-#  command: dnscheck
-#  devices: arch
-#  parameter: google.ch
-#  operator: '='
-#  expected: 'True'
+- name: Test 3
+  command: dnscheck
+  devices: arch
+  parameter: [google.ch]
+  operator: '='
+  expected: True
 
 # DHCP Check Test Linux
-#- name: Test 4
-#  command: dhcpcheck
-#  devices: arch
-#  parameter: 152.96.232.1
-#  operator: '='
-#  expected: 'False'
+- name: Test 4
+  command: dhcpcheck
+  devices: arch
+  parameter: [152.96.232.1]
+  operator: '='
+  expected: False
 
 # Web Response Test Linux
-#- name: Test 5
-#  command: webresponse
-#  devices: arch
-#  parameter: 'www.googrle.ch'
-#  operator: '='
-#  expected: 'True'
+- name: Test 5
+  command: webresponse
+  devices: arch
+  parameter: ['www.google.ch']
+  operator: '='
+  expected: True
 
-# Web Response Test Linux
+# Port Response Test Linux
 - name: Test 6
   command: portresponse
   devices: arch
-  parameter: '1335 152.96.9.55'
+  parameter: ["1335,2341,4500-4510", arch]
   operator: '='
-  expected: 'True'
+  expected: ['4505', '4506']
+
+# Arista User Test Linux
+- name: Test 7
+  command: checkuser
+  devices: arista
+  parameter: []
+  operator: '='
+  expected: ['admin', 'eapi']
+
+# Arista Version Test Linux
+- name: Test 8
+  command: checkversion
+  devices: arista
+  parameter: []
+  operator: '='
+  expected: '4.14.1M'

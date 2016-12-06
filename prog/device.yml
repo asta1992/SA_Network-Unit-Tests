@@ -1,11 +1,20 @@
 - name: arch
   os: linux
-  ipAddress: 127.0.0.1
+  destination: arch
+  loginRequired: False
   username: arch
   password: 1234a
 
 - name: switch1
   os: ios
-  ipAddress: 152.96.9.1
+  destination: 152.96.9.1
+  loginRequired: True
   username: cisco
   password: cisco
+
+- name: arista
+  os: arista
+  destination: 192.168.43.120
+  loginRequired: True
+  username: eapi
+  password: password

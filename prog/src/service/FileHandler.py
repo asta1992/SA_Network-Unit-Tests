@@ -22,7 +22,7 @@ class FileHandler:
     def addDevices(data, testSuite):
         values = yaml.safe_load(data)
         for val in values:
-            testSuite.createDevice(val["name"], val["os"], val["ipAddress"], val["username"], val["password"])
+            testSuite.createDevice(val["name"], val["os"], val["destination"], val["loginRequired"], val["username"], val["password"])
 
     def readFile(self, file, type):
         try:

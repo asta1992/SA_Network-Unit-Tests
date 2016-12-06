@@ -1,5 +1,6 @@
 import subprocess
 import progressbar
+import json
 from time import sleep
 
 class Runner:
@@ -9,8 +10,17 @@ class Runner:
 
 
     def run(self, testCase):
+        param = ""
         bar = progressbar.ProgressBar(maxval=20, widgets=[progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()])
-        proc = subprocess.Popen(['salt-call ' + "nuts." + testCase.command + " " + testCase.devices + " " + testCase.parameter + " " + self.testSuite.getDeviceOS(testCase)], stdout=subprocess.PIPE, shell=True)
+        for parameter in testCase.parameter:
+            param += " " + parameter
+
+        if self.testSuite.getLoginRequired(testCase):
+            proc = subprocess.Popen(['salt-call ' + "nuts." + testCase.command + " " + self.testSuite.getDeviceDestination(testCase) + " " + param + " " + self.testSuite.getDeviceOS(testCase) + " " + self.testSuite.getUsername(testCase) + " " + self.testSuite.getPassword(testCase)], stdout=subprocess.PIPE, shell=True)
+        else:
+            proc = subprocess.Popen(['salt-call ' + "nuts." + testCase.command + " " + self.testSuite.getDeviceDestination(testCase) + " " + param + " " + self.testSuite.getDeviceOS(testCase)], stdout=subprocess.PIPE, shell=True)
+
+
         for i in bar(range(100)):
             if proc.poll() == 0:
                 bar.update(100)
@@ -24,8 +34,13 @@ class Runner:
                         sleep(0.2)
                 sleep(0.1)
                 bar.update(i)
+
+
         result = proc.communicate()
-        self.testSuite.setActualResult(testCase, result[0].split( )[1].decode('utf-8'))
+        start = result[0].decode('utf-8').index('{')
+        end = result[0].decode('utf-8').index('}') + 1
+        json_data = json.loads(result[0].decode('utf-8')[start:end])
+        self.testSuite.setActualResult(testCase, json_data)
 
 
     def runAll(self):
