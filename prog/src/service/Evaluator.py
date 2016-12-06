@@ -23,27 +23,39 @@ class Evaluator:
 
 
     def printResult(self, testCase):
-        res = ""
-        exp = ""
+        if self.compare(testCase):
+            print('\033[92m' + testCase.name + ": Test bestanden ------------------------- \033[0m\nExpected: " + str(self.getExpected(testCase)) + " " + testCase.operator +  " Actual: " + str(self.getResult(testCase)))
+            self.writeLog(testCase, self.getResult(testCase), self.getExpected(testCase), True)
+        else:
+            print('\033[91m' + testCase.name + ": Test nicht bestanden -------------------\033[0m\nExpected: " + str(self.getExpected(testCase)) + " " + testCase.operator + " Actual: " + str(self.getResult(testCase)))
+            self.writeLog(testCase, self.getResult(testCase), self.getExpected(testCase), False)
+
+
+    def getResult(self, testCase):
+        res = ''
         if testCase.actualResult["resulttype"] == "single":
             res = testCase.actualResult["result"]
+        elif testCase.actualResult["resulttype"] == "multiple":
+            res = ' '.join(testCase.actualResult["result"])
+        return res
+
+    def getExpected(self, testCase):
+        exp = ''
+        if testCase.actualResult["resulttype"] == "single":
             exp = testCase.expectedResult
         elif testCase.actualResult["resulttype"] == "multiple":
-            for result in testCase.actualResult["result"]:
-                res += result + " "
-            for expected in testCase.expectedResult:
-                exp += expected + " "
+            exp = ' '.join(testCase.expectedResult)
+        return exp
 
-        if self.compare(testCase):
-            print('\033[92m' + testCase.name + ": Test bestanden ------------------------- \033[0m\nExpected: " + str(exp) + " " + testCase.operator +  " Actual: " + str(res))
-            result = testCase.name + ": Test bestanden ------------------------- \nExpected: " + str(exp) + " " + testCase.operator + " \nActual:  "+ str(res)
+
+    def writeLog(self, testCase, res, exp, passed):
+        if passed:
+            result = '\n' + testCase.name + ": Test bestanden ------------------------- \nExpected: " + str(exp) + " " + testCase.operator + " Actual:  " + str(res)
         else:
-            print('\033[91m' + testCase.name + ": Test nicht bestanden -------------------\033[0m\nExpected: " + str(exp) + " " + testCase.operator + " Actual: " + str(res))
-            result = testCase.name + ": Test nicht bestanden ------------------- \nExpected: " + str(exp) + " " + testCase.operator + " \nActual:  "+ str(res)
+            result = '\n' + testCase.name + ": Test nicht bestanden ------------------- \nExpected: " + str(exp) + " " + testCase.operator + " Actual:  " + str(res)
 
         with open('/var/log/nuts/' + self.testSuite.name + ' - ' + self.date, 'a') as logfile:
             logfile.write(result)
-
 
     def printAllResults(self):
         for test in self.testSuite.testCases:

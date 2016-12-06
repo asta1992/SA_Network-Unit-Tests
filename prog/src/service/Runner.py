@@ -10,15 +10,12 @@ class Runner:
 
 
     def run(self, testCase):
-        param = ""
         bar = progressbar.ProgressBar(maxval=20, widgets=[progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()])
-        for parameter in testCase.parameter:
-            param += " " + parameter
 
         if self.testSuite.getLoginRequired(testCase):
-            proc = subprocess.Popen(['salt-call ' + "nuts." + testCase.command + " " + self.testSuite.getDeviceDestination(testCase) + " " + param + " " + self.testSuite.getDeviceOS(testCase) + " " + self.testSuite.getUsername(testCase) + " " + self.testSuite.getPassword(testCase)], stdout=subprocess.PIPE, shell=True)
+            proc = subprocess.Popen(['salt-call ' + "nuts." + testCase.command + " " + self.testSuite.getDeviceDestination(testCase) + " " + ' '.join(testCase.parameter) + " " + self.testSuite.getDeviceOS(testCase) + " " + self.testSuite.getUsername(testCase) + " " + self.testSuite.getPassword(testCase)], stdout=subprocess.PIPE, shell=True)
         else:
-            proc = subprocess.Popen(['salt-call ' + "nuts." + testCase.command + " " + self.testSuite.getDeviceDestination(testCase) + " " + param + " " + self.testSuite.getDeviceOS(testCase)], stdout=subprocess.PIPE, shell=True)
+            proc = subprocess.Popen(['salt-call ' + "nuts." + testCase.command + " " + self.testSuite.getDeviceDestination(testCase) + " " + ' '.join(testCase.parameter) + " " + self.testSuite.getDeviceOS(testCase)], stdout=subprocess.PIPE, shell=True)
 
 
         for i in bar(range(100)):
@@ -36,11 +33,9 @@ class Runner:
                 bar.update(i)
 
 
-        result = proc.communicate()
-        start = result[0].decode('utf-8').index('{')
-        end = result[0].decode('utf-8').index('}') + 1
-        json_data = json.loads(result[0].decode('utf-8')[start:end])
-        self.testSuite.setActualResult(testCase, json_data)
+        result = proc.communicate()[0].decode('utf-8')
+
+        self.testSuite.setActualResult(testCase, json.loads(result[result.index('{'):(result.index('}') + 1)]))
 
 
     def runAll(self):
