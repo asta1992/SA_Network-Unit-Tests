@@ -138,87 +138,11 @@ show spanning-tree vlan *
 	</DataModel>
 </ODMSpec>
 ###
-show spanning-tree interface FastEthernet*/*
+show spanning-tree interface *
 <?xml version="1.0" encoding="UTF-8"?>
 <ODMSpec>
 	<SpecVersion>built-in</SpecVersion>
-	<Command><Name>show spanning-tree interface FastEthernet*/*</Name></Command>
-	<DataModel>
-		<Container name="ShowSpanningtree">
-			<Table name="InterfaceProperties">
-				<Header name="Vlan" type="String" start="0" end="18"/>
-				<Header name="Role" type="String" start="20" end="23"/>
-				<Header name="Sts" type="String" start="25" end="27"/>
-				<Header name="Cost" type="String" start="29" end="37"/>
-				<Header name="Prio.Nbr" type="String" start="39" end="46"/>
-				<Header name="Type" type="String" start="48" end="79"/>
-			</Table>
-		</Container>
-	</DataModel>
-</ODMSpec>
-###
-show spanning-tree interface FastEthernet*/*/*
-<?xml version="1.0" encoding="UTF-8"?>
-<ODMSpec>
-	<SpecVersion>built-in</SpecVersion>
-	<Command><Name>show spanning-tree interface FastEthernet*/*/*</Name></Command>
-	<DataModel>
-		<Container name="ShowSpanningtree">
-			<Table name="InterfaceProperties">
-				<Header name="Vlan" type="String" start="0" end="18"/>
-				<Header name="Role" type="String" start="20" end="23"/>
-				<Header name="Sts" type="String" start="25" end="27"/>
-				<Header name="Cost" type="String" start="29" end="37"/>
-				<Header name="Prio.Nbr" type="String" start="39" end="46"/>
-				<Header name="Type" type="String" start="48" end="79"/>
-			</Table>
-		</Container>
-	</DataModel>
-</ODMSpec>
-###
-show spanning-tree interface GigabitEthernet*/*
-<?xml version="1.0" encoding="UTF-8"?>
-<ODMSpec>
-	<SpecVersion>built-in</SpecVersion>
-	<Command><Name>show spanning-tree interface GigabitEthernet*/*</Name></Command>
-	<DataModel>
-		<Container name="ShowSpanningtree">
-			<Table name="InterfaceProperties">
-				<Header name="Vlan" type="String" start="0" end="18"/>
-				<Header name="Role" type="String" start="20" end="23"/>
-				<Header name="Sts" type="String" start="25" end="27"/>
-				<Header name="Cost" type="String" start="29" end="37"/>
-				<Header name="Prio.Nbr" type="String" start="39" end="46"/>
-				<Header name="Type" type="String" start="48" end="79"/>
-			</Table>
-		</Container>
-	</DataModel>
-</ODMSpec>
-###
-show spanning-tree interface TenGigabitEthernet*/*
-<?xml version="1.0" encoding="UTF-8"?>
-<ODMSpec>
-	<SpecVersion>built-in</SpecVersion>
-	<Command><Name>show spanning-tree interface TenGigabitEthernet*/*</Name></Command>
-	<DataModel>
-		<Container name="ShowSpanningtree">
-			<Table name="InterfaceProperties">
-				<Header name="Vlan" type="String" start="0" end="18"/>
-				<Header name="Role" type="String" start="20" end="23"/>
-				<Header name="Sts" type="String" start="25" end="27"/>
-				<Header name="Cost" type="String" start="29" end="37"/>
-				<Header name="Prio.Nbr" type="String" start="39" end="46"/>
-				<Header name="Type" type="String" start="48" end="79"/>
-			</Table>
-		</Container>
-	</DataModel>
-</ODMSpec>
-###
-show spanning-tree interface TenGigabitEthernet*/*/*
-<?xml version="1.0" encoding="UTF-8"?>
-<ODMSpec>
-	<SpecVersion>built-in</SpecVersion>
-	<Command><Name>show spanning-tree interface TenGigabitEthernet*/*/*</Name></Command>
+	<Command><Name>show spanning-tree interface *</Name></Command>
 	<DataModel>
 		<Container name="ShowSpanningtree">
 			<Table name="InterfaceProperties">
@@ -248,13 +172,13 @@ show spanning-tree blockedports
 	</DataModel>
 </ODMSpec>
 ###
-show vlan id *
+show vlan
 <?xml version="1.0" encoding="UTF-8"?>
 <ODMSpec>
 	<SpecVersion>built-in</SpecVersion>
-	<Command><Name>show vlan id *</Name></Command>
+	<Command><Name>show vlan</Name></Command>
 	<DataModel>
-		<Container name="ShowVlanInformation">
+		<Container name="ShowVlan">
 			<Table name="Vlan">
 					<Header name="VLAN" type="String" start="0" end="3"/>
 					<Header name="Name" type="String" start="5" end="36"/>
@@ -264,4 +188,40 @@ show vlan id *
 		</Container>
 	</DataModel>
 </ODMSpec>
-
+###
+show vlan id *
+<?xml version="1.0" encoding="UTF-8"?>
+<ODMSpec>
+	<SpecVersion>built-in</SpecVersion>
+	<Command><Name>show vlan id *</Name></Command>
+	<DataModel>
+		<Container name="ShowVlanInformation">
+			<Table name="Vlan">
+				<Header name="VLAN" type="String" start="0" end="3"/>
+				<Header name="Name" type="String" start="5" end="36"/>
+				<Header name="Status" type="String" start="38" end="46"/>
+				<Header name="Ports" type="String" start="48" end="-1"/>
+			</Table>
+		</Container>
+	</DataModel>
+</ODMSpec>
+###
+show interfaces status
+<?xml version="1.0" encoding="UTF-8"?>
+<ODMSpec>
+	<SpecVersion>built-in</SpecVersion>
+	<Command><Name>show interfaces status</Name></Command>
+	<DataModel>
+		<Container name="ShowInterfacesStatus">
+			<Table name="InterfacesStatus">
+				<Header name="Port" type="String" start="0" end="8"/>
+				<Header name="Name" type="String" start="10" end="27"/>
+				<Header name="Status" type="String" start="29" end="40"/>
+				<Header name="Vlan" type="String" start="42" end="51"/>
+				<Header name="Duplex" type="String" start="53" end="59"/>
+				<Header name="Speed" type="String" start="61" end="65"/>
+				<Header name="Type" type="String" start="67" end="-1"/>
+			</Table>
+		</Container>
+	</DataModel>
+</ODMSpec>
