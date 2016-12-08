@@ -17,7 +17,6 @@ class Runner:
         else:
             proc = subprocess.Popen(['salt-call ' + "nuts." + testCase.command + " " + self.testSuite.getDeviceDestination(testCase) + " " + ' '.join(testCase.parameter) + " " + self.testSuite.getDeviceOS(testCase)], stdout=subprocess.PIPE, shell=True)
 
-
         for i in bar(range(100)):
             if proc.poll() == 0:
                 bar.update(100)
@@ -31,7 +30,6 @@ class Runner:
                         sleep(0.2)
                 sleep(0.1)
                 bar.update(i)
-
 
         result = proc.communicate()[0].decode('utf-8')
 

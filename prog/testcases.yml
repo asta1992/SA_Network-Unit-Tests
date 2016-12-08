@@ -46,19 +46,3 @@
   parameter: ["1335,2341,4500-4510", arch]
   operator: '='
   expected: ['4505', '4506']
-
-# Arista User Test Linux
-- name: Test 7
-  command: checkuser
-  devices: arista
-  parameter: []
-  operator: '='
-  expected: ['admin', 'eapi']
-
-# Arista Version Test Linux
-- name: Test 8
-  command: checkversion
-  devices: arista
-  parameter: []
-  operator: '='
-  expected: '4.14.1M'

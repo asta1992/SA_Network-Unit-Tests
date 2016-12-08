@@ -1,0 +1,44 @@
+# Cisco User Test
+- name: Test 0
+  command: checkversion
+  devices: DS1
+  parameter: []
+  operator: '='
+  expected: '12.2'
+
+
+# Cisco User Test
+- name: Test 1
+  command: checkuser
+  devices: DS1
+  parameter: []
+  operator: '='
+  expected: ['admin']
+
+# Cisco User Test
+- name: Test 2
+  command: checkospfneighborsstatus
+  devices: DS1
+  parameter: []
+  operator: '='
+  expected: ['10.0.2.1:FULL/DR', '10.0.0.6:FULL/BDR']
+
+# Cisco User Test
+- name: Test 3
+  command: checkospfneighbors
+  devices: DS1
+  parameter: []
+  operator: '='
+  expected: ['10.0.2.1', '10.0.0.6']
+
+# Cisco User Test
+- name: Test 4
+  command: countospfneighbors
+  devices: DS1
+  parameter: []
+  operator: '='
+  expected: 2
+
+
+
+

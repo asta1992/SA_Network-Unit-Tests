@@ -5,12 +5,12 @@
   username: arch
   password: 1234a
 
-- name: switch1
+- name: DS1
   os: ios
-  destination: 152.96.9.1
+  destination: DS1
   loginRequired: True
-  username: cisco
-  password: cisco
+  username: admin
+  password: '12345678'
 
 - name: arista
   os: arista
