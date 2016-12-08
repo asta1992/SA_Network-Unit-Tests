@@ -14,6 +14,25 @@ __virtualname__ = 'nuts'
 def __virtual__():
     return __virtualname__
 
+def getCiscoXML(dst, param, cmd, attribut):
+    value = local.cmd("arch", 'cmd.run', [
+        "salt-ssh " + dst + " -i -r '" + cmd + " " + str(param) + " " + attribut + " | format flash:nuts.odm' --roster-file=/etc/salt/roster"])
+    xml = value['arch'][value['arch'].index('<'):len(value['arch'])]
+    return ET.fromstring(xml)
+
+def returnMultiple(result):
+    json_data = {}
+    json_data["result"] = result
+    json_data["resulttype"] = "multiple"
+    return json.dumps(json_data)
+
+def returnSingle(result):
+    json_data = {}
+    json_data["result"] = result
+    json_data["resulttype"] = "single"
+    return json.dumps(json_data)
+
+
 def connectivity(dst, param, os, user, password):
     json_data = {}
     if os == "linux":
@@ -198,19 +217,194 @@ def checkospfneighborsstatus(dst, os, user, pwd):
         print('Not Implemented')
 
 
-def routingpath(dst, os, user, pwd):
-    cmd = '<< EOF' \
-          ' tclsh\n' \
-          'ios_config "ip sla 10"\n' \
-          'ios_config "ip sla 10" "path-echo 10.0.1.201"\n' \
-          'ios_config "ip sla schedule 10 start-time now life 0"\n' \
-          'ios_config "do sh ip sla statistics 10"\n' \
-          'EOF'
-
-    son_data = {}
+def stpinterfacestate(dst, param, os, user, pwd):
+    json_data = {}
     resultList = []
     if os == 'ios':
-        value = local.cmd("arch", 'cmd.run', ["salt-ssh " + dst + " -i -r "+ cmd +" --roster-file=/etc/salt/roster"])
-        print(cmd)
-        print(value)
+        value = local.cmd("arch", 'cmd.run', ["salt-ssh " + dst + " -i -r 'sh spanning-tree interface " + param + " | format flash:nuts.odm' --roster-file=/etc/salt/roster"])
+        xml = value['arch'][value['arch'].index('<'):len(value['arch'])]
+        tree = ET.fromstring(xml)
+        for id in tree.iter(tag='{ODM://flash:nuts.odm//show_spanning-tree_interface_*}entry'):
+            resultList.append(id.find('{ODM://flash:nuts.odm//show_spanning-tree_interface_*}Vlan').text + ":" + id.find('{ODM://flash:nuts.odm//show_spanning-tree_interface_*}Sts').text)
+        json_data["result"] = resultList
+        json_data["resulttype"] = "multiple"
+        return json.dumps(json_data)
+    elif os == 'arista':
+        print('Not Implemented')
 
+def stpinterfacerole(dst, param, os, user, pwd):
+    json_data = {}
+    resultList = []
+    if os == 'ios':
+        value = local.cmd("arch", 'cmd.run', ["salt-ssh " + dst + " -i -r 'sh spanning-tree interface " + param + " | format flash:nuts.odm' --roster-file=/etc/salt/roster"])
+        xml = value['arch'][value['arch'].index('<'):len(value['arch'])]
+        tree = ET.fromstring(xml)
+        for id in tree.iter(tag='{ODM://flash:nuts.odm//show_spanning-tree_interface_*}entry'):
+            resultList.append(id.find('{ODM://flash:nuts.odm//show_spanning-tree_interface_*}Vlan').text + ":" + id.find('{ODM://flash:nuts.odm//show_spanning-tree_interface_*}Role').text)
+        json_data["result"] = resultList
+        json_data["resulttype"] = "multiple"
+        return json.dumps(json_data)
+    elif os == 'arista':
+        print('Not Implemented')
+
+def stpinterfacecost(dst, param, os, user, pwd):
+    json_data = {}
+    resultList = []
+    if os == 'ios':
+        value = local.cmd("arch", 'cmd.run', [
+            "salt-ssh " + dst + " -i -r 'sh spanning-tree interface " + param + " | format flash:nuts.odm' --roster-file=/etc/salt/roster"])
+        xml = value['arch'][value['arch'].index('<'):len(value['arch'])]
+        tree = ET.fromstring(xml)
+        for id in tree.iter(tag='{ODM://flash:nuts.odm//show_spanning-tree_interface_*}entry'):
+            resultList.append(
+                id.find('{ODM://flash:nuts.odm//show_spanning-tree_interface_*}Vlan').text + ":" + id.find('{ODM://flash:nuts.odm//show_spanning-tree_interface_*}Cost').text)
+        json_data["result"] = resultList
+        json_data["resulttype"] = "multiple"
+        return json.dumps(json_data)
+    elif os == 'arista':
+        print('Not Implemented')
+
+
+def stprootid(dst, param, os, user, pwd):
+    json_data = {}
+    resultList = []
+    if os == 'ios':
+        value = local.cmd("arch", 'cmd.run', [
+            "salt-ssh " + dst + " -i -r 'sh spanning-tree root | format flash:nuts.odm' --roster-file=/etc/salt/roster"])
+        xml = value['arch'][value['arch'].index('<'):len(value['arch'])]
+        tree = ET.fromstring(xml)
+        for id in tree.iter(tag='{ODM://flash:nuts.odm//show_spanning-tree_root}entry'):
+            resultList.append(
+                id.find('{ODM://flash:nuts.odm//show_spanning-tree_root}Vlan').text + ":" + id.find('{ODM://flash:nuts.odm//show_spanning-tree_root}RootID').text.split(' ')[1])
+        json_data["result"] = resultList
+        json_data["resulttype"] = "multiple"
+        return json.dumps(json_data)
+    elif os == 'arista':
+        print('Not Implemented')
+
+def stprootcost(dst, param, os, user, pwd):
+    json_data = {}
+    resultList = []
+    if os == 'ios':
+        value = local.cmd("arch", 'cmd.run', [
+            "salt-ssh " + dst + " -i -r 'sh spanning-tree root | format flash:nuts.odm' --roster-file=/etc/salt/roster"])
+        xml = value['arch'][value['arch'].index('<'):len(value['arch'])]
+        tree = ET.fromstring(xml)
+        for id in tree.iter(tag='{ODM://flash:nuts.odm//show_spanning-tree_root}entry'):
+            resultList.append(
+                id.find('{ODM://flash:nuts.odm//show_spanning-tree_root}Vlan').text + ":" + id.find('{ODM://flash:nuts.odm//show_spanning-tree_root}Cost').text)
+        json_data["result"] = resultList
+        json_data["resulttype"] = "multiple"
+        return json.dumps(json_data)
+    elif os == 'arista':
+        print('Not Implemented')
+
+def stpvlaninterfaces(dst, param, os, user, pwd):
+    json_data = {}
+    resultList = []
+    if os == 'ios':
+        value = local.cmd("arch", 'cmd.run', [
+            "salt-ssh " + dst + " -i -r 'sh spanning-tree vlan " + str(param) + " | format flash:nuts.odm' --roster-file=/etc/salt/roster"])
+        xml = value['arch'][value['arch'].index('<'):len(value['arch'])]
+        tree = ET.fromstring(xml)
+        for id in tree.iter(tag='{ODM://flash:nuts.odm//show_spanning-tree_vlan_*}entry'):
+            resultList.append(
+                id.find('{ODM://flash:nuts.odm//show_spanning-tree_vlan_*}Interface').text)
+        json_data["result"] = resultList
+        json_data["resulttype"] = "multiple"
+        return json.dumps(json_data)
+    elif os == 'arista':
+        print('Not Implemented')
+
+def stpvlanblockedports(dst, param, os, user, pwd):
+    resultList = []
+    if os == 'ios':
+        tree = getCiscoXML(dst, param, "sh spanning-tree blockedports")
+        for id in tree.iter(tag='{ODM://flash:nuts.odm//show_spanning-tree_blockedports}entry'):
+            resultList.append(id.find('{ODM://flash:nuts.odm//show_spanning-tree_blockedports}Name').text + ":" + id.find('{ODM://flash:nuts.odm//show_spanning-tree_blockedports}BlockedInterfacesList').text)
+        return returnMultiple(resultList)
+    elif os == 'arista':
+        print('Not Implemented')
+
+def vlanports(dst, param, os, user, pwd):
+    resultList = []
+    if os == 'ios':
+        tree = getCiscoXML(dst, param, "sh vlan id ")
+        for id in tree.iter(tag='{ODM://flash:nuts.odm//show_vlan_id_*}entry'):
+            resultList.append(id.find('{ODM://flash:nuts.odm//show_spanning-tree_blockedports}Ports').text)
+        return returnMultiple(resultList)
+    elif os == 'arista':
+        print('Not Implemented')
+
+def interfacestatus(dst, param, os, user, pwd):
+    result = ""
+    if os == 'ios':
+        tree = getCiscoXML(dst, param, "sh interface", " status")
+        for id in tree.iter(tag='{ODM://flash:nuts.odm//show_interface_*_status}entry'):
+            result = (id.find('{ODM://flash:nuts.odm//show_interface_*_status}Status').text)
+        return returnSingle(result)
+    elif os == 'arista':
+        print('Not Implemented')
+
+def interfacevlan(dst, param, os, user, pwd):
+    result = ""
+    if os == 'ios':
+        tree = getCiscoXML(dst, param, "sh interface", " status")
+        for id in tree.iter(tag='{ODM://flash:nuts.odm//show_interface_*_status}entry'):
+            result = (id.find('{ODM://flash:nuts.odm//show_interface_*_status}Vlan').text)
+        return returnSingle(result)
+    elif os == 'arista':
+        print('Not Implemented')
+
+def interfaceduplex(dst, param, os, user, pwd):
+    result = ""
+    if os == 'ios':
+        tree = getCiscoXML(dst, param, "sh interface", " status")
+        for id in tree.iter(tag='{ODM://flash:nuts.odm//show_interface_*_status}entry'):
+            result = (id.find('{ODM://flash:nuts.odm//show_interface_*_status}Duplex').text)
+        return returnSingle(result)
+    elif os == 'arista':
+        print('Not Implemented')
+
+def interfacespeed(dst, param, os, user, pwd):
+    result = ""
+    if os == 'ios':
+        tree = getCiscoXML(dst, param, "sh interface", " status")
+        for id in tree.iter(tag='{ODM://flash:nuts.odm//show_interface_*_status}entry'):
+            result = (id.find('{ODM://flash:nuts.odm//show_interface_*_status}Speed').text)
+        return returnSingle(result)
+    elif os == 'arista':
+        print('Not Implemented')
+
+def cdpneighbor(dst, param, os, user, pwd):
+    result = ""
+    if os == 'ios':
+        tree = getCiscoXML(dst, param, "sh cdp neighbors", "")
+        for id in tree.iter(tag='{ODM://flash:nuts.odm//show_cdp_neighbors_*}entry'):
+            result = (id.find('{ODM://flash:nuts.odm//show_cdp_neighbors_*}DeviceID').text)
+        return returnSingle(result)
+    elif os == 'arista':
+        print('Not Implemented')
+
+def cdpneighborcount(dst, param, os, user, pwd):
+    if os == 'ios':
+        tree = getCiscoXML(dst, "", "sh cdp neighbors", "")
+        i = 0
+        for id in tree.iter(tag='{ODM://flash:nuts.odm//show_cdp_neighbors}entry'):
+            i += 1
+        return returnSingle(i)
+    elif os == 'arista':
+        print('Not Implemented')
+
+def arp(dst, param, os, user, pwd):
+    resultList= []
+    if os == 'ios':
+        tree = getCiscoXML(dst, "", "sh arp", "")
+        for id in tree.iter(tag='{ODM://flash:nuts.odm//show_arp}entry'):
+            if id.find('{ODM://flash:nuts.odm//show_arp}Address').text == param:
+                resultList.append(param + ":" + id.find('{ODM://flash:nuts.odm//show_arp}HardwareAddr').text)
+                return returnMultiple(resultList)
+        resultList.append(param + ":-")
+        return returnMultiple(resultList)
+    elif os == 'arista':
+        print('Not Implemented')
