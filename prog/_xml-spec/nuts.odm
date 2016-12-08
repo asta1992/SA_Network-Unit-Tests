@@ -56,6 +56,25 @@ show cdp neighbors
 	</DataModel>
 </ODMSpec>
 ###
+show cdp neighbors *
+<?xml version="1.0" encoding="UTF-8"?>
+<ODMSpec>
+	<SpecVersion>built-in</SpecVersion>
+	<Command><Name>show cdp neighbors *</Name></Command>
+	<DataModel>
+		<Container name="ShowCdpNeighbors">
+			<Table name="CdpNeighborsTable">
+				<Header name="Device ID" type="String" start="0" end="16"/>
+				<Header name="Local Intrfce" type="String" start="17" end="34"/>
+				<Header name="Holdtme" type="String" start="35" end="45"/>
+				<Header name="Capability" type="String" start="46" end="57"/>
+				<Header name="Platform" type="String" start="58" end="67"/> 
+				<Header name="Port ID" type="String" start="68" end="-1"/>
+			</Table>
+		</Container>
+	</DataModel>
+</ODMSpec>
+###
 show spanning-tree
 <?xml version="1.0" encoding="UTF-8"?>
 <ODMSpec>
@@ -211,6 +230,26 @@ show interfaces status
 <ODMSpec>
 	<SpecVersion>built-in</SpecVersion>
 	<Command><Name>show interfaces status</Name></Command>
+	<DataModel>
+		<Container name="ShowInterfacesStatus">
+			<Table name="InterfacesStatus">
+				<Header name="Port" type="String" start="0" end="8"/>
+				<Header name="Name" type="String" start="10" end="27"/>
+				<Header name="Status" type="String" start="29" end="40"/>
+				<Header name="Vlan" type="String" start="42" end="51"/>
+				<Header name="Duplex" type="String" start="53" end="59"/>
+				<Header name="Speed" type="String" start="61" end="65"/>
+				<Header name="Type" type="String" start="67" end="-1"/>
+			</Table>
+		</Container>
+	</DataModel>
+</ODMSpec>
+###
+show interface * status
+<?xml version="1.0" encoding="UTF-8"?>
+<ODMSpec>
+	<SpecVersion>built-in</SpecVersion>
+	<Command><Name>show interface * status</Name></Command>
 	<DataModel>
 		<Container name="ShowInterfacesStatus">
 			<Table name="InterfacesStatus">
