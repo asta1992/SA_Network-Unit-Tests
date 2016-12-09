@@ -13,4 +13,4 @@
   devices: arista
   parameter: []
   operator: '='
-  expected: '4.14.1M'
+  expected: '4.14.16M'

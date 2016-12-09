@@ -6,7 +6,6 @@
   operator: '='
   expected: '12.2'
 
-
 # Cisco User Test
 - name: Test 1
   command: checkuser
@@ -24,7 +23,7 @@
   expected: ['10.0.2.1:FULL/DR', '10.0.0.6:FULL/BDR']
 
 # Cisco User Test
-- name: Test 3
+- name: Ospf Neighbors DS1
   command: checkospfneighbors
   devices: DS1
   parameter: []
@@ -32,12 +31,29 @@
   expected: ['10.0.2.1', '10.0.0.6']
 
 # Cisco User Test
-- name: Test 4
-  command: countospfneighbors
-  devices: DS1
-  parameter: []
+- name: Speed fa0/1 AS1
+  command: interfacespeed
+  devices: AS1
+  parameter: ['fa0/1']
   operator: '='
-  expected: 2
+  expected: 'a-100'
+
+
+ # Cisco User Test
+- name: Status fa0/1 AS1
+  command: interfacestatus
+  devices: AS1
+  parameter: ['fa0/1']
+  operator: '='
+  expected: 'connected'
+
+ # Cisco User Test
+- name: STP Role fa0/1 AS1
+  command: stpinterfacerole
+  devices: AS1
+  parameter: ['fa0/1']
+  operator: '='
+  expected: ['VLAN0001:Desg']
 
 
 

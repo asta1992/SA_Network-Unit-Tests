@@ -20,15 +20,11 @@ def main(argv):
         elif opt in ("-v", "--validate"):
             validator = ValidationController(os.getcwd() + "/" + arg, os.getcwd() + "/" + args[0])
             validator.logic()
-     #   elif opt in ("-v -t", "--validate -t"):
-      #      validator = ValidationController(os.getcwd() + "/" + arg, "tests")
-       #     validator.logic()
-        #elif opt in ("-v -d", "--validate -d"):
-         #   validator = ValidationController(os.getcwd() + "/" + arg, "devices")
-          #  validator.logic()
         elif opt in ("-i", "--input"):
             tester = TestController(os.getcwd() + "/" + arg, os.getcwd() + "/" + args[0])
             tester.logic()
+            #argparse
+            #doc string
 
 
 def printUsage():

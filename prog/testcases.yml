@@ -1,48 +1,16 @@
 # Ping Test Linux
-- name: Test 1
+- name: Ping 10.0.1.1
   command: connectivity
-  devices: arch
-  parameter: [8.8.8.8]
+  devices: archnotebook
+  parameter: ['10.0.1.1']
   operator: '='
   expected: True
 
-
-# Bandwidth Test Linux
-- name: Test 2
-  command: bandwidth
-  devices: arch
-  parameter: [arch]
-  operator: '>'
-  expected: 50000000
-
-# Dns Check Test Linux
-- name: Test 3
-  command: dnscheck
-  devices: arch
-  parameter: [google.ch]
+# Ping Test Linux
+- name: Ping 10.0.2.1
+  command: connectivity
+  devices: archnotebook
+  parameter: ['10.0.2.1']
   operator: '='
   expected: True
 
-# DHCP Check Test Linux
-- name: Test 4
-  command: dhcpcheck
-  devices: arch
-  parameter: [152.96.232.1]
-  operator: '='
-  expected: False
-
-# Web Response Test Linux
-- name: Test 5
-  command: webresponse
-  devices: arch
-  parameter: ['www.google.ch']
-  operator: '='
-  expected: True
-
-# Port Response Test Linux
-- name: Test 6
-  command: portresponse
-  devices: arch
-  parameter: ["1335,2341,4500-4510", arch]
-  operator: '='
-  expected: ['4505', '4506']

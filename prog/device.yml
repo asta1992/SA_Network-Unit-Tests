@@ -1,9 +1,16 @@
 - name: arch
   os: linux
   destination: arch
-  loginRequired: False
-  username: arch
-  password: 1234a
+  loginRequired: True
+  username: '-'
+  password: '-'
+
+- name: archnotebook
+  os: linux
+  destination: archnotebook
+  loginRequired: True
+  username: '-'
+  password: '-'
 
 - name: DS1
   os: ios
@@ -12,9 +19,16 @@
   username: admin
   password: '12345678'
 
+- name: AS1
+  os: ios
+  destination: AS1
+  loginRequired: True
+  username: admin
+  password: '12345678'
+
 - name: arista
   os: arista
-  destination: 192.168.43.120
+  destination: 10.0.2.205
   loginRequired: True
   username: eapi
   password: password
