@@ -13,11 +13,11 @@ sequence:
         type: str
         required: yes
       "parameter":
-        type: str
+        type: any
         required: yes
       "operator":
         type: str
         required: yes
       "expected":
-        type: str
+        type: any
         required: yes
