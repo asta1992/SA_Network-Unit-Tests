@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-import sys
 import os
+import sys
 import argparse
+import traceback
+from src.application.Logger import Logger
 from src.application.ValidationController import ValidationController
 from src.application.TestController import TestController
-
 
 
 def main(argv):
@@ -28,5 +29,13 @@ def main(argv):
         validator = ValidationController(os.getcwd() + "/" + args.validatedevice[0], "D")
         validator.logic()
 
+
+
+
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    logger = Logger()
+    try:
+        main(sys.argv[1:])
+    except:
+        logger.errorlogger.exception(traceback.format_exc())
+

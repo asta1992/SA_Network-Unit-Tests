@@ -1,23 +1,22 @@
 import salt.client
 import re
 import json
+import salt.config
 import xml.etree.ElementTree as ET
 from salt.client.ssh.client import SSHClient
 from jsonrpclib import Server
 client = SSHClient()
 local = salt.client.LocalClient()
-
+master = salt.client.Caller()
 
 __virtualname__ = 'nuts'
-
 
 def __virtual__():
     return __virtualname__
 
 def getCiscoXML(dst, param, cmd, attribut):
-    value = local.cmd("arch", 'cmd.run', [
-        "salt-ssh " + dst + " -i -r '" + cmd + " " + str(param) + " " + attribut + " | format flash:nuts.odm' --roster-file=/etc/salt/roster"])
-    xml = value['arch'][value['arch'].index('<'):len(value['arch'])]
+    value = master.cmd('cmd.run', ["salt-ssh " + dst + " -i -r '" + cmd + " " + str(param) + " " + attribut + " | format flash:nuts.odm' --roster-file=/etc/salt/roster"])
+    xml = value[dst][value[dst].index('<'):len(value[dst])]
     return ET.fromstring(xml)
 
 def returnMultiple(result):
@@ -35,15 +34,15 @@ def returnSingle(result):
 
 def connectivity(dst, param, os, user, password):
     if os == "linux":
-        result = local.cmd(dst, 'cmd.run', ['ping -c 3 ' + dst])
+        result = local.cmd(dst, 'cmd.run', ['ping -c 3 ' + param])
         text = bytes(result).decode(encoding="utf-8", errors='ignore')
         regex = "([0-9]*)% packet loss"
         r = re.compile(regex)
         m = r.search(text)
         return returnSingle((int(float(m.group(1))) < 100))
     elif os == "ios":
-        value = local.cmd("arch", 'cmd.run',["salt-ssh " + dst + " -i -r 'ping '" + param + "  --roster-file=/etc/salt/roster"])
-        text = bytes(value).decode(encoding="utf-8", errors='ignore')
+        result = master.cmd('cmd.run',["salt-ssh " + dst + " -i -r 'ping '" + param + " --roster-file=/etc/salt/roster"])
+        text = bytes(result).decode(encoding="utf-8", errors='ignore')
         regex = 'percent \(([0-5])'
         r = re.compile(regex)
         m = r.search(text)
@@ -54,7 +53,7 @@ def traceroute(dst, param, os, user, pwd):
     json_data = {}
     resultList = []
     if os == "ios":
-        value = local.cmd("arch", 'cmd.run', ["salt-ssh " + dst + " -i -r 'traceroute '" + param +"  --roster-file=/etc/salt/roster"])
+        value = master.cmd('cmd.run', ["salt-ssh " + dst + " -i -r 'traceroute '" + param +"  --roster-file=/etc/salt/roster"])
         text = bytes(value).decode(encoding="utf-8", errors='ignore')
         regex = "([0-9.]*)( [0-9]* msec)"
         for m in re.finditer(regex, text):
@@ -64,7 +63,6 @@ def traceroute(dst, param, os, user, pwd):
         return json.dumps(json_data)
 
 def bandwidth(dst, host, os, user, pwd):
-    json_data = {}
     if os == "linux":
         local.cmd(dst, 'cmd.run', ['iperf3 -s -D -1'])
         result = local.cmd(host, 'cmd.run', ['iperf3 -c ' + dst])
@@ -84,7 +82,6 @@ def dnscheck(dst, param, os):
         return returnSingle(r.search(text) == True)
 
 def dhcpcheck(dst, param, os):
-    json_data = {}
     if os == "linux":
         result = local.cmd(dst, 'cmd.run', ['dhcping -s ' + param])
         text = bytes(result).decode(encoding="utf-8", errors='ignore')
@@ -93,7 +90,6 @@ def dhcpcheck(dst, param, os):
         return returnSingle(r.search(text) == True)
 
 def webresponse(dst, param, os):
-    json_data = {}
     if os == "linux":
         result = local.cmd(dst, 'cmd.run', ['curl -Is '+ param + ' | head -n 1'])
         text = bytes(result).decode(encoding="utf-8", errors='ignore')
@@ -102,7 +98,6 @@ def webresponse(dst, param, os):
         return returnSingle(r.search(text) == True)
 
 def portresponse(dst, port, param, os):
-    json_data = {}
     resultList = []
     if os == "linux":
         result = local.cmd(dst, 'cmd.run', ['nmap -p '+ str(port) + ' ' + param])
@@ -114,10 +109,9 @@ def portresponse(dst, port, param, os):
         return returnMultiple(resultList)
 
 def checkuser(dst, os, user, pwd):
-    json_data = {}
     resultList = []
     if os == "ios":
-        value = local.cmd("arch", 'cmd.run', ["salt-ssh " + dst + " -i -r 'sh run | i username' --roster-file=/etc/salt/roster"])
+        value = master.cmd('cmd.run', ["salt-ssh " + dst + " -i -r 'sh run | i username' --roster-file=/etc/salt/roster"])
         text = bytes(value).decode(encoding="utf-8", errors='ignore')
         regex = "username ([a-zA-Z0-9]*)"
         for m in re.finditer(regex, text):

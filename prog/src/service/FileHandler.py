@@ -1,4 +1,6 @@
 import yaml
+import logging
+
 class FileHandler:
 
 
@@ -6,7 +8,7 @@ class FileHandler:
         self.testSuite = testSuite
         self.testFile = testFile
         self.deviceFile = deviceFile
-
+        self.logger = logging.getLogger('nuts_error_log')
 
     def yaml(self):
        return yaml.dump(self.__dict__)
@@ -22,7 +24,7 @@ class FileHandler:
     def addDevices(data, testSuite):
         values = yaml.safe_load(data)
         for val in values:
-            testSuite.createDevice(val["name"], val["os"], val["destination"], val["loginRequired"], val["username"], val["password"])
+            testSuite.createDevice(val["name"], val["os"], val["destination"], val["username"], val["password"])
 
     def readFile(self, file, type):
         try:
@@ -37,6 +39,7 @@ class FileHandler:
                 else:
                     self.addDevices(stream, self.testSuite)
             except yaml.YAMLError as exc:
-                print(exc)
+                print("Import-Fehler bei der Datei: " + file)
+                self.logger.exception("Import-Fehler bei der Datei: " + file)
 
 

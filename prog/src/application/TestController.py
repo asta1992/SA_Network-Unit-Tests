@@ -7,7 +7,6 @@ class TestController:
 
     testSuite = TestSuite("SuiteName")
 
-
     def __init__(self, testFile, devFile):
         self.testFile = testFile
         self.devFile = devFile

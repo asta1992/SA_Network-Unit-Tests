@@ -9,9 +9,6 @@ sequence:
       "destination":
         type: str
         required: yes
-      "loginRequired":
-        type: bool
-        required: yes
       "username":
         type: str
         required: yes
